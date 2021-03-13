@@ -1,7 +1,7 @@
 import { Row, Col, Typography } from 'antd';
 import './Navbar.less';
 
-const { Text, Title, Link } = Typography;
+const { Title, Link } = Typography;
 
 const links = [
   {
@@ -29,8 +29,8 @@ const links = [
 
 const Navbar = () => {
   return (
-    <div className='wrapper'>
-      <div className='container'>
+    <div className='navbar-wrapper'>
+      <div className='content-container'>
         <Row align='middle' justify='space-between'>
           <Col>
             <Title type='secondary' level={3}>MyAnimeList</Title>

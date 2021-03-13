@@ -9,15 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.ant-typography {
-  font-family: 'Poppins', sans-serif;
-  margin-bottom: 0 !important;
-}
-
-.ant-typography-secondary {
-  color: #fafafa !important;
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

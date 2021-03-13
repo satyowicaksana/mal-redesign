@@ -1,13 +1,24 @@
-import { Button } from 'antd';
-import './App.less';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
 
+import Home from 'views/Home';
 import Navbar from 'components/Navbar'
+import './App.less';
 
 const App = () => {
   return (
-    <div className="App">
+    <div>
       <Navbar />
-      <Button type='primary'>MyAnimeList Redesign</Button>
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
