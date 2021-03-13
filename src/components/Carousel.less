@@ -4,6 +4,29 @@
 
 .carousel-wrapper {
   position: relative;
+  background-color: @primary-color;
+  display: flex;
+  justify-content: center;
+  padding-top: 64px;
+}
+
+.carousel-background-image {
+  transition: opacity 0.4s;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+
+  &.selected {
+    opacity: 0.1;
+  }
+}
+
+.carousel-cards-container {
+  position: relative;
   width: 100%;
   height: @carousel-card-height;
   
@@ -16,6 +39,7 @@
 
 .carousel-card {
   overflow: hidden;
+  cursor: pointer;
   transition: all 0.4s linear, background-color 0s;
   position: absolute;
   width: 100%;
@@ -72,7 +96,7 @@
 }
 
 .carousel-arrow-icon {
-  transition: all 0.2s linear;
+  transition: opacity 0.2s;
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
