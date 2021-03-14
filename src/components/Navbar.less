@@ -1,3 +1,5 @@
+@import '../lib.less';
+
 .navbar-wrapper {
   position: fixed;
   width: 100%;
@@ -6,4 +8,57 @@
   justify-content: center;
   padding: 16px;
   z-index: 1;
+}
+
+.navbar-logo {
+  font-family: 'AGRevueCyr' !important;
+  letter-spacing: 1px;
+}
+
+.navbar-popover-option-container {
+  padding: 0 -16px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: @primary-fade-color;
+
+    * {
+      transition: all 0.2s;
+      color: @primary-color !important;
+    }
+  }
+}
+
+.navbar-search {
+  transition: all 0.2s;
+  background-color: rgba(0,0,0,0.3) !important;
+  width: 32px !important;
+
+  &:hover, &.expanded, &.ant-input-affix-wrapper-focused {
+    width: 240px !important;
+    .ant-input {
+      display: unset;
+    }
+  }
+
+  &:not(:hover, .ant-input-affix-wrapper-focused) {
+    border-color: rgba(0,0,0,0) !important;
+  }
+
+  .ant-input-suffix {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+  }
+
+  .ant-input {
+    background-color: rgba(0,0,0,0);
+    color: @color-white;
+    display: none;
+  }
+}
+
+.navbar-search-icon {
+  color: white;
 }

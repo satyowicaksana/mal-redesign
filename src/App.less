@@ -1,11 +1,6 @@
 @import './lib.less';
 @import '~antd/dist/antd.less';
 
-.content-container {
-  width: 100%;
-  max-width: 1200px;
-}
-
 .ant-typography {
   font-family: 'Poppins', sans-serif;
   margin-bottom: 0 !important;
@@ -13,6 +8,12 @@
 
 .ant-typography-secondary {
   color: @color-white !important;
+}
+
+a.ant-typography-secondary {
+  &:hover {
+    color: @secondary-color !important;
+  }
 }
 
 .ant-tag {
@@ -27,8 +28,82 @@
   color: @color-white;
 }
 
+.ant-popover-arrow {
+  display: none;
+}
+
+.ant-popover-inner {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.ant-popover-inner-content {
+  padding: 0;
+}
+
+.ant-input {
+  border-radius: 16px;
+}
+
+.ant-input-affix-wrapper {
+  border-radius: 16px;
+
+  .ant-input {
+    border-radius: 0;
+  }
+}
+
+.ant-btn {
+  border-radius: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+
+  &.ant-btn-default {
+    background-color: @secondary-color;
+    color: @color-white;
+    border-color: @secondary-color;
+
+    &:hover, &:focus {
+      background: @secondary-color-light;
+      border-color: @secondary-color-light;
+    }
+
+    &:active {
+      background: @secondary-color-dark;
+      border-color: @secondary-color-dark;
+    }
+  }
+}
+
+
+
+.content-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.py-1 {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.py-2 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.px-3 {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
 .p-3 {
   padding: 24px;
+}
+
+.mr-1 {
+  margin-right: 8px;
 }
 
 .mb-2 {
