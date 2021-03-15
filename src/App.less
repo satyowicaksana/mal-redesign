@@ -1,6 +1,10 @@
 @import './lib.less';
 @import '~antd/dist/antd.less';
 
+h1, h2, h3, h4, h5, strong {
+  font-weight: 800 !important;
+}
+
 .ant-typography {
   font-family: 'Poppins', sans-serif;
   margin-bottom: 0 !important;
@@ -19,7 +23,7 @@ a.ant-typography-secondary {
 .ant-tag {
   border-radius: 24px;
   padding: 4px 12px;
-  font-weight: bold;
+  font-weight: 900;
   border: none;
 }
 
@@ -55,7 +59,7 @@ a.ant-typography-secondary {
 
 .ant-btn {
   border-radius: 16px;
-  font-weight: bold;
+  font-weight: 900;
   display: flex;
   align-items: center;
 
@@ -76,11 +80,25 @@ a.ant-typography-secondary {
   }
 }
 
+.ant-divider {
+  margin: 0;
+  border-top: 4px solid rgba(0, 0, 0, 0.06);
+}
 
+.centered-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .content-container {
   width: 100%;
-  max-width: 1200px;
+  max-width: calc(1200px + 16px);
+  padding: 0 16px;
+}
+
+.p-3 {
+  padding: 24px;
 }
 
 .py-1 {
@@ -93,13 +111,14 @@ a.ant-typography-secondary {
   padding-bottom: 16px;
 }
 
+.py-5 {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 .px-3 {
   padding-left: 24px;
   padding-right: 24px;
-}
-
-.p-3 {
-  padding: 24px;
 }
 
 .mr-1 {
@@ -108,6 +127,10 @@ a.ant-typography-secondary {
 
 .mb-2 {
   margin-bottom: 16px !important;
+}
+
+.mb-3 {
+  margin-bottom: 24px !important;
 }
 
 .pt-4 {

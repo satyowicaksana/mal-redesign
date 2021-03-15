@@ -1,4 +1,8 @@
+import { Row, Col, Divider, Typography, Button } from 'antd';
+
+import BannerCarousel from 'components/BannerCarousel';
 import Carousel from 'components/Carousel';
+import AnimeCard from 'components/AnimeCard';
 import './Home.less';
 
 const featuredNews = [
@@ -19,10 +23,47 @@ const featuredNews = [
   },
 ]
 
+const { Title, Text } = Typography;
+
 const Home = () => {
   return (
     <div>
-      <Carousel items={featuredNews}/>
+      <BannerCarousel items={featuredNews}/>
+      <div className='centered-flex'>
+        <div className='content-container py-5'>
+          <Row gutter={32} align='middle' className='mb-3'>
+            <Col>
+              <Title level={3}>Winter 2021 Anime</Title>
+            </Col>
+            <Col flex='auto'>
+              <Divider/>
+            </Col>
+            <Col>
+              <Button type='link'>VIEW ALL</Button>
+            </Col>
+          </Row>
+          <Carousel className='home-cards-carousel'>
+            <div>
+              <Row gutter={32} className='home-cards-slide'>
+                { [0, 1, 2, 3, 4, 5].map((num, i) => (
+                  <Col span={4}>
+                    <AnimeCard/>
+                  </Col>
+                )) }
+              </Row>
+            </div>
+            <div>
+              <Row gutter={32} className='home-cards-slide'>
+                { [0, 1, 2, 3, 4, 5].map((num, i) => (
+                  <Col span={4}>
+                    <AnimeCard/>
+                  </Col>
+                )) }
+              </Row>
+            </div>
+          </Carousel>
+        </div>
+      </div>
     </div>
   )
 }

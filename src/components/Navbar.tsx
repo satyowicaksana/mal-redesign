@@ -35,7 +35,7 @@ const Navbar = () => {
   const [search, setSearch] = useState('');
 
   return (
-    <div className='navbar-wrapper'>
+    <div className='navbar-wrapper py-2'>
       <div className='content-container'>
         <Row align='middle' justify='space-between'>
           <Col>

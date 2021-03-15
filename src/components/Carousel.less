@@ -1,97 +1,12 @@
 @import '../lib.less';
 
-@carousel-card-height: 400px;
-
 .carousel-wrapper {
   position: relative;
-  background-color: @primary-color;
-  display: flex;
-  justify-content: center;
-  padding-top: 64px;
-}
 
-.carousel-background-image {
-  transition: opacity 0.4s;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-
-  &.selected {
-    opacity: 0.1;
-  }
-}
-
-.carousel-cards-container {
-  position: relative;
-  width: 100%;
-  height: @carousel-card-height;
-  
   &:hover {
     .carousel-right-icon, .carousel-left-icon {
       opacity: 1 !important;
     }
-  }
-}
-
-.carousel-card {
-  overflow: hidden;
-  cursor: pointer;
-  transition: all 0.4s linear, background-color 0s;
-  position: absolute;
-  width: 100%;
-  left: calc(50% + 16px);
-  transform: translate(-50%, 0);
-  top: 16px;
-  background-color: #73B5F4;
-  border-radius: 24px;
-  height: calc(@carousel-card-height - 16px * 2);
-  box-shadow: @box-shadow-base;
-
-  &.selected {
-    left: 50%;
-    transform: translate(-50%, 0);
-    top: 0;
-    height: @carousel-card-height;
-    background-color: @color-white;
-    z-index: 1;
-  }
-}
-
-.carousel-card-image {
-  width: 100%;
-  height: @carousel-card-height;
-  object-fit: cover;
-}
-
-.carousel-card-info-container {
-  display: flex !important;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.carousel-calendar-icon-container {
-  display: flex;
-  align-items: center;
-}
-
-.carousel-calendar-icon {
-  color: @primary-color;
-}
-
-.carousel-pointer {
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
-  background-color: @primary-color;
-  opacity: 0.5;
-
-  &.selected {
-    width: 16px;
-    opacity: 1;
   }
 }
 

@@ -1,0 +1,122 @@
+@import '../lib.less';
+
+@home-carousel-card-height: 400px;
+
+.home-carousel-wrapper {
+  position: relative;
+  background-color: @primary-color;
+  display: flex;
+  justify-content: center;
+  padding-top: 64px;
+}
+
+.home-carousel-background-image {
+  transition: opacity 0.4s;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+
+  &.selected {
+    opacity: 0.1;
+  }
+}
+
+.home-carousel-cards-container {
+  position: relative;
+  width: 100%;
+  height: @home-carousel-card-height;
+  
+  &:hover {
+    .home-carousel-right-icon, .home-carousel-left-icon {
+      opacity: 1 !important;
+    }
+  }
+}
+
+.home-carousel-card {
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s linear, background-color 0s;
+  position: absolute;
+  width: 100%;
+  left: calc(50% + 16px);
+  transform: translate(-50%, 0);
+  top: 16px;
+  background-color: #73B5F4;
+  border-radius: 24px;
+  height: calc(@home-carousel-card-height - 16px * 2);
+  box-shadow: @box-shadow-base;
+
+  &.selected {
+    left: 50%;
+    transform: translate(-50%, 0);
+    top: 0;
+    height: @home-carousel-card-height;
+    background-color: @color-white;
+    z-index: 1;
+  }
+}
+
+.home-carousel-card-image {
+  width: 100%;
+  height: @home-carousel-card-height;
+  object-fit: cover;
+}
+
+.home-carousel-card-info-container {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.home-carousel-calendar-icon-container {
+  display: flex;
+  align-items: center;
+}
+
+.home-carousel-calendar-icon {
+  color: @primary-color;
+}
+
+.home-carousel-pointer {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: @primary-color;
+  opacity: 0.5;
+
+  &.selected {
+    width: 16px;
+    opacity: 1;
+  }
+}
+
+.home-carousel-arrow-icon {
+  transition: opacity 0.2s;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 32px;
+  padding: 8px;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: @box-shadow-base;
+  background-color: @color-white;
+  border-radius: 50%;
+  color: @primary-color !important;
+  opacity: 0.2;
+}
+
+.home-carousel-right-icon {
+  &:extend(.home-carousel-arrow-icon);
+  right: 16px;
+}
+
+.home-carousel-left-icon {
+  &:extend(.home-carousel-arrow-icon);
+  left: 16px;
+}
