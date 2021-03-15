@@ -46,7 +46,7 @@ const Home = () => {
             <div>
               <Row gutter={32} className='home-cards-slide'>
                 { [0, 1, 2, 3, 4, 5].map((num, i) => (
-                  <Col span={4}>
+                  <Col key={i} span={4}>
                     <AnimeCard/>
                   </Col>
                 )) }
@@ -55,7 +55,7 @@ const Home = () => {
             <div>
               <Row gutter={32} className='home-cards-slide'>
                 { [0, 1, 2, 3, 4, 5].map((num, i) => (
-                  <Col span={4}>
+                  <Col key={i} span={4}>
                     <AnimeCard/>
                   </Col>
                 )) }

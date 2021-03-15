@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Row, Col, Typography, Popover, Input, Button } from 'antd';
 import { FaSearch } from 'react-icons/fa';
 import { BiLogInCircle } from 'react-icons/bi';
 
+import { useScroll } from 'helpers/hooks';
 import './Navbar.less';
 
 const { Title, Text, Link } = Typography;
@@ -34,8 +35,13 @@ const links = [
 const Navbar = () => {
   const [search, setSearch] = useState('');
 
+  const { scrollY } = useScroll();
+
+  useEffect(() => {
+  }, [scrollY])
+
   return (
-    <div className='navbar-wrapper py-2'>
+    <div className={`navbar-wrapper ${scrollY > 60 ? 'float' : ''} py-2`}>
       <div className='content-container'>
         <Row align='middle' justify='space-between'>
           <Col>
@@ -45,6 +51,7 @@ const Navbar = () => {
             <Row gutter={16} align='middle'>
               { links.map((link, i) => (
                 <Popover
+                  key={i}
                   placement='bottomLeft'
                   content={
                     <div className='py-2'>
@@ -60,7 +67,7 @@ const Navbar = () => {
                     </div>
                   }
                 >
-                  <Col key={i}>
+                  <Col>
                     <Link type='secondary' strong>{link.text}</Link>
                   </Col>
                 </Popover>
