@@ -33,10 +33,50 @@ const animes = [
   {
     title: `The Promised Neverland: Season 2`,
     imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
+  },
+  {
+    title: 'Attack On Titan: Final Season',
+    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+  },
+  {
+    title: `The Promised Neverland: Season 2`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
+  },
+  {
+    title: 'Attack On Titan: Final Season',
+    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+  },
+  {
+    title: `The Promised Neverland: Season 2`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
+  },
+  {
+    title: 'Attack On Titan: Final Season',
+    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+  },
+  {
+    title: `The Promised Neverland: Season 2`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
+  },
+  {
+    title: 'Attack On Titan: Final Season',
+    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+  },
+  {
+    title: `The Promised Neverland: Season 2`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
+  },
+  {
+    title: 'Attack On Titan: Final Season',
+    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+  },
+  {
+    title: `The Promised Neverland: Season 2`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
   }
 ]
 
-const { Title, Text } = Typography;
+const { Title, Link } = Typography;
 
 const Home = () => {
   const { width } = useWindowSize();
@@ -45,10 +85,12 @@ const Home = () => {
 
   useEffect(() => {
     if(width) {
-      if(width < 1216) {
+      if(width < 768) {
+        setCardColumn(2);
+      } else if(width < 1216) {
         setCardColumn(4);
       } else {
-        setCardColumn(6)
+        setCardColumn(6);
       }
     }
   }, [width])
@@ -63,17 +105,20 @@ const Home = () => {
             <Col>
               <Title level={3}>Winter 2021 Anime</Title>
             </Col>
-            <Col flex='auto'>
+            <Col flex='auto' className='desktop'>
               <Divider/>
             </Col>
-            <Col>
-              <Button type='link'>VIEW ALL</Button>
+            <Col className='desktop'>
+              <Link strong>VIEW ALL</Link>
             </Col>
           </Row>
-          <Carousel className='home-cards-carousel'>
+          <Carousel
+            dots={false}
+            className='home-cards-carousel mb-2'
+          >
             { Array.from(Array(Math.ceil(animes.length / 6)).keys()).map(i => (
               <div key={i}>
-                <Row gutter={32} className='home-cards-slide'>
+                <Row gutter={cardColumn * 6} className='home-cards-slide'>
                   { Array.from(Array(cardColumn).keys()).map(j => (
                     <Col key={`${i}${j}`} span={24 / cardColumn}>
                       {/*{animes[i * cardColumn + j] || (animes.length >= cardColumn && animes[i * cardColumn + j - animes.length])}*/}
@@ -89,6 +134,11 @@ const Home = () => {
               </div>
             )) }
           </Carousel>
+          <Row justify='end' className='mobile'>
+            <Col>
+              <Link strong>VIEW ALL</Link>
+            </Col>
+          </Row>
         </div>
       </div>
     </div>

@@ -97,6 +97,18 @@ a.ant-typography-secondary {
   padding: 0 16px;
 }
 
+.desktop {
+  @media @mobile {
+    display: none;
+  }
+}
+
+.mobile {
+  @media @desktop {
+    display: none;
+  }
+}
+
 .p-3 {
   padding: 24px;
 }
