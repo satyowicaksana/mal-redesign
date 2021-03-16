@@ -1,8 +1,10 @@
+import { useState, useEffect } from 'react';
 import { Row, Col, Divider, Typography, Button } from 'antd';
 
 import BannerCarousel from 'components/BannerCarousel';
 import Carousel from 'components/Carousel';
 import AnimeCard from 'components/AnimeCard';
+import { useWindowSize } from 'helpers/hooks';
 import './Home.less';
 
 const featuredNews = [
@@ -23,9 +25,35 @@ const featuredNews = [
   },
 ]
 
+const animes = [
+  {
+    title: 'Attack On Titan: Final Season',
+    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+  },
+  {
+    title: `The Promised Neverland: Season 2`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
+  }
+]
+
 const { Title, Text } = Typography;
 
 const Home = () => {
+  const { width } = useWindowSize();
+
+  const [cardColumn, setCardColumn] = useState(6);
+
+  useEffect(() => {
+    if(width) {
+      if(width < 1216) {
+        setCardColumn(4);
+      } else {
+        setCardColumn(6)
+      }
+    }
+  }, [width])
+
+
   return (
     <div>
       <BannerCarousel items={featuredNews}/>
@@ -43,24 +71,23 @@ const Home = () => {
             </Col>
           </Row>
           <Carousel className='home-cards-carousel'>
-            <div>
-              <Row gutter={32} className='home-cards-slide'>
-                { [0, 1, 2, 3, 4, 5].map((num, i) => (
-                  <Col key={i} span={4}>
-                    <AnimeCard/>
-                  </Col>
-                )) }
-              </Row>
-            </div>
-            <div>
-              <Row gutter={32} className='home-cards-slide'>
-                { [0, 1, 2, 3, 4, 5].map((num, i) => (
-                  <Col key={i} span={4}>
-                    <AnimeCard/>
-                  </Col>
-                )) }
-              </Row>
-            </div>
+            { Array.from(Array(Math.ceil(animes.length / 6)).keys()).map(i => (
+              <div key={i}>
+                <Row gutter={32} className='home-cards-slide'>
+                  { Array.from(Array(cardColumn).keys()).map(j => (
+                    <Col key={`${i}${j}`} span={24 / cardColumn}>
+                      {/*{animes[i * cardColumn + j] || (animes.length >= cardColumn && animes[i * cardColumn + j - animes.length])}*/}
+                      {animes[i * cardColumn + j] && 
+                        <AnimeCard
+                          title={animes[i * cardColumn + j].title}
+                          imagePath={animes[i * cardColumn + j].imagePath}
+                        />
+                      }
+                    </Col>
+                  )) }
+                </Row>
+              </div>
+            )) }
           </Carousel>
         </div>
       </div>
