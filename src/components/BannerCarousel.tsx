@@ -44,19 +44,19 @@ const BannerCarousel = ({
   }
 
   return (
-    <div className='home-carousel-wrapper' onMouseEnter={() => setAutoplay(false)} onMouseLeave={() => setAutoplay(true)}>
+    <div className='banner-carousel-wrapper' onMouseEnter={() => setAutoplay(false)} onMouseLeave={() => setAutoplay(true)}>
       { items.map((item, i) => (
-        <img key={i} src={items[i].imagePath} alt='' className={`home-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
+        <img key={i} src={items[i].imagePath} alt='' className={`banner-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
       )) }
       <div className='content-container pt-4 pb-5'>
-        <div className='home-carousel-cards-container'>
+        <div className='banner-carousel-cards-container'>
           { items.map((item, i) => (
-            <div key={i} className={`home-carousel-card ${selectedItemIndex === i ? 'selected' : ''}`}>
+            <div key={i} className={`banner-carousel-card ${selectedItemIndex === i ? 'selected' : ''}`}>
               <Row>
                 <Col md={14} xs={24}>
-                  <img src={item.imagePath} alt='' className='home-carousel-card-image' />
+                  <img src={item.imagePath} alt='' className='banner-carousel-card-image' />
                 </Col>
-                <Col md={10} xs={24} className='home-carousel-card-info-container p-3'>
+                <Col md={10} xs={24} className='banner-carousel-card-info-container p-3'>
                   <div>
                     <Row className='mb-2'>
                       <Col>
@@ -69,8 +69,8 @@ const BannerCarousel = ({
                     <Title level={3} ellipsis={{rows: 3}} className='mb-2'>{item.title}</Title>
                     <Paragraph ellipsis={{rows: 5}} className='desktop mb-2'>{item.description}</Paragraph>
                     <Row gutter={8} align='middle' className='mb-2'>
-                      <Col className='home-carousel-calendar-icon-container'>
-                        <FaRegCalendarAlt className='home-carousel-calendar-icon'/>
+                      <Col className='banner-carousel-calendar-icon-container'>
+                        <FaRegCalendarAlt className='banner-carousel-calendar-icon'/>
                       </Col>
                       <Col>
                         12/03/2021
@@ -80,7 +80,7 @@ const BannerCarousel = ({
                   <Row gutter={8}>
                     { items.map((item, i) => (
                       <Col key={i}>
-                        <div className={`home-carousel-pointer ${selectedItemIndex === i ? 'selected' : ''}`}/>
+                        <div className={`banner-carousel-pointer ${selectedItemIndex === i ? 'selected' : ''}`}/>
                       </Col>
                     ))}
                   </Row>
@@ -88,8 +88,8 @@ const BannerCarousel = ({
               </Row>
             </div>
           )) }
-          <FaChevronLeft onClick={handleClickLeft} className='home-carousel-left-icon' />
-          <FaChevronRight onClick={handleClickRight} className='home-carousel-right-icon' />
+          <FaChevronLeft onClick={handleClickLeft} className='banner-carousel-left-icon' />
+          <FaChevronRight onClick={handleClickRight} className='banner-carousel-right-icon' />
         </div>
       </div>
     </div>

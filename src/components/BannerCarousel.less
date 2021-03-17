@@ -1,8 +1,8 @@
 @import '../lib.less';
 
-@home-carousel-card-height: 400px;
+@banner-carousel-card-height: 400px;
 
-.home-carousel-wrapper {
+.banner-carousel-wrapper {
   position: relative;
   background-color: @primary-color;
   display: flex;
@@ -10,7 +10,7 @@
   padding-top: 64px;
 }
 
-.home-carousel-background-image {
+.banner-carousel-background-image {
   transition: opacity 0.4s;
   position: absolute;
   left: 0;
@@ -25,23 +25,23 @@
   }
 }
 
-.home-carousel-cards-container {
+.banner-carousel-cards-container {
   position: relative;
   width: 100%;
-  height: @home-carousel-card-height;
+  height: @banner-carousel-card-height;
 
   @media @mobile {
-    height: @home-carousel-card-height / 1.5;
+    height: @banner-carousel-card-height / 1.5;
   }
   
   &:hover {
-    .home-carousel-right-icon, .home-carousel-left-icon {
+    .banner-carousel-right-icon, .banner-carousel-left-icon {
       opacity: 1 !important;
     }
   }
 }
 
-.home-carousel-card {
+.banner-carousel-card {
   overflow: hidden;
   cursor: pointer;
   transition: all 0.4s linear, background-color 0s;
@@ -53,10 +53,10 @@
   background-color: #73B5F4;
   border-radius: 24px;
   box-shadow: @box-shadow-base;
-  height: @home-carousel-card-height - 16px * 2;
+  height: @banner-carousel-card-height - 16px * 2;
 
   @media @mobile {
-    height: @home-carousel-card-height / 1.5 - 16px * 2;
+    height: @banner-carousel-card-height / 1.5 - 16px * 2;
   }
 
   &.selected {
@@ -65,33 +65,33 @@
     top: 0;
     background-color: @color-white;
     z-index: 1;
-    height: @home-carousel-card-height;
+    height: @banner-carousel-card-height;
 
     @media @mobile {
-      height: @home-carousel-card-height / 1.5;
+      height: @banner-carousel-card-height / 1.5;
     }
   }
 }
 
-.home-carousel-card-image {
+.banner-carousel-card-image {
   object-fit: cover;
   width: 100%;
-  height: @home-carousel-card-height;
+  height: @banner-carousel-card-height;
 
   @media @mobile {
     filter: brightness(50%);
-    height: @home-carousel-card-height / 1.5;
+    height: @banner-carousel-card-height / 1.5;
   }
 }
 
-.home-carousel-card-info-container {
+.banner-carousel-card-info-container {
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
   
   @media @mobile {
     position: absolute !important;
-    height: @home-carousel-card-height / 1.5;
+    height: @banner-carousel-card-height / 1.5;
 
     * {
       color: @color-white !important;
@@ -99,16 +99,16 @@
   }
 }
 
-.home-carousel-calendar-icon-container {
+.banner-carousel-calendar-icon-container {
   display: flex;
   align-items: center;
 }
 
-.home-carousel-calendar-icon {
+.banner-carousel-calendar-icon {
   color: @primary-color;
 }
 
-.home-carousel-pointer {
+.banner-carousel-pointer {
   width: 8px;
   height: 8px;
   border-radius: 4px;
@@ -125,7 +125,7 @@
   }
 }
 
-.home-carousel-arrow-icon {
+.banner-carousel-arrow-icon {
   transition: opacity 0.2s;
   position: absolute;
   top: 50%;
@@ -141,12 +141,12 @@
   opacity: 0.2;
 }
 
-.home-carousel-right-icon {
-  &:extend(.home-carousel-arrow-icon);
+.banner-carousel-right-icon {
+  &:extend(.banner-carousel-arrow-icon);
   right: 16px;
 }
 
-.home-carousel-left-icon {
-  &:extend(.home-carousel-arrow-icon);
+.banner-carousel-left-icon {
+  &:extend(.banner-carousel-arrow-icon);
   left: 16px;
 }
