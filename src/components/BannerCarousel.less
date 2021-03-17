@@ -29,6 +29,10 @@
   position: relative;
   width: 100%;
   height: @home-carousel-card-height;
+
+  @media @mobile {
+    height: @home-carousel-card-height / 1.5;
+  }
   
   &:hover {
     .home-carousel-right-icon, .home-carousel-left-icon {
@@ -48,29 +52,51 @@
   top: 16px;
   background-color: #73B5F4;
   border-radius: 24px;
-  height: calc(@home-carousel-card-height - 16px * 2);
   box-shadow: @box-shadow-base;
+  height: @home-carousel-card-height - 16px * 2;
+
+  @media @mobile {
+    height: @home-carousel-card-height / 1.5 - 16px * 2;
+  }
 
   &.selected {
     left: 50%;
     transform: translate(-50%, 0);
     top: 0;
-    height: @home-carousel-card-height;
     background-color: @color-white;
     z-index: 1;
+    height: @home-carousel-card-height;
+
+    @media @mobile {
+      height: @home-carousel-card-height / 1.5;
+    }
   }
 }
 
 .home-carousel-card-image {
+  object-fit: cover;
   width: 100%;
   height: @home-carousel-card-height;
-  object-fit: cover;
+
+  @media @mobile {
+    filter: brightness(50%);
+    height: @home-carousel-card-height / 1.5;
+  }
 }
 
 .home-carousel-card-info-container {
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
+  
+  @media @mobile {
+    position: absolute !important;
+    height: @home-carousel-card-height / 1.5;
+
+    * {
+      color: @color-white !important;
+    }
+  }
 }
 
 .home-carousel-calendar-icon-container {
@@ -92,6 +118,10 @@
   &.selected {
     width: 16px;
     opacity: 1;
+  }
+
+  @media @mobile {
+    background-color: @color-white;
   }
 }
 

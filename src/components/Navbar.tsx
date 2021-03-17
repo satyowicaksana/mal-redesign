@@ -47,7 +47,7 @@ const Navbar = () => {
           <Col>
             <Title type='secondary' level={3} className='navbar-logo'>MyAnimeList</Title>
           </Col>
-          <Col>
+          <Col className='desktop'>
             <Row gutter={16} align='middle'>
               { links.map((link, i) => (
                 <Popover

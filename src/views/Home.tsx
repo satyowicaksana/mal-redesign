@@ -114,7 +114,7 @@ const Home = () => {
           </Row>
           <Carousel
             dots={false}
-            className='home-cards-carousel mb-2'
+            className='home-cards-carousel mb-1'
           >
             { Array.from(Array(Math.ceil(animes.length / 6)).keys()).map(i => (
               <div key={i}>
@@ -134,7 +134,7 @@ const Home = () => {
               </div>
             )) }
           </Carousel>
-          <Row justify='end' className='mobile'>
+          <Row justify='end' className='mobile mt-2'>
             <Col>
               <Link strong>VIEW ALL</Link>
             </Col>

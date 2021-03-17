@@ -53,10 +53,10 @@ const BannerCarousel = ({
           { items.map((item, i) => (
             <div key={i} className={`home-carousel-card ${selectedItemIndex === i ? 'selected' : ''}`}>
               <Row>
-                <Col span={14}>
+                <Col md={14} xs={24}>
                   <img src={item.imagePath} alt='' className='home-carousel-card-image' />
                 </Col>
-                <Col span={10} className='home-carousel-card-info-container p-3'>
+                <Col md={10} xs={24} className='home-carousel-card-info-container p-3'>
                   <div>
                     <Row className='mb-2'>
                       <Col>
@@ -67,7 +67,7 @@ const BannerCarousel = ({
                       </Col>
                     </Row>
                     <Title level={3} ellipsis={{rows: 3}} className='mb-2'>{item.title}</Title>
-                    <Paragraph ellipsis={{rows: 5}} className='mb-2'>{item.description}</Paragraph>
+                    <Paragraph ellipsis={{rows: 5}} className='desktop mb-2'>{item.description}</Paragraph>
                     <Row gutter={8} align='middle' className='mb-2'>
                       <Col className='home-carousel-calendar-icon-container'>
                         <FaRegCalendarAlt className='home-carousel-calendar-icon'/>
