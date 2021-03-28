@@ -42,7 +42,7 @@ const Navbar = () => {
 
   return (
     <div className={`navbar-wrapper ${scrollY > 60 ? 'float' : ''} py-2`}>
-      <div className='content-container'>
+      <div className='content-container px-2'>
         <Row align='middle' justify='space-between'>
           <Col>
             <Title type='secondary' level={3} className='navbar-logo'>MyAnimeList</Title>

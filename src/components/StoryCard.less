@@ -1,0 +1,31 @@
+@import '../lib.less';
+
+.story-card {
+  width: 100%;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: solid 2px rgba(0, 0, 0, 0.06);
+
+  @media @sm, @xs {
+    height: 100px;
+  }
+}
+
+.story-card-image {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.story-card-info-container {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.story-card-calendar-icon {
+  color: @primary-color;
+}

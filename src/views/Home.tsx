@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Row, Col, Divider, Typography, Button } from 'antd';
 
 import BannerCarousel from 'components/BannerCarousel';
-import Carousel from 'components/Carousel';
 import AnimeCardsSection from 'components/AnimeCardsSection';
+import NewsCardsSection from 'components/StoryCardsSection';
+import { windowSizes } from 'consts';
 import { useWindowSize } from 'helpers/hooks';
 import './Home.less';
 
@@ -28,7 +28,7 @@ const featuredNews = [
 const animes = [
   {
     title: 'Attack On Titan: Final Season',
-    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
   },
   {
     title: `The Promised Neverland: Season 2`,
@@ -36,7 +36,7 @@ const animes = [
   },
   {
     title: 'Attack On Titan: Final Season',
-    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
   },
   {
     title: `The Promised Neverland: Season 2`,
@@ -44,7 +44,7 @@ const animes = [
   },
   {
     title: 'Attack On Titan: Final Season',
-    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
   },
   {
     title: `The Promised Neverland: Season 2`,
@@ -52,7 +52,7 @@ const animes = [
   },
   {
     title: 'Attack On Titan: Final Season',
-    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
   },
   {
     title: `The Promised Neverland: Season 2`,
@@ -60,7 +60,7 @@ const animes = [
   },
   {
     title: 'Attack On Titan: Final Season',
-    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
   },
   {
     title: `The Promised Neverland: Season 2`,
@@ -68,7 +68,7 @@ const animes = [
   },
   {
     title: 'Attack On Titan: Final Season',
-    imagePath: 'https://d.newsweek.com/en/full/1702195/attack-titan-final-season-4-visual.webp?w=790&f=0eb6a783944916223ecc40e6a4aa5ed4',
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
   },
   {
     title: `The Promised Neverland: Season 2`,
@@ -76,7 +76,32 @@ const animes = [
   }
 ]
 
-const { Title, Link } = Typography;
+const stories = [
+  {
+    title: `'100-man no Inochi no Ue ni Ore wa Tatteiru' 2nd Season Reveals Supporting Cast, Promo`,
+    description: `The official website of the 100-man no Inochi no Ue ni Ore wa Tatteiru (I'm Standing on a Million Lives) anime series revealed four supporting cast, ending theme performer, and a promotional video for the second season on Friday. The new season will..`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
+    date: new Date()
+  },
+  {
+    title: `'100-man no Inochi no Ue ni Ore wa Tatteiru' 2nd Season Reveals Supporting Cast, Promo`,
+    description: `The official website of the 100-man no Inochi no Ue ni Ore wa Tatteiru (I'm Standing on a Million Lives) anime series revealed four supporting cast, ending theme performer, and a promotional video for the second season on Friday. The new season will..`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
+    date: new Date()
+  },
+  {
+    title: `'100-man no Inochi no Ue ni Ore wa Tatteiru' 2nd Season Reveals Supporting Cast, Promo`,
+    description: `The official website of the 100-man no Inochi no Ue ni Ore wa Tatteiru (I'm Standing on a Million Lives) anime series revealed four supporting cast, ending theme performer, and a promotional video for the second season on Friday. The new season will..`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
+    date: new Date()
+  },
+  {
+    title: `'100-man no Inochi no Ue ni Ore wa Tatteiru' 2nd Season Reveals Supporting Cast, Promo`,
+    description: `The official website of the 100-man no Inochi no Ue ni Ore wa Tatteiru (I'm Standing on a Million Lives) anime series revealed four supporting cast, ending theme performer, and a promotional video for the second season on Friday. The new season will..`,
+    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
+    date: new Date()
+  }
+]
 
 const Home = () => {
   const { width } = useWindowSize();
@@ -85,13 +110,15 @@ const Home = () => {
 
   useEffect(() => {
     if(width) {
-      if(width < 768) {
+      if(width < windowSizes.md.min) {
         setCardColumn(2);
-      } else if(width < 1216) {
-        setCardColumn(4);
-      } else {
-        setCardColumn(6);
+        return
       }
+      if(width < windowSizes.xl.min) {
+        setCardColumn(4);
+        return
+      }
+      setCardColumn(6);
     }
   }, [width])
 
@@ -100,7 +127,7 @@ const Home = () => {
     <div>
       <BannerCarousel items={featuredNews}/>
       <div className='centered-flex'>
-        <div className='content-container py-5'>
+        <div className='content-container py-5 px-2'>
           <AnimeCardsSection
             animes={animes}
             cardColumn={cardColumn}
@@ -108,6 +135,9 @@ const Home = () => {
           <AnimeCardsSection
             animes={animes}
             cardColumn={cardColumn}
+          />
+          <NewsCardsSection
+            stories={stories}
           />
         </div>
       </div>

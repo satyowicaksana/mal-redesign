@@ -20,7 +20,7 @@ const AnimeCardsSection = ({
 }: AnimeCardsSectionProps) => {
   return (
     <div className='mb-5'>
-      <Row gutter={32} align='middle' className='mb-3'>
+      <Row gutter={{xs: 0, md: 32}} align='middle' className='mb-3'>
         <Col>
           <Title level={3}>Winter 2021 Anime</Title>
         </Col>
@@ -28,7 +28,7 @@ const AnimeCardsSection = ({
           <Divider/>
         </Col>
         <Col className='desktop'>
-          <Link strong>VIEW ALL</Link>
+          <Link strong>VIEW MORE</Link>
         </Col>
       </Row>
       <Carousel
@@ -54,7 +54,7 @@ const AnimeCardsSection = ({
       </Carousel>
       <Row justify='end' className='mobile mt-2'>
         <Col>
-          <Link strong>VIEW ALL</Link>
+          <Link strong>VIEW MORE</Link>
         </Col>
       </Row>
     </div>

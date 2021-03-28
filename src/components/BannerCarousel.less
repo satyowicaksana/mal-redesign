@@ -30,8 +30,8 @@
   width: 100%;
   height: @banner-carousel-card-height;
 
-  @media @mobile {
-    height: @banner-carousel-card-height / 1.5;
+  @media @sm, @xs {
+    height: @banner-carousel-card-height / 2;
   }
   
   &:hover {
@@ -55,8 +55,9 @@
   box-shadow: @box-shadow-base;
   height: @banner-carousel-card-height - 16px * 2;
 
-  @media @mobile {
-    height: @banner-carousel-card-height / 1.5 - 16px * 2;
+  @media @sm, @xs {
+    left: calc(50% + 8px);
+    height: @banner-carousel-card-height / 2 - 16px * 2;
   }
 
   &.selected {
@@ -67,8 +68,8 @@
     z-index: 1;
     height: @banner-carousel-card-height;
 
-    @media @mobile {
-      height: @banner-carousel-card-height / 1.5;
+    @media @sm, @xs {
+      height: @banner-carousel-card-height / 2;
     }
   }
 }
@@ -78,9 +79,9 @@
   width: 100%;
   height: @banner-carousel-card-height;
 
-  @media @mobile {
+  @media @sm, @xs {
     filter: brightness(50%);
-    height: @banner-carousel-card-height / 1.5;
+    height: @banner-carousel-card-height / 2;
   }
 }
 
@@ -89,9 +90,9 @@
   flex-direction: column;
   justify-content: space-between;
   
-  @media @mobile {
+  @media @sm, @xs {
     position: absolute !important;
-    height: @banner-carousel-card-height / 1.5;
+    height: @banner-carousel-card-height / 2;
 
     * {
       color: @color-white !important;
@@ -120,7 +121,7 @@
     opacity: 1;
   }
 
-  @media @mobile {
+  @media @sm, @xs {
     background-color: @color-white;
   }
 }
