@@ -5,19 +5,20 @@ import './AnimeCard.less';
 const { Text } = Typography;
 
 type AnimeCardProps = {
-  title: string;
-  imagePath: string;
+  anime: {
+    title: string;
+    imagePath: string;
+  }
 }
 
 const AnimeCard = ({
-  title,
-  imagePath
+  anime
 }: AnimeCardProps) => {
   return (
     <div className='anime-card'>
-      <img src={imagePath} alt='' className='anime-card-image'/>
+      <img src={anime.imagePath} alt='' className='anime-card-image'/>
       <div className='anime-card-title-container py-1 px-2'>
-        <Text strong>{title}</Text>
+        <Text strong className='anime-card-title'>{anime.title}</Text>
       </div>
     </div>
   );

@@ -1,10 +1,6 @@
-import { useState, useEffect } from 'react';
-
 import BannerCarousel from 'components/BannerCarousel';
 import AnimeCardsSection from 'components/AnimeCardsSection';
 import NewsCardsSection from 'components/StoryCardsSection';
-import { windowSizes } from 'consts';
-import { useWindowSize } from 'helpers/hooks';
 import './Home.less';
 
 const featuredNews = [
@@ -104,25 +100,6 @@ const stories = [
 ]
 
 const Home = () => {
-  const { width } = useWindowSize();
-
-  const [cardColumn, setCardColumn] = useState(6);
-
-  useEffect(() => {
-    if(width) {
-      if(width < windowSizes.md.min) {
-        setCardColumn(2);
-        return
-      }
-      if(width < windowSizes.xl.min) {
-        setCardColumn(4);
-        return
-      }
-      setCardColumn(6);
-    }
-  }, [width])
-
-
   return (
     <div>
       <BannerCarousel items={featuredNews}/>
@@ -130,11 +107,9 @@ const Home = () => {
         <div className='content-container py-5 px-2'>
           <AnimeCardsSection
             animes={animes}
-            cardColumn={cardColumn}
           />
           <AnimeCardsSection
             animes={animes}
-            cardColumn={cardColumn}
           />
           <NewsCardsSection
             stories={stories}
