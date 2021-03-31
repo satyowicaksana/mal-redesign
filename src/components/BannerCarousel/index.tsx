@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Row, Col, Typography, Tag } from 'antd';
 import { FaChevronLeft, FaChevronRight, FaRegCalendarAlt } from 'react-icons/fa'
 
-import { useInterval } from 'helpers/hooks';
-import './BannerCarousel.less';
+import { useInterval } from 'hooks'
+import './style.less';
 
 const { Paragraph, Title } = Typography
 

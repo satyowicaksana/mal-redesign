@@ -1,6 +1,6 @@
 import { Typography } from 'antd';
 
-import './AnimeCard.less';
+import './style.less';
 
 const { Text } = Typography;
 

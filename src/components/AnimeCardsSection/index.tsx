@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Typography, Row, Col, Divider } from 'antd';
 
-import Carousel from 'components/Carousel'
-import AnimeCard from 'components/AnimeCard';
+import { Carousel, AnimeCard } from 'components'
 import { windowSizes } from 'consts';
-import { useWindowSize } from 'helpers/hooks';
-import './AnimeCardsSection.less';
+import { useWindowSize } from 'hooks'
+import './style.less';
 
 const { Title, Link } = Typography;
 

@@ -3,8 +3,8 @@ import { Row, Col, Typography, Popover, Input, Button } from 'antd';
 import { FaSearch } from 'react-icons/fa';
 import { BiLogInCircle } from 'react-icons/bi';
 
-import { useScroll } from 'helpers/hooks';
-import './Navbar.less';
+import { useScroll } from 'hooks'
+import './style.less';
 
 const { Title, Text, Link } = Typography;
 

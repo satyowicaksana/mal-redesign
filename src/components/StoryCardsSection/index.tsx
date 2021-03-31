@@ -1,7 +1,7 @@
 import { Typography, Row, Col, Divider} from 'antd';
 
-import StoryCard from './StoryCard';
-import './StoryCardsSection.less';
+import { StoryCard } from 'components'
+import './style.less';
 
 const { Title, Link } = Typography;
 

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Carousel, CarouselProps } from 'antd';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
-import './Carousel.less';
+import './style.less';
 
 const CustomCarousel = (props: CarouselProps) => {
   const carouselRef = useRef<any>();

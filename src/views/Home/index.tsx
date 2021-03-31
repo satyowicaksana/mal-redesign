@@ -1,7 +1,5 @@
-import BannerCarousel from 'components/BannerCarousel';
-import AnimeCardsSection from 'components/AnimeCardsSection';
-import NewsCardsSection from 'components/StoryCardsSection';
-import './Home.less';
+import { BannerCarousel, AnimeCardsSection, StoryCardsSection } from 'components';
+import './style.less';
 
 const featuredNews = [
   {
@@ -111,7 +109,7 @@ const Home = () => {
           <AnimeCardsSection
             animes={animes}
           />
-          <NewsCardsSection
+          <StoryCardsSection
             stories={stories}
           />
         </div>

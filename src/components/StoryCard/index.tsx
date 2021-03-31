@@ -2,8 +2,8 @@ import { Row, Col, Typography } from 'antd';
 import { FaRegCalendarAlt } from 'react-icons/fa'
 
 import { windowSizes } from 'consts'
-import { useWindowSize } from 'helpers/hooks'
-import './StoryCard.less';
+import { useWindowSize } from 'hooks'
+import './style.less';
 
 const { Title, Text } = Typography;
 
