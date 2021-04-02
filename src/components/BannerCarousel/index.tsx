@@ -48,7 +48,7 @@ const BannerCarousel = ({
       { items.map((item, i) => (
         <img key={i} src={items[i].imagePath} alt='' className={`banner-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
       )) }
-      <div className='content-container pt-4 pb-5 px-2'>
+      <div className='content-container pt-4 pb-5'>
         <div className='banner-carousel-cards-container'>
           { items.map((item, i) => (
             <div key={i} className={`banner-carousel-card ${selectedItemIndex === i ? 'selected' : ''}`}>

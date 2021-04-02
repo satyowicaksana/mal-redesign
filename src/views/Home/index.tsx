@@ -107,7 +107,7 @@ const Home = () => {
     <div>
       <BannerCarousel items={featuredNews}/>
       <div className='centered-flex'>
-        <div className='content-container py-5 px-2'>
+        <div className='content-container py-5'>
           <AnimeCardsSection
             animes={animes}
           />

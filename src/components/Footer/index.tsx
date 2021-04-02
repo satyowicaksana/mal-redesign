@@ -12,7 +12,7 @@ const Footer = () => {
 
   return (
     <div className='footer-wrapper'>
-      <div className='content-container px-2 py-4'>
+      <div className='content-container py-4'>
         <Row justify='space-between' className='row-vertical-sm'>
           <Col>
             <Row gutter={[{xs: 0, md: 40}, 16]} className='row-vertical-sm'>
