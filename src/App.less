@@ -1,7 +1,9 @@
 @import './lib.less';
 @import '~antd/dist/antd.less';
 
-span {
+/* style adjustment */
+
+span, a {
   @media @sm, @xs {
     font-size: 12px;
   }
@@ -14,6 +16,8 @@ h1, h2, h3, h4, h5, strong {
     font-size: 14px !important;
   }
 }
+
+//typography
 
 .ant-typography {
   font-family: 'Poppins', sans-serif;
@@ -29,6 +33,8 @@ a.ant-typography-secondary {
     color: @secondary-color !important;
   }
 }
+
+// tag
 
 .ant-tag {
   border-radius: 24px;
@@ -46,6 +52,8 @@ a.ant-typography-secondary {
   color: @color-white;
 }
 
+// popover
+
 .ant-popover-arrow {
   display: none;
 }
@@ -59,6 +67,8 @@ a.ant-typography-secondary {
   padding: 0;
 }
 
+// input
+
 .ant-input {
   border-radius: 16px;
 }
@@ -71,9 +81,11 @@ a.ant-typography-secondary {
   }
 }
 
+// button
+
 .ant-btn {
   border-radius: 16px;
-  font-weight: 900;
+  font-weight: 800 !important;
   display: flex;
   align-items: center;
 
@@ -94,15 +106,28 @@ a.ant-typography-secondary {
   }
 }
 
+// divider
+
 .ant-divider {
   margin: 0;
   border-top: 4px solid rgba(0, 0, 0, 0.06);
 }
 
+/* custom styles */
+
+// common
+
 .centered-flex {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.centered-flex-sm {
+  @media @sm, @xs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .content-container {
@@ -121,6 +146,26 @@ a.ant-typography-secondary {
     display: none;
   }
 }
+
+// typography
+
+.typography-fade {
+  opacity: 0.7;
+}
+
+// row
+
+.row-vertical {
+  flex-direction: column;
+}
+.row-vertical-sm {
+  @media @sm, @xs {
+    flex-direction: column;
+  }
+}
+
+
+// spacing
 
 .p-2 {
   padding: 16px;
@@ -188,6 +233,16 @@ a.ant-typography-secondary {
   }
 }
 
+.my-4 {
+  margin-top: 32px;
+  margin-bottom: 32px;
+
+  @media @sm, @xs {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+
 .mt-2 {
   margin-top: 16px;
 
@@ -212,6 +267,13 @@ a.ant-typography-secondary {
   }
 }
 
+.mb-1 {
+  margin-bottom: 8px !important;
+
+  @media @sm, @xs {
+    margin-bottom: 4px !important;
+  }
+}
 
 .mb-2 {
   margin-bottom: 16px !important;
@@ -234,6 +296,16 @@ a.ant-typography-secondary {
 
   @media @sm, @xs {
     margin-bottom: 20px !important;
+  }
+}
+
+.py-4 {
+  padding-top: 32px;
+  padding-bottom: 32px;
+
+  @media @sm, @xs {
+    padding-top: 16px;
+    padding-bottom: 16px;
   }
 }
 

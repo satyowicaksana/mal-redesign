@@ -1,4 +1,9 @@
-import { BannerCarousel, AnimeCardsSection, StoryCardsSection } from 'components';
+import {
+  BannerCarousel,
+  AnimeCardsSection,
+  StoryCardsSection,
+  Footer
+} from 'components';
 import './style.less';
 
 const featuredNews = [
@@ -114,6 +119,7 @@ const Home = () => {
           />
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

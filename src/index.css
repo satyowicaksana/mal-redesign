@@ -2,7 +2,7 @@
 
 @font-face {
   font-family: 'AGRevueCyr';
-  src: url('./assets/AGRevueCyr-Roman-Medium.woff') format('woff');
+  src: url('assets/fonts/AGRevueCyr-Roman-Medium.woff') format('woff');
 }
 
 body {

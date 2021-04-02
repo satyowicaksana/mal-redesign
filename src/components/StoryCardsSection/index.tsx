@@ -32,7 +32,7 @@ const StoryCardsSection = ({
       </Row>
       <Row gutter={[{ md: 24, xl: 40 }, { xs: 8, sm: 8, md: 24, xl: 40 }]}>
         { stories.map((story, i) => (
-          <Col xs={24} lg={12}>
+          <Col key={i} xs={24} lg={12}>
             <StoryCard
               story={story}
             />
