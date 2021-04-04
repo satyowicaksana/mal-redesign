@@ -6,6 +6,9 @@ import {
 } from 'components';
 import './style.less';
 
+import { useSelector, useDispatch } from 'react-redux'
+import { selectCounter, increment } from 'store/counter'
+
 const featuredNews = [
   {
     imagePath: 'https://media.comicbook.com/2020/09/edens-zero-anime-poster-hiro-mashima-fairy-tail-creator-1238508-1280x0.jpeg',
@@ -103,9 +106,15 @@ const stories = [
 ]
 
 const Home = () => {
+  const dispatch = useDispatch()
+
+  const page = useSelector(selectCounter)
+
   return (
     <div>
       <BannerCarousel items={featuredNews}/>
+      {page}
+      <button onClick={() => dispatch(increment())}>increment</button>
       <div className='centered-flex'>
         <div className='content-container py-5'>
           <AnimeCardsSection
