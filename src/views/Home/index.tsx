@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
 import {
   BannerCarousel,
   AnimeCardsSection,
@@ -5,9 +8,7 @@ import {
   Footer
 } from 'components';
 import './style.less';
-
-import { useSelector, useDispatch } from 'react-redux'
-import { selectCounter, increment } from 'store/counter'
+import { selectCurrentSeason, getCurrentSeason } from 'store/season'
 
 const featuredNews = [
   {
@@ -25,57 +26,6 @@ const featuredNews = [
     title: `A Tale of Two Redheads: Yona vs. Shirayuki`,
     description: 'Making comparisons amongst different facets of popular anime is a fun little exercise I like to engage with occasionally, especially when certain trends end up getting clustered together. In one such instance back in 2015, we coincidentally saw two different anime adaptations of shoujo manga with red-haired female protagonists in fantasy settings, and the general similarities continue well beyond that point, so today, I wanted to take a closer look at Yona from Yona of the Dawn and Shirayuki from Snow White with the Red Hair to see how they compare and what makes they work within their respective stories.'
   },
-]
-
-const animes = [
-  {
-    title: 'Attack On Titan: Final Season',
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
-  },
-  {
-    title: `The Promised Neverland: Season 2`,
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
-  },
-  {
-    title: 'Attack On Titan: Final Season',
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
-  },
-  {
-    title: `The Promised Neverland: Season 2`,
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
-  },
-  {
-    title: 'Attack On Titan: Final Season',
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
-  },
-  {
-    title: `The Promised Neverland: Season 2`,
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
-  },
-  {
-    title: 'Attack On Titan: Final Season',
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
-  },
-  {
-    title: `The Promised Neverland: Season 2`,
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
-  },
-  {
-    title: 'Attack On Titan: Final Season',
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
-  },
-  {
-    title: `The Promised Neverland: Season 2`,
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
-  },
-  {
-    title: 'Attack On Titan: Final Season',
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg',
-  },
-  {
-    title: `The Promised Neverland: Season 2`,
-    imagePath: 'https://cdn.myanimelist.net/images/anime/1815/110626.jpg'
-  }
 ]
 
 const stories = [
@@ -108,21 +58,22 @@ const stories = [
 const Home = () => {
   const dispatch = useDispatch()
 
-  const page = useSelector(selectCounter)
+  const currentSeason = useSelector(selectCurrentSeason)
+
+  useEffect(() => {
+    dispatch(getCurrentSeason())
+  }, [dispatch])
 
   return (
     <div>
       <BannerCarousel items={featuredNews}/>
-      {page}
-      <button onClick={() => dispatch(increment())}>increment</button>
       <div className='centered-flex'>
         <div className='content-container py-5'>
-          <AnimeCardsSection
-            animes={animes}
-          />
-          <AnimeCardsSection
-            animes={animes}
-          />
+          {currentSeason &&
+            <AnimeCardsSection
+              animes={currentSeason.anime}
+            />
+          }
           <StoryCardsSection
             stories={stories}
           />

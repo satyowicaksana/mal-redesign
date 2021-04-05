@@ -4,15 +4,13 @@ import { Typography, Row, Col, Divider } from 'antd';
 import { Carousel, AnimeCard } from 'components'
 import { windowSizes } from 'consts';
 import { useWindowSize } from 'hooks'
+import { Anime } from 'interfaces/anime'
 import './style.less';
 
 const { Title, Link } = Typography;
 
 type AnimeCardsSectionProps = {
-  animes: {
-    title: string;
-    imagePath: string;
-  }[];
+  animes: Anime[];
 }
 
 const AnimeCardsSection = ({
