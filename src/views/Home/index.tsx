@@ -8,7 +8,12 @@ import {
   Footer
 } from 'components';
 import './style.less';
-import { selectCurrentSeason, getCurrentSeason } from 'store/season'
+import {
+  selectCurrentSeason,
+  selectTopAiringAnimes,
+  getCurrentSeason,
+  getTopAiringAnimes
+} from 'store/anime'
 
 const featuredNews = [
   {
@@ -59,9 +64,11 @@ const Home = () => {
   const dispatch = useDispatch()
 
   const currentSeason = useSelector(selectCurrentSeason)
+  const topAiringAnimes = useSelector(selectTopAiringAnimes)
 
   useEffect(() => {
     dispatch(getCurrentSeason())
+    dispatch(getTopAiringAnimes())
   }, [dispatch])
 
   return (
@@ -74,6 +81,9 @@ const Home = () => {
               animes={currentSeason.anime}
             />
           }
+          <AnimeCardsSection
+            animes={topAiringAnimes}
+          />
           <StoryCardsSection
             stories={stories}
           />

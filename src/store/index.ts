@@ -2,11 +2,11 @@ import { configureStore, Action, combineReducers } from '@reduxjs/toolkit'
 import { ThunkAction } from 'redux-thunk'
 
 import counter from 'store/counter'
-import season from 'store/season'
+import anime from 'store/anime'
 
 const reducer = combineReducers({
   counter,
-  season
+  anime
 })
 
 export type RootState = ReturnType<typeof reducer>
