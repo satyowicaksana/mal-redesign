@@ -5,17 +5,33 @@ import { Anime, Season } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
-  currentSeason: Season | undefined
-  topAiringAnimes: Anime[]
+  currentSeason: {
+    data: Season | undefined
+    loading: boolean
+    error: Error | undefined
+  }
+  topAiringAnimes: {
+    data: Anime[]
+    loading: boolean
+    error: Error | undefined
+  }
 }
 
 let initialState: AnimeState = {
-  currentSeason: undefined,
-  topAiringAnimes: []
+  currentSeason: {
+    data: undefined,
+    loading: false,
+    error: undefined
+  },
+  topAiringAnimes: {
+    data: [],
+    loading: false,
+    error: undefined
+  }
 }
 
 export const getCurrentSeason = createAsyncThunk(
-  'season/getCurrentSeason',
+  'anime/getCurrentSeason',
   async () => {
     const response = await fetch(jikanAPI.getCurrentSeason)
     const data: Season = await response.json()
@@ -27,7 +43,7 @@ export const getCurrentSeason = createAsyncThunk(
 )
 
 export const getTopAiringAnimes = createAsyncThunk(
-  'season/getTopAiringAnimes',
+  'anime/getTopAiringAnimes',
   async () => {
     const response = await fetch(jikanAPI.getTopAiringAnimes)
     const data: {
@@ -38,23 +54,33 @@ export const getTopAiringAnimes = createAsyncThunk(
 )
 
 const animeSlice = createSlice({
-  name: 'season',
+  name: 'anime',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getCurrentSeason.pending, () => {
+    builder.addCase(getCurrentSeason.pending, state => {
+      state.currentSeason.loading = true
     })
     builder.addCase(getCurrentSeason.fulfilled, (state, { payload }) => {
-      state.currentSeason = payload
+      state.currentSeason.data = payload
+      state.currentSeason.loading = false
     })
-    builder.addCase(getCurrentSeason.rejected, () => {
+    builder.addCase(getCurrentSeason.rejected, (state, action) => {
+      state.currentSeason.loading = false
+      alert('error')
+      console.log(action)
     })
-    builder.addCase(getTopAiringAnimes.pending, () => {
+    builder.addCase(getTopAiringAnimes.pending, state => {
+      state.topAiringAnimes.loading = true
     })
     builder.addCase(getTopAiringAnimes.fulfilled, (state, { payload }) => {
-      state.topAiringAnimes = payload
+      state.topAiringAnimes.data = payload
+      state.topAiringAnimes.loading = false
     })
-    builder.addCase(getTopAiringAnimes.rejected, () => {
+    builder.addCase(getTopAiringAnimes.rejected, (state, action) => {
+      state.topAiringAnimes.loading = false
+      alert('error')
+      console.log(action)
     })
   },
 })

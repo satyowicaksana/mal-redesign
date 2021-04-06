@@ -4,7 +4,14 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 import './style.less';
 
-const CustomCarousel = (props: CarouselProps) => {
+interface CustomCarouselProps extends CarouselProps {
+  showArrows?: boolean
+}
+
+const CustomCarousel = ({
+  showArrows = true,
+  ...props
+}: CustomCarouselProps) => {
   const carouselRef = useRef<any>();
 
   const handleClickRight = () => {
@@ -23,8 +30,9 @@ const CustomCarousel = (props: CarouselProps) => {
           carouselRef.current = ref;
         }}
       />
-      <FaChevronLeft onClick={handleClickLeft} className='carousel-left-icon' />
-      <FaChevronRight onClick={handleClickRight} className='carousel-right-icon' />
+      {showArrows
+      && <><FaChevronLeft onClick={handleClickLeft} className='carousel-left-icon' />
+      <FaChevronRight onClick={handleClickRight} className='carousel-right-icon' /></>}
     </div>
   );
 }

@@ -76,13 +76,15 @@ const Home = () => {
       <BannerCarousel items={featuredNews}/>
       <div className='centered-flex'>
         <div className='content-container py-5'>
-          {currentSeason &&
-            <AnimeCardsSection
-              animes={currentSeason.anime}
-            />
-          }
           <AnimeCardsSection
-            animes={topAiringAnimes}
+            title={currentSeason.data ? `${currentSeason.data.season_name} ${currentSeason.data.season_year} Anime` : ''}
+            animes={currentSeason.data?.anime || []}
+            loading={currentSeason.loading}
+          />
+          <AnimeCardsSection
+            title='Top Airing Anime'
+            animes={topAiringAnimes.data}
+            loading={topAiringAnimes.loading}
           />
           <StoryCardsSection
             stories={stories}

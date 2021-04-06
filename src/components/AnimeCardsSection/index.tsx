@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Typography, Row, Col, Divider } from 'antd';
+import { Typography, Row, Col, Divider, Skeleton } from 'antd';
 
 import { Carousel, AnimeCard } from 'components'
 import { windowSizes } from 'consts';
@@ -10,11 +10,15 @@ import './style.less';
 const { Title, Link } = Typography;
 
 type AnimeCardsSectionProps = {
-  animes: Anime[];
+  title: string
+  animes: Anime[]
+  loading?: boolean
 }
 
 const AnimeCardsSection = ({
+  title,
   animes,
+  loading
 }: AnimeCardsSectionProps) => {
   const { width } = useWindowSize();
 
@@ -32,7 +36,7 @@ const AnimeCardsSection = ({
     <div className='mb-5'>
       <Row gutter={{xs: 0, md: 32}} align='middle' className='mb-3'>
         <Col>
-          <Title level={3}>Winter 2021 Anime</Title>
+          <Title level={3}>{title}</Title>
         </Col>
         <Col flex='auto' className='desktop'>
           <Divider/>
@@ -43,29 +47,37 @@ const AnimeCardsSection = ({
       </Row>
       {width <= windowSizes.md.max ? (
         <div className='anime-cards-section-swiper'>
-          {animes.map((anime, i) => (
-            <div key={i} className='anime-cards-section-swiper-card-container mr-2'>
-              <AnimeCard
-                anime={anime}
-              />
-            </div>
-          ))}
+          {loading
+          ? Array.from(Array(6).keys()).map(i => 
+              <div key={i} className='anime-cards-section-swiper-card-container mr-2'>
+                <Skeleton.Button key={i} active className='skeleton-anime-card'/>
+              </div>
+            )
+          : animes.map((anime, i) => 
+              <div key={i} className='anime-cards-section-swiper-card-container mr-2'>
+                <AnimeCard
+                  anime={anime}
+                />
+              </div>
+            )}
         </div>
       ) : (
         <Carousel
           dots={false}
+          showArrows={!loading}
           className='anime-cards-section-carousel mb-1'
         >
-          { Array.from(Array(Math.ceil(animes.length / 6)).keys()).map(i => (
+          { Array.from(Array(Math.ceil((loading ? 6 : animes.length) / 6)).keys()).map(i => (
             <div key={i}>
               <Row gutter={carouselCardColumn * 6} className='anime-cards-section-slide'>
                 { Array.from(Array(carouselCardColumn).keys()).map(j => (
                   <Col key={`${i}${j}`} span={24 / carouselCardColumn}>
-                    {animes[i * carouselCardColumn + j] && 
-                      <AnimeCard
+                    {loading
+                    ? <Skeleton.Button active key={i} className='skeleton-anime-card'/>
+                    : animes[i * carouselCardColumn + j]
+                    && <AnimeCard
                         anime={animes[i * carouselCardColumn + j]}
-                      />
-                    }
+                      />}
                   </Col>
                 )) }
               </Row>
