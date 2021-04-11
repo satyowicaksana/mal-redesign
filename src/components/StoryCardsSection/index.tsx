@@ -1,4 +1,4 @@
-import { Typography, Row, Col, Divider} from 'antd';
+import { Typography, Row, Col, Divider, Skeleton} from 'antd';
 
 import { StoryCard } from 'components'
 import { News } from 'interfaces/news'
@@ -8,10 +8,12 @@ const { Title, Link } = Typography;
 
 type StoryCardsSectionProps = {
   stories: News[];
+  loading?: boolean;
 }
 
 const StoryCardsSection = ({
-  stories
+  stories,
+  loading
 }: StoryCardsSectionProps) => {
   return (
     <div className='mb-5'>
@@ -27,12 +29,25 @@ const StoryCardsSection = ({
         </Col>
       </Row>
       <Row gutter={[{ md: 24, xl: 40 }, { xs: 8, sm: 8, md: 24, xl: 40 }]}>
-        { stories.map((story, i) => (
+        {loading
+        ? Array.from(Array(4).keys()).map(i => (
           <Col key={i} xs={24} lg={12}>
-            <StoryCard
-              story={story}
-            />
+            <Row className='story-card'>
+              <Col xs={8} md={12}>
+                <Skeleton.Button active className='skeleton-stretch' />
+              </Col>
+              <Col xs={16} md={12} className='p-2'>
+                <Skeleton active/>
+              </Col>
+            </Row>
           </Col>
+          ))
+        : stories.map((story, i) => (
+            <Col key={i} xs={24} lg={12}>
+              <StoryCard
+                story={story}
+              />
+            </Col>
           )) }
       </Row>
       <Row justify='end' className='mobile mt-2'>

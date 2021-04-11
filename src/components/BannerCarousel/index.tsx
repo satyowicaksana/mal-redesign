@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Row, Col, Typography, Tag } from 'antd';
-import { FaChevronLeft, FaChevronRight, FaRegCalendarAlt } from 'react-icons/fa'
+import { Row, Col, Typography, Tag, Skeleton } from 'antd';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 import { useInterval } from 'hooks'
 import { News } from 'interfaces/news'
@@ -10,10 +10,12 @@ const { Paragraph, Title } = Typography
 
 type BannerCarouselProps = {
   newsList: News[]
+  loading?: boolean
 }
 
 const BannerCarousel = ({
-  newsList
+  newsList,
+  loading
 }: BannerCarouselProps) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
@@ -42,12 +44,24 @@ const BannerCarousel = ({
 
   return (
     <div className='banner-carousel-wrapper'>
-      { newsList.map((item, i) => (
+      {!loading
+      && newsList.map((item, i) => (
         <img key={i} src={newsList[i].image_url} alt='' className={`banner-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
-      )) }
+      ))}
       <div className='content-container pt-4 pb-5'>
         <div className='banner-carousel-cards-container' onMouseEnter={() => setAutoplay(false)} onMouseLeave={() => setAutoplay(true)}>
-          { newsList.map((item, i) => (
+          {loading
+          ? <div className='banner-carousel-card selected loading'>
+              <Row className='banner-carousel-card-content-container'>
+                <Col md={14} xs={24}>
+                  <Skeleton.Button active className='skeleton-stretch'/>
+                </Col>
+                <Col md={10} xs={24} className='banner-carousel-card-info-container p-3'>
+                  <Skeleton active/>
+                </Col>
+              </Row>
+            </div>
+          : newsList.map((item, i) => (
             <div key={i} className={`banner-carousel-card ${selectedItemIndex === i ? 'selected' : ''}`}>
               <Row>
                 <Col md={14} xs={24}>
@@ -63,19 +77,11 @@ const BannerCarousel = ({
                         <Tag color='blue'>NEWS</Tag>
                       </Col>
                     </Row>
-                    <Title level={3} ellipsis={{rows: 3}} className='mb-2'>{item.title}</Title>
+                    <Title level={2} ellipsis={{rows: 3}} className='mb-2'>{item.title}</Title>
                     <Paragraph ellipsis={{rows: 5}} className='desktop mb-2'>{item.description}</Paragraph>
-                    <Row gutter={8} align='middle' className='mb-2'>
-                      <Col className='banner-carousel-calendar-icon-container'>
-                        <FaRegCalendarAlt className='banner-carousel-calendar-icon'/>
-                      </Col>
-                      <Col>
-                        12/03/2021
-                      </Col>
-                    </Row>
                   </div>
                   <Row gutter={8}>
-                    { newsList.map((item, i) => (
+                    {newsList.map((item, i) => (
                       <Col key={i}>
                         <div className={`banner-carousel-pointer ${selectedItemIndex === i ? 'selected' : ''}`}/>
                       </Col>
@@ -85,8 +91,11 @@ const BannerCarousel = ({
               </Row>
             </div>
           )) }
-          <FaChevronLeft onClick={handleClickLeft} className='banner-carousel-left-icon' />
-          <FaChevronRight onClick={handleClickRight} className='banner-carousel-right-icon' />
+          {!loading
+          && <>
+              <FaChevronLeft onClick={handleClickLeft} className='banner-carousel-left-icon' />
+              <FaChevronRight onClick={handleClickRight} className='banner-carousel-right-icon' />
+            </>}
         </div>
       </div>
     </div>

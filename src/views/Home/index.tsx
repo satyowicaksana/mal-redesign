@@ -34,20 +34,24 @@ const Home = () => {
 
   return (
     <div>
-      <BannerCarousel newsList={featuredNewsList.data || []}/>
+      <BannerCarousel
+        loading={featuredNewsList.loading}
+        newsList={featuredNewsList.data || []}
+      />
       <div className='centered-flex'>
         <div className='content-container py-5'>
           <AnimeCardsSection
+            loading={currentSeason.loading}
             title={currentSeason.data ? `${currentSeason.data.season_name} ${currentSeason.data.season_year} Anime` : ''}
             animes={currentSeason.data?.anime || []}
-            loading={currentSeason.loading}
           />
           <AnimeCardsSection
+            loading={topAiringAnimes.loading}
             title='Top Airing Anime'
             animes={topAiringAnimes.data}
-            loading={topAiringAnimes.loading}
           />
           <StoryCardsSection
+            loading={featuredNewsList.loading}
             stories={featuredNewsList.data || []}
           />
         </div>
