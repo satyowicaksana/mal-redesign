@@ -1,3 +1,4 @@
+import { HTMLAttributes } from 'react';
 import { Row, Col, Typography } from 'antd';
 import { FaRegCalendarAlt } from 'react-icons/fa'
 
@@ -8,19 +9,20 @@ import './style.less';
 
 const { Title, Text } = Typography;
 
-type StoryCardProps = {
+interface StoryCardProps extends HTMLAttributes<HTMLDivElement> {
   story: News
 }
 
 const StoryCard = ({
-  story
+  story,
+  ...props
 }: StoryCardProps) => {
   const { title, image_url } = story;
 
   const { width } = useWindowSize();
 
   return (
-    <Row className='story-card'>
+    <Row {...props} className='story-card'>
       <Col xs={8} md={12}>
         <img src={image_url} alt='' className='story-card-image'/>
       </Col>

@@ -32,7 +32,7 @@ const StoryCardsSection = ({
         {loading
         ? Array.from(Array(4).keys()).map(i => (
           <Col key={i} xs={24} lg={12}>
-            <Row className='story-card'>
+            <Row className='story-card loading'>
               <Col xs={8} md={12}>
                 <Skeleton.Button active className='skeleton-stretch' />
               </Col>
@@ -45,6 +45,7 @@ const StoryCardsSection = ({
         : stories.map((story, i) => (
             <Col key={i} xs={24} lg={12}>
               <StoryCard
+                onClick={() => window.open(story.link, '_blank')}
                 story={story}
               />
             </Col>

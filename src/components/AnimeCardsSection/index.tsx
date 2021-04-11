@@ -76,6 +76,7 @@ const AnimeCardsSection = ({
                     ? <Skeleton.Button active key={i} className='skeleton-anime-card'/>
                     : animes[i * carouselCardColumn + j]
                     && <AnimeCard
+                        onClick={() => window.open(animes[i * carouselCardColumn + j].url, '_blank')}
                         anime={animes[i * carouselCardColumn + j]}
                       />}
                   </Col>

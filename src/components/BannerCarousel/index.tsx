@@ -45,13 +45,18 @@ const BannerCarousel = ({
   return (
     <div className='banner-carousel-wrapper'>
       {!loading
-      && newsList.map((item, i) => (
+      && newsList.map((news, i) => (
         <img key={i} src={newsList[i].image_url} alt='' className={`banner-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
       ))}
       <div className='content-container pt-4 pb-5'>
-        <div className='banner-carousel-cards-container' onMouseEnter={() => setAutoplay(false)} onMouseLeave={() => setAutoplay(true)}>
+        <div
+          onMouseEnter={() => setAutoplay(false)}
+          onMouseLeave={() => setAutoplay(true)}
+          className='banner-carousel-cards-container'
+        >
           {loading
-          ? <div className='banner-carousel-card selected loading'>
+          ? <div 
+            className='banner-carousel-card selected loading'>
               <Row className='banner-carousel-card-content-container'>
                 <Col md={14} xs={24}>
                   <Skeleton.Button active className='skeleton-stretch'/>
@@ -61,11 +66,15 @@ const BannerCarousel = ({
                 </Col>
               </Row>
             </div>
-          : newsList.map((item, i) => (
-            <div key={i} className={`banner-carousel-card ${selectedItemIndex === i ? 'selected' : ''}`}>
+          : newsList.map((news, i) => (
+            <div
+              key={i}
+              onClick={() => window.open(news.link, '_blank')}
+              className={`banner-carousel-card ${selectedItemIndex === i ? 'selected' : ''}`}
+            >
               <Row>
                 <Col md={14} xs={24}>
-                  <img src={item.image_url} alt='' className='banner-carousel-card-image' />
+                  <img src={news.image_url} alt='' className='banner-carousel-card-image' />
                 </Col>
                 <Col md={10} xs={24} className='banner-carousel-card-info-container p-3'>
                   <div>
@@ -77,11 +86,11 @@ const BannerCarousel = ({
                         <Tag color='blue'>NEWS</Tag>
                       </Col>
                     </Row>
-                    <Title level={2} ellipsis={{rows: 3}} className='mb-2'>{item.title}</Title>
-                    <Paragraph ellipsis={{rows: 5}} className='desktop mb-2'>{item.description}</Paragraph>
+                    <Title level={2} ellipsis={{rows: 3}} className='mb-2'>{news.title}</Title>
+                    <Paragraph ellipsis={{rows: 5}} className='desktop mb-2'>{news.description}</Paragraph>
                   </div>
                   <Row gutter={8}>
-                    {newsList.map((item, i) => (
+                    {newsList.map((news, i) => (
                       <Col key={i}>
                         <div className={`banner-carousel-pointer ${selectedItemIndex === i ? 'selected' : ''}`}/>
                       </Col>
