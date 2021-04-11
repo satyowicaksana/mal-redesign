@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/myanimelist-client/static/css/main.37d5cdb0.chunk.css",
+    "main.js": "/myanimelist-client/static/js/main.100e299d.chunk.js",
+    "main.js.map": "/myanimelist-client/static/js/main.100e299d.chunk.js.map",
+    "runtime-main.js": "/myanimelist-client/static/js/runtime-main.534985f9.js",
+    "runtime-main.js.map": "/myanimelist-client/static/js/runtime-main.534985f9.js.map",
+    "static/js/2.880461bd.chunk.js": "/myanimelist-client/static/js/2.880461bd.chunk.js",
+    "static/js/2.880461bd.chunk.js.map": "/myanimelist-client/static/js/2.880461bd.chunk.js.map",
+    "static/js/3.a81b6437.chunk.js": "/myanimelist-client/static/js/3.a81b6437.chunk.js",
+    "static/js/3.a81b6437.chunk.js.map": "/myanimelist-client/static/js/3.a81b6437.chunk.js.map",
+    "index.html": "/myanimelist-client/index.html",
+    "static/css/main.37d5cdb0.chunk.css.map": "/myanimelist-client/static/css/main.37d5cdb0.chunk.css.map",
+    "static/js/2.880461bd.chunk.js.LICENSE.txt": "/myanimelist-client/static/js/2.880461bd.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/myanimelist-client/static/media/AGRevueCyr-Roman-Medium.c22169c5.woff",
+    "static/media/apple-store-badge.6d21b830.png": "/myanimelist-client/static/media/apple-store-badge.6d21b830.png",
+    "static/media/google-play-badge.d2b386b1.png": "/myanimelist-client/static/media/google-play-badge.d2b386b1.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.534985f9.js",
+    "static/js/2.880461bd.chunk.js",
+    "static/css/main.37d5cdb0.chunk.css",
+    "static/js/main.100e299d.chunk.js"
+  ]
+}
