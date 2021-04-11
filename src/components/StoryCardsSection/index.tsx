@@ -1,17 +1,13 @@
 import { Typography, Row, Col, Divider} from 'antd';
 
 import { StoryCard } from 'components'
+import { News } from 'interfaces/news'
 import './style.less';
 
 const { Title, Link } = Typography;
 
 type StoryCardsSectionProps = {
-  stories: {
-    title: string;
-    description: string;
-    imagePath: string;
-    date: Date;
-  }[];
+  stories: News[];
 }
 
 const StoryCardsSection = ({

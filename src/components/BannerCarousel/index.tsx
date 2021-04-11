@@ -3,20 +3,17 @@ import { Row, Col, Typography, Tag } from 'antd';
 import { FaChevronLeft, FaChevronRight, FaRegCalendarAlt } from 'react-icons/fa'
 
 import { useInterval } from 'hooks'
+import { News } from 'interfaces/news'
 import './style.less';
 
 const { Paragraph, Title } = Typography
 
 type BannerCarouselProps = {
-  items: {
-    imagePath: string;
-    title: string;
-    description:string;
-  }[];
+  newsList: News[]
 }
 
 const BannerCarousel = ({
-  items
+  newsList
 }: BannerCarouselProps) => {
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
@@ -28,7 +25,7 @@ const BannerCarousel = ({
   }, 4000);
 
   const handleClickRight = () => {
-    if(selectedItemIndex === items.length - 1) {
+    if(selectedItemIndex === newsList.length - 1) {
       setSelectedItemIndex(0);
     } else {
       setSelectedItemIndex(selectedItemIndex + 1);
@@ -37,24 +34,24 @@ const BannerCarousel = ({
 
   const handleClickLeft = () => {
     if(selectedItemIndex === 0) {
-      setSelectedItemIndex(items.length - 1);
+      setSelectedItemIndex(newsList.length - 1);
     } else {
       setSelectedItemIndex(selectedItemIndex - 1);
     }
   }
 
   return (
-    <div className='banner-carousel-wrapper' onMouseEnter={() => setAutoplay(false)} onMouseLeave={() => setAutoplay(true)}>
-      { items.map((item, i) => (
-        <img key={i} src={items[i].imagePath} alt='' className={`banner-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
+    <div className='banner-carousel-wrapper'>
+      { newsList.map((item, i) => (
+        <img key={i} src={newsList[i].image_url} alt='' className={`banner-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
       )) }
       <div className='content-container pt-4 pb-5'>
-        <div className='banner-carousel-cards-container'>
-          { items.map((item, i) => (
+        <div className='banner-carousel-cards-container' onMouseEnter={() => setAutoplay(false)} onMouseLeave={() => setAutoplay(true)}>
+          { newsList.map((item, i) => (
             <div key={i} className={`banner-carousel-card ${selectedItemIndex === i ? 'selected' : ''}`}>
               <Row>
                 <Col md={14} xs={24}>
-                  <img src={item.imagePath} alt='' className='banner-carousel-card-image' />
+                  <img src={item.image_url} alt='' className='banner-carousel-card-image' />
                 </Col>
                 <Col md={10} xs={24} className='banner-carousel-card-info-container p-3'>
                   <div>
@@ -78,7 +75,7 @@ const BannerCarousel = ({
                     </Row>
                   </div>
                   <Row gutter={8}>
-                    { items.map((item, i) => (
+                    { newsList.map((item, i) => (
                       <Col key={i}>
                         <div className={`banner-carousel-pointer ${selectedItemIndex === i ? 'selected' : ''}`}/>
                       </Col>

@@ -1,5 +1,7 @@
 import jikanAPI from './jikan'
+import goAPI from './go'
 
 export {
-  jikanAPI
+  jikanAPI,
+  goAPI
 }

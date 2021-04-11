@@ -3,10 +3,12 @@ import { ThunkAction } from 'redux-thunk'
 
 import counter from 'store/counter'
 import anime from 'store/anime'
+import news from 'store/news'
 
 const reducer = combineReducers({
   counter,
-  anime
+  anime,
+  news
 })
 
 export type RootState = ReturnType<typeof reducer>
