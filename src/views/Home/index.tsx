@@ -4,8 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   BannerCarousel,
   AnimeCardsSection,
-  StoryCardsSection,
-  Footer
+  StoryCardsSection
 } from 'components';
 import './style.less';
 import {
@@ -56,7 +55,6 @@ const Home = () => {
           />
         </div>
       </div>
-      <Footer/>
     </div>
   )
 }

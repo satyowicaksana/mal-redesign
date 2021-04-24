@@ -4,21 +4,31 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Home from 'views/Home';
-import Navbar from 'components/Navbar'
+import {
+  Home,
+  Anime
+} from 'views'
+import {
+  Navbar,
+  Footer
+} from 'components'
 import './App.less';
 
 const App = () => {
   return (
     <div>
-      <Navbar />
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path='/'>
             <Home />
           </Route>
+          <Route exact path='/anime/:id'>
+            <Anime />
+          </Route>
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }

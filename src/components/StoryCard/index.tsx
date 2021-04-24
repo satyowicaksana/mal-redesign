@@ -17,14 +17,14 @@ const StoryCard = ({
   story,
   ...props
 }: StoryCardProps) => {
-  const { title, image_url } = story;
+  const { title, imageURL } = story;
 
   const { width } = useWindowSize();
 
   return (
     <Row {...props} className='story-card'>
       <Col xs={8} md={12}>
-        <img src={image_url} alt='' className='story-card-image'/>
+        <img src={imageURL} alt='' className='story-card-image'/>
       </Col>
       <Col xs={16} md={12} className='story-card-info-container p-2'>
         <Title level={4} ellipsis={{rows: width < windowSizes.md.min ? 3 : 4}}>

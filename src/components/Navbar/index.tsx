@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Row, Col, Typography, Popover, Input, Button } from 'antd';
 import { FaSearch } from 'react-icons/fa';
 import { BiLogInCircle } from 'react-icons/bi';
@@ -33,6 +34,8 @@ const links = [
 ]
 
 const Navbar = () => {
+  const history = useHistory()
+
   const [search, setSearch] = useState('');
 
   const { scrollY } = useScroll();
@@ -44,7 +47,7 @@ const Navbar = () => {
     <div className={`navbar-wrapper ${scrollY > 60 ? 'float' : ''} py-2`}>
       <div className='content-container'>
         <Row align='middle' justify='space-between'>
-          <Col>
+          <Col onClick={() => history.push('/')} className='clickable'>
             <Title type='secondary' level={3} className='navbar-logo'>MyAnimeList</Title>
           </Col>
           <Col className='desktop'>

@@ -29,10 +29,31 @@ h1, h2, h3, h4, h5, strong {
 }
 
 a.ant-typography-secondary {
-  &:hover {
-    color: @secondary-color !important;
+  &:hover, &:focus {
+    color: @secondary-color-light !important;
+  }
+
+  &:active {
+    color: @secondary-color-dark !important;
   }
 }
+
+.ant-typography-secondary {
+
+  .ant-typography-expand {
+    color: @secondary-color;
+
+    &:hover, &:focus {
+      color: @secondary-color-light;
+    }
+  
+    &:active {
+      color: @secondary-color-dark;
+    }
+  }
+}
+
+
 
 // tag
 
@@ -88,22 +109,26 @@ a.ant-typography-secondary {
   font-weight: 800 !important;
   display: flex;
   align-items: center;
+}
 
-  &.ant-btn-default {
-    background-color: @secondary-color;
-    color: @color-white;
-    border-color: @secondary-color;
+.ant-btn-default {
+  background-color: @secondary-color;
+  color: @color-white;
+  border-color: @secondary-color;
 
-    &:hover, &:focus {
-      background: @secondary-color-light;
-      border-color: @secondary-color-light;
-    }
-
-    &:active {
-      background: @secondary-color-dark;
-      border-color: @secondary-color-dark;
-    }
+  &:hover, &:focus {
+    background: @secondary-color-light;
+    border-color: @secondary-color-light;
   }
+
+  &:active {
+    background: @secondary-color-dark;
+    border-color: @secondary-color-dark;
+  }
+}
+
+.ant-btn-circle {
+  justify-content: center;
 }
 
 // divider
@@ -166,12 +191,19 @@ a.ant-typography-secondary {
   cursor: unset;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 // typography
 
 .typography-fade {
   opacity: 0.7;
 }
 
+.typography-block {
+  display: block;
+}
 // row
 
 .row-vertical {
@@ -202,6 +234,14 @@ a.ant-typography-secondary {
 
 
 // spacing
+
+.p-1 {
+  padding: 8px;
+
+  @media @sm, @xs {
+    padding: 4px;
+  }
+}
 
 .p-2 {
   padding: 16px;

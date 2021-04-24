@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
 import { News } from 'interfaces/news'
-import { goAPI } from 'apis'
+import { serverAPI } from 'apis'
 
 type AnimeState = {
   featuredNewsList: {
@@ -23,7 +23,8 @@ let initialState: AnimeState = {
 export const getFeaturedNewsList = createAsyncThunk(
   'news/getFeaturedNewsList',
   async () => {
-    const response = await fetch(goAPI.getFeaturedNewsList)
+    console.log(serverAPI.getFeaturedNewsList)
+    const response = await fetch(serverAPI.getFeaturedNewsList)
     const data: News[] = await response.json()
     return data
   }

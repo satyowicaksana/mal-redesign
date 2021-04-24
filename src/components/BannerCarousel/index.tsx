@@ -46,7 +46,7 @@ const BannerCarousel = ({
     <div className='banner-carousel-wrapper'>
       {!loading
       && newsList.map((news, i) => (
-        <img key={i} src={newsList[i].image_url} alt='' className={`banner-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
+        <img key={i} src={newsList[i].imageURL} alt='' className={`banner-carousel-background-image ${selectedItemIndex === i ? 'selected' : ''}`} />
       ))}
       <div className='content-container pt-4 pb-5'>
         <div
@@ -74,7 +74,7 @@ const BannerCarousel = ({
             >
               <Row>
                 <Col md={14} xs={24}>
-                  <img src={news.image_url} alt='' className='banner-carousel-card-image' />
+                  <img src={news.imageURL} alt='' className='banner-carousel-card-image' />
                 </Col>
                 <Col md={10} xs={24} className='banner-carousel-card-info-container p-3'>
                   <div>

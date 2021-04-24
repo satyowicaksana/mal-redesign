@@ -1,0 +1,59 @@
+@import 'lib.less';
+
+@banner-image-height: 300px;
+
+.anime-banner-image-container {
+  height: @banner-image-height;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: @primary-dark-color;
+}
+
+.anime-banner-image-text-container {
+  z-index: 1;
+}
+
+.anime-banner-image {
+  height: @banner-image-height;
+  width: 100%;
+  position: absolute;
+  object-fit: cover;
+  object-position: 50% 0%;
+  opacity: 0.2;
+}
+
+.anime-banner-image-subtitle {
+  font-size: 20px;
+}
+
+.anime-banner-info-container {
+  display: flex;
+  justify-content: center;
+  background-color: @primary-color;
+}
+
+.anime-banner-info-image {
+  width: 250px;
+  position: absolute;
+  top: -160px - 32px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.anime-banner-info-score-container {
+  background-color: @secondary-color;
+  border-radius: 16px;
+  white-space: pre
+}
+
+.anime-banner-info-score {
+  font-size: 32px;
+  line-height: 32px;
+}
+
+.anime-banner-info-card {
+  border: @border-color solid 3px;
+  border-radius: 16px;
+}
