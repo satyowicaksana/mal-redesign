@@ -1,12 +1,117 @@
-import { Row, Col, Typography, Button } from 'antd'
+import { Row, Col, Typography, Button, Table } from 'antd'
 import { AiOutlinePlus, AiOutlineHeart } from 'react-icons/ai'
 
 import './style.less'
 
 const { Title, Text, Paragraph } = Typography
 
-const Anime = () => {
+const dataSource = [
+  {
+    key: '1',
+    name: 'Mike',
+    age: 32,
+    address: '10 Downing Street',
+    key1: '1',
+    name1: 'Mike',
+    age1: 32,
+    address1: '10 Downing Street'
+  },
+];
 
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age',
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address',
+  },
+];
+
+const Anime = () => {
   return (
     <div>
       <div className='anime-banner-image-container'>
@@ -45,7 +150,7 @@ const Anime = () => {
       </div>
       <div className='anime-banner-info-container py-4'>
         <div className='content-container'>
-          <Row wrap={false} gutter={50}>
+          <Row wrap={false} gutter={50} className='mb-4'>
             <Col flex='282px'>
               <img src="https://i.pinimg.com/originals/ac/43/52/ac4352f877cd4265d69538bd7532b7b3.jpg" alt='' className='anime-banner-info-image'/>
             </Col>
@@ -74,9 +179,9 @@ const Anime = () => {
               </Paragraph>
             </Col>
           </Row>
-          <Row wrap={false}>
+          <Row gutter={24} wrap={false}>
             <Col>
-              <div className='anime-banner-info-score-container p-1'>
+              <div className='anime-banner-info-score-container centered-flex p-1'>
                 <Row align='middle' className='row-vertical'>
                   <Col>
                     <Text strong type='secondary'>SCORE</Text>
@@ -90,33 +195,13 @@ const Anime = () => {
                 </Row>
               </div>
             </Col>
-            <Col>
-              <div className='anime-banner-info-card'>
-                <Row gutter={16}>
-                  <Col className='p-1'>
-                    <Text type='secondary' strong>Sdwidjiowjed: </Text><Text type='secondary'>deiowdjw</Text>
-                  </Col>
-                  <Col className='p-1'>
-                    <Text type='secondary' strong>Sdwidjiowjed: </Text><Text type='secondary'>deiowdjw</Text>
-                  </Col>
-                  <Col className='p-1'>
-                    <Text type='secondary' strong>Sdwidjiowjed: </Text><Text type='secondary'>deiowdjw</Text>
-                  </Col>
-                  <Col className='p-1'>
-                    <Text type='secondary' strong>Sdwidjiowjed: </Text><Text type='secondary'>deiowdjw</Text>
-                  </Col>
-                  <Col className='p-1'>
-                    <Text type='secondary' strong>Sdwidjiowjed: </Text><Text type='secondary'>deiowdjw</Text>
-                  </Col>
-                  <Col className='p-1'>
-                    <Text type='secondary' strong>Sdwidjiowjed: </Text><Text type='secondary'>deiowdjw</Text>
-                  </Col>
-                </Row>
-              </div>
+            <Col flex='auto'>
+              <Table dataSource={dataSource} columns={columns} pagination={false} className='anime-banner-info-table overflow-scroll' />
             </Col>
           </Row>
         </div>
       </div>
+      a
     </div>
   ) 
 }

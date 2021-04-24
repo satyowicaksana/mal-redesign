@@ -45,7 +45,8 @@
 .anime-banner-info-score-container {
   background-color: @secondary-color;
   border-radius: 16px;
-  white-space: pre
+  white-space: pre;
+  height: 100%;
 }
 
 .anime-banner-info-score {
@@ -53,7 +54,36 @@
   line-height: 32px;
 }
 
-.anime-banner-info-card {
-  border: @border-color solid 3px;
+.anime-banner-info-table-container {
+  border: solid 3px @border-color;
   border-radius: 16px;
+  height: 100%;
+}
+
+thead {
+  background: blue !important;
+}
+
+.anime-banner-info-table {
+  border: solid 3px @border-color;
+  border-radius: 16px;
+  height: 100%;
+  * {
+    color: @color-white !important;
+    background-color: transparent !important;
+  }
+  .ant-table-thead {
+
+    * {
+      font-weight: 800;
+    }
+    .ant-table-cell {
+      border-bottom: solid 3px @border-color;
+    }
+  }
+  .ant-table-cell {
+    border: none;
+    padding: 12px;
+    white-space: pre;
+  }
 }

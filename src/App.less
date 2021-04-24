@@ -53,6 +53,11 @@ a.ant-typography-secondary {
   }
 }
 
+// table
+
+.ant-table {
+  font-family: 'Poppins', sans-serif;
+}
 
 
 // tag
@@ -193,6 +198,15 @@ a.ant-typography-secondary {
 
 .clickable {
   cursor: pointer;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 // typography
@@ -364,6 +378,14 @@ a.ant-typography-secondary {
 
   @media @sm, @xs {
     margin-bottom: 12px !important;
+  }
+}
+
+.mb-4 {
+  margin-bottom: 32px !important;
+
+  @media @sm, @xs {
+    margin-bottom: 16px !important;
   }
 }
 
