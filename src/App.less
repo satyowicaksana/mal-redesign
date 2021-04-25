@@ -3,17 +3,11 @@
 
 /* style adjustment */
 
-span, a {
-  @media @sm, @xs {
-    font-size: 12px;
-  }
-}
-
 h1, h2, h3, h4, h5, strong {
   font-weight: 800 !important;
 
   @media @sm, @xs {
-    font-size: 14px !important;
+    font-size: 16px !important;
   }
 }
 
@@ -53,12 +47,31 @@ a.ant-typography-secondary {
   }
 }
 
+// select
+
+.ant-select-selector {
+  border-radius: 16px !important;
+  font-weight: 800;
+}
+
 // table
 
 .ant-table {
   font-family: 'Poppins', sans-serif;
 }
 
+// avatar
+
+.ant-avatar {
+  border: solid 3px @primary-color;
+}
+
+.ant-avatar-lg {
+  width: 80px;
+  height: 80px;
+  line-height: 40px;
+  border-radius: 50%;
+}
 
 // tag
 
@@ -67,6 +80,7 @@ a.ant-typography-secondary {
   padding: 4px 12px;
   font-weight: 900;
   border: none;
+  margin: 0;
 
   @media @sm, @xs {
     padding: 2px 6px;
@@ -75,6 +89,11 @@ a.ant-typography-secondary {
 
 .ant-tag-blue {
   background-color: @primary-color;
+  color: @color-white;
+}
+
+.ant-tag-orange {
+  background-color: @secondary-color;
   color: @color-white;
 }
 
@@ -212,12 +231,24 @@ a.ant-typography-secondary {
 // typography
 
 .typography-fade {
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 .typography-block {
   display: block;
 }
+
+.typography-h4 {
+  font-size: 20px;
+  @media @sm, @xs {
+    font-size: 14px;
+  }
+}
+
+.typography-small {
+  font-size: 11px;
+}
+
 // row
 
 .row-vertical {

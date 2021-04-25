@@ -23,10 +23,6 @@
   opacity: 0.2;
 }
 
-.anime-banner-image-subtitle {
-  font-size: 20px;
-}
-
 .anime-banner-info-container {
   display: flex;
   justify-content: center;
@@ -60,10 +56,6 @@
   height: 100%;
 }
 
-thead {
-  background: blue !important;
-}
-
 .anime-banner-info-table {
   border: solid 3px @border-color;
   border-radius: 16px;
@@ -86,4 +78,35 @@ thead {
     padding: 12px;
     white-space: pre;
   }
+}
+
+.anime-menu {
+  width: 100%;
+
+  .ant-menu-item {
+    font-weight: 800;
+  }
+}
+
+.anime-review-item-arrow {
+  height: 24px;
+  width: 24px;
+  border: solid 3px @border-color;
+  transform: rotate(45deg);
+  background-color: white;
+  position: absolute;
+  border-top-color: white;
+  border-right-color: white;
+  top: 16px;
+  border-radius: 4px;
+}
+
+.anime-review-item-container {
+  margin-left: 8px;
+  border: solid 3px @border-color;
+  border-radius: 16px;
+}
+
+.anime-review-reviewer-profile-container {
+  text-align: center;
 }
