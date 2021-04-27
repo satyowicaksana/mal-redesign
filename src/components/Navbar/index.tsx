@@ -33,7 +33,13 @@ const links = [
   }
 ]
 
-const Navbar = () => {
+type NavbarProps = {
+  transparent?: boolean;
+}
+
+const Navbar = ({
+  transparent = false
+}: NavbarProps) => {
   const history = useHistory()
 
   const [search, setSearch] = useState('');
@@ -44,7 +50,7 @@ const Navbar = () => {
   }, [scrollY])
 
   return (
-    <div className={`navbar-wrapper ${scrollY > 60 ? 'float' : ''} py-2`}>
+    <div className={`navbar-wrapper ${(!transparent || scrollY > 60) ? 'bg-primary' : ''} py-2`}>
       <div className='content-container'>
         <Row align='middle' justify='space-between'>
           <Col onClick={() => history.push('/')} className='clickable'>
@@ -84,7 +90,13 @@ const Navbar = () => {
                 />
               </Col>
               <Col>
-                <Button type='default' icon={<BiLogInCircle className='mr-1'/>}>SIGN IN</Button>
+                <Button
+                  type='default'
+                  icon={<BiLogInCircle className='mr-1'/>}
+                  onClick={() => history.push('/login')}
+                >
+                  SIGN IN
+                </Button>
               </Col>
             </Row>
           </Col>

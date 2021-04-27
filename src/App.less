@@ -1,6 +1,18 @@
 @import './lib.less';
 @import '~antd/dist/antd.less';
 
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.app-content-wrapper {
+  min-height: 100vh;
+
+  &.has-navbar-padding {
+    padding-top: @navbar-height;
+  }
+}
+
 /* style adjustment */
 
 h1, h2, h3, h4, h5, strong {
@@ -52,12 +64,6 @@ a.ant-typography-secondary {
 .ant-select-selector {
   border-radius: 16px !important;
   font-weight: 800;
-}
-
-// table
-
-.ant-table {
-  font-family: 'Poppins', sans-serif;
 }
 
 // avatar
@@ -116,14 +122,35 @@ a.ant-typography-secondary {
 
 .ant-input {
   border-radius: 16px;
+  border-width: 2px;
+  height: 40px;
+  padding: 0 16px;
+  &:focus, &:hover {
+    border-right-width: 2px !important;
+  }
 }
 
 .ant-input-affix-wrapper {
   border-radius: 16px;
+  border-width: 2px;
+  height: 40px;
+  padding: 0 16px;
+  
+  &:not(.ant-input-affix-wrapper-disabled):hover, &:not(.ant-input-affix-wrapper-disabled):focus {
+    border-right-width: 2px !important;
+  }
 
   .ant-input {
-    border-radius: 0;
+    border-radius: unset;
+    height: unset;
+    padding: unset;
   }
+}
+
+// form
+
+.ant-form-item {
+  margin-bottom: 0;
 }
 
 // button
@@ -141,11 +168,13 @@ a.ant-typography-secondary {
   border-color: @secondary-color;
 
   &:hover, &:focus {
+    color: @color-white;
     background: @secondary-color-light;
     border-color: @secondary-color-light;
   }
 
   &:active {
+    color: @color-white;
     background: @secondary-color-dark;
     border-color: @secondary-color-dark;
   }
@@ -204,7 +233,7 @@ a.ant-typography-secondary {
   height: 200px;
   border-radius: 16px;
   overflow: hidden;
-  border: solid 2px rgba(0, 0, 0, 0.06);
+  box-shadow: @box-shadow;
 
   @media @sm, @xs {
     height: 100px;
@@ -268,7 +297,7 @@ a.ant-typography-secondary {
     width: 100%;
     padding-top: 150%;
     border-radius: 16px;
-    box-shadow: @box-shadow-light;
+    box-shadow: @box-shadow;
   }
 }
 
@@ -301,6 +330,14 @@ a.ant-typography-secondary {
 
   @media @sm, @xs {
     padding: 16px;
+  }
+}
+
+.p-5 {
+  padding: 40px;
+
+  @media @sm, @xs {
+    padding: 20px;
   }
 }
 
