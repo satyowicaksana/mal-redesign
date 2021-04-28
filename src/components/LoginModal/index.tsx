@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom'
 import { Modal, ModalProps, Typography, Form, Input, Button, Row, Col, Divider } from 'antd';
 
 import { validator } from 'helpers'
@@ -11,14 +12,16 @@ interface LoginModalProps extends ModalProps {
 const LoginModal = ({
   ...props
 }: LoginModalProps) => {
-  const [loginForm] = Form.useForm();
+  const history = useHistory()
+
+  const [loginForm] = Form.useForm()
 
   return (
     <Modal {...props}>
       <div className='p-3'>
         <Row align='middle' gutter={24} className='mb-4'>
           <Col>
-            <Title>LOGIN</Title>
+            <Title>SIGN IN</Title>
           </Col>
           <Col flex='auto'>
             <Divider />
@@ -60,7 +63,7 @@ const LoginModal = ({
           </Row>
           <Row justify='end'>
             <Col>
-              <Text className='typography-fade'>Not registered? </Text><Link>Create an account</Link>
+              <Text className='typography-fade'>Not registered? </Text><Link onClick={() => history.push('/register')}>Create an account</Link>
             </Col>
           </Row>
         </Form>

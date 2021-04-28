@@ -8,7 +8,7 @@ import {
 import {
   Home,
   Anime,
-  Login
+  Register
 } from 'views'
 import {
   Navbar,
@@ -20,26 +20,31 @@ const App = () => {
   const history = useHistory()
 
   const [isNavbarOverlay, setIsNavbarOverlay] = useState(false)
+  const [showNavbar, setShowNavbar] = useState(false)
 
   useEffect(() => {
     setIsNavbarOverlay(history.location.pathname === '/' ||
     history.location.pathname.startsWith('/anime'))
+    setShowNavbar(history.location.pathname === '/' ||
+    history.location.pathname.startsWith('/anime'))
     return history.listen(() => {
       setIsNavbarOverlay(history.location.pathname === '/' ||
+      history.location.pathname.startsWith('/anime'))
+      setShowNavbar(history.location.pathname === '/' ||
       history.location.pathname.startsWith('/anime'))
     })
   }, [history])
 
   return (
     <div>
-        <Navbar transparent={isNavbarOverlay} />
-        <div className={`app-content-wrapper ${!isNavbarOverlay ? 'has-navbar-padding' : ''}`}>
+        {showNavbar && <Navbar transparent={isNavbarOverlay} />}
+        <div className='app-content-wrapper'>
           <Switch>
             <Route exact path='/'>
               <Home />
             </Route>
-            <Route exact path='/login'>
-              <Login />
+            <Route exact path='/register'>
+              <Register />
             </Route>
             <Route exact path='/anime/:id'>
               <Anime />
