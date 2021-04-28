@@ -130,13 +130,23 @@ a.ant-typography-secondary {
   }
 }
 
+.ant-form-item-has-error {
+  &.ant-input:focus, &.ant-input:hover {
+    border-right-width: 2px !important;
+  }
+}
+
+.ant-form-item-has-error .ant-input:focus, .ant-form-item-has-error .ant-input-affix-wrapper:focus, .ant-form-item-has-error .ant-input-focused, .ant-form-item-has-error .ant-input-affix-wrapper-focused {
+  border-right-width: 2px !important;
+}
+
 .ant-input-affix-wrapper {
   border-radius: 16px;
-  border-width: 2px;
+  border-width: 2px !important;
   height: 40px;
   padding: 0 16px;
-  
-  &:not(.ant-input-affix-wrapper-disabled):hover, &:not(.ant-input-affix-wrapper-disabled):focus {
+
+  &:not(.ant-input-affix-wrapper-disabled):focus, &:not(.ant-input-affix-wrapper-disabled):hover {
     border-right-width: 2px !important;
   }
 
@@ -152,6 +162,18 @@ a.ant-typography-secondary {
 .ant-form-item {
   margin-bottom: 0;
 }
+.ant-form-item-explain {
+  font-size: 11px;
+}
+
+// modal
+
+.ant-modal-content {
+  border-radius: 16px;
+}
+.ant-modal-footer {
+  display: none;
+}
 
 // button
 
@@ -163,20 +185,20 @@ a.ant-typography-secondary {
 }
 
 .ant-btn-default {
-  background-color: @secondary-color;
+  background-color: @warning-color;
   color: @color-white;
-  border-color: @secondary-color;
+  border-color: @warning-color;
 
   &:hover, &:focus {
     color: @color-white;
-    background: @secondary-color-light;
-    border-color: @secondary-color-light;
+    background: @warning-color;
+    border-color: @warning-color;
   }
 
   &:active {
     color: @color-white;
-    background: @secondary-color-dark;
-    border-color: @secondary-color-dark;
+    background: @warning-color;
+    border-color: @warning-color;
   }
 }
 

@@ -4,6 +4,7 @@ import { Row, Col, Typography, Popover, Input, Button } from 'antd';
 import { FaSearch } from 'react-icons/fa';
 import { BiLogInCircle } from 'react-icons/bi';
 
+import { LoginModal } from 'components'
 import { useScroll } from 'hooks'
 import './style.less';
 
@@ -42,7 +43,8 @@ const Navbar = ({
 }: NavbarProps) => {
   const history = useHistory()
 
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('')
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false)
 
   const { scrollY } = useScroll();
 
@@ -50,6 +52,7 @@ const Navbar = ({
   }, [scrollY])
 
   return (
+    <>
     <div className={`navbar-wrapper ${(!transparent || scrollY > 60) ? 'bg-primary' : ''} py-2`}>
       <div className='content-container'>
         <Row align='middle' justify='space-between'>
@@ -93,7 +96,7 @@ const Navbar = ({
                 <Button
                   type='default'
                   icon={<BiLogInCircle className='mr-1'/>}
-                  onClick={() => history.push('/login')}
+                  onClick={() => setIsLoginModalVisible(true)}
                 >
                   SIGN IN
                 </Button>
@@ -103,6 +106,8 @@ const Navbar = ({
         </Row>
       </div>
     </div>
+    <LoginModal visible={isLoginModalVisible} onCancel={() => setIsLoginModalVisible(false)}/>
+    </>
   );
 }
 
