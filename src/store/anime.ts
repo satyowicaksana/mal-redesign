@@ -6,27 +6,32 @@ import { jikanAPI } from 'apis'
 
 type AnimeState = {
   currentSeason: {
-    data: Season | undefined
+    data?: Season
     loading: boolean
-    error: Error | undefined
+    error?: Error
   }
   topAiringAnimes: {
     data: Anime[]
     loading: boolean
-    error: Error | undefined
+    error?: Error
+  }
+  anime: {
+    data?: Anime
+    loading: boolean
+    error?: Error
   }
 }
 
 let initialState: AnimeState = {
   currentSeason: {
-    data: undefined,
     loading: false,
-    error: undefined
   },
   topAiringAnimes: {
     data: [],
     loading: false,
-    error: undefined
+  },
+  anime: {
+    loading: false
   }
 }
 
@@ -50,6 +55,15 @@ export const getTopAiringAnimes = createAsyncThunk(
       top: Anime[]
     } = await response.json()
     return data.top.slice(0, 24)
+  }
+)
+
+export const getAnime = createAsyncThunk(
+  'anime/getAnime',
+  async (id: string) => {
+    const response = await fetch(jikanAPI.getAnime(id))
+    const data: Anime = await response.json()
+    return data
   }
 )
 
@@ -82,10 +96,23 @@ const animeSlice = createSlice({
       alert('error')
       console.log(action)
     })
+    builder.addCase(getAnime.pending, state => {
+      state.anime.loading = true
+    })
+    builder.addCase(getAnime.fulfilled, (state, { payload }) => {
+      state.anime.data = payload
+      state.anime.loading = false
+    })
+    builder.addCase(getAnime.rejected, (state, action) => {
+      state.anime.loading = false
+      alert('error')
+      console.log(action)
+    })
   },
 })
 
 export const selectCurrentSeason = (state: RootState) => state.anime.currentSeason
 export const selectTopAiringAnimes = (state: RootState) => state.anime.topAiringAnimes
+export const selectAnime = (state: RootState) => state.anime.anime
 
 export default animeSlice.reducer

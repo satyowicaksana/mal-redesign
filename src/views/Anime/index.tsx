@@ -1,119 +1,82 @@
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Row, Col, Typography, Button, Table, Menu, Select, Avatar, Tag } from 'antd'
 import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
 
+import {
+  selectAnime,
+  getAnime
+} from 'store/anime'
+import {
+  Reference
+} from 'interfaces/anime'
 import './style.less'
 
 const { Title, Text, Paragraph, Link } = Typography
 const { Option } = Select
 
-const dataSource = [
-  {
-    key: '1',
-    name: 'Mike',
-    age: 32,
-    address: '10 Downing Street',
-    key1: '1',
-    name1: 'Mike',
-    age1: 32,
-    address1: '10 Downing Street'
-  },
-];
+const infoColumnKeys = [
+  'type',
+  'episodes',
+  'status',
+  'aired',
+  'premiered',
+  'broadcast',
+  'producers',
+  'licensors',
+  'studios',
+  'source',
+  'genres',
+  'duration',
+  'rating'
+]
 
-const columns = [
+const infoColumns = infoColumnKeys.map(key => (
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-];
+    title: `${key.charAt(0).toUpperCase()}${key.slice(1)}`,
+    dataIndex: key,
+    key,
+  }
+));
 
 const Anime = () => {
+  const dispatch = useDispatch()
+
+  const anime = useSelector(selectAnime)
+
+  useEffect(() => {
+    dispatch(getAnime("1"))
+  }, [dispatch])
+  useEffect(() => {
+    console.log(anime)
+  }, [anime])
+
+  const generateReferenceText = (references: Reference[]) => (<>
+    {references.map((reference, i) => (
+      <>
+      <Link type='warning' onClick={() => window.open(reference.url, '_blank')}>
+        {reference.name}
+      </Link>
+      {i < references.length - 1 && ', '}
+      </>
+    ))}
+  </>)
+
+  // convert anime object to table dataSource format
+  const getAnimeInfoDataSource = () => {
+    if(!anime?.data) return {}
+    const { aired, producers, licensors, studios, genres } = anime.data
+    return {
+      ...anime.data,
+      aired: aired.string,
+      producers: generateReferenceText(producers),
+      licensors: generateReferenceText(licensors),
+      studios: generateReferenceText(studios),
+      genres: generateReferenceText(genres)
+    }
+  }
+
   return (
     <div>
       <div className='anime-banner-image-container'>
@@ -124,10 +87,10 @@ const Anime = () => {
               <Row align='bottom' justify='space-between'>
                 <Col>
                   <Title type='secondary' className='mb-1'>
-                    Jujutsu Kaisen
+                    {anime.data?.title_english}
                   </Title>
                   <Text type='secondary' className='typography-h4'>
-                    Jujutsu Kaisen
+                    {anime.data?.title}
                   </Text>
                 </Col>
                 <Col>
@@ -154,7 +117,7 @@ const Anime = () => {
         <div className='content-container'>
           <Row wrap={false} gutter={50} className='mb-4'>
             <Col flex='282px'>
-              <img src="https://i.pinimg.com/originals/ac/43/52/ac4352f877cd4265d69538bd7532b7b3.jpg" alt='' className='anime-banner-info-image'/>
+              <img src={anime.data?.image_url} alt='' className='anime-banner-info-image'/>
             </Col>
             <Col flex='auto'>
               <Row justify='space-between' className='mb-2'>
@@ -164,20 +127,19 @@ const Anime = () => {
                 <Col>
                   <Row gutter={16}>
                     <Col>
-                      <Text type='secondary' strong>Ranked: </Text><Text type='secondary'>#4165</Text>
+                      <Text type='secondary' strong>Ranked: </Text><Text type='secondary'>#{anime.data?.rank}</Text>
                     </Col>
                     <Col>
-                      <Text type='secondary' strong>Popularity: </Text><Text type='secondary'>#3031</Text>
+                      <Text type='secondary' strong>Popularity: </Text><Text type='secondary'>#{anime.data?.popularity}</Text>
                     </Col>
                     <Col>
-                      <Text type='secondary' strong>Members: </Text><Text type='secondary'>27,456</Text>
+                      <Text type='secondary' strong>Members: </Text><Text type='secondary'>{anime.data?.members.toLocaleString()}</Text>
                     </Col>
                   </Row>
                 </Col>
               </Row>
               <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}} type='secondary'>
-                Sed ut perspiciatis undeeijwdiojdoiwjed weiojdowjeodioewdnweiodiojwed iowjedojwodjoiwjd wioedjiowjd oieidojew ewojdopjweodew wioejdojewkendowdj Sed ut perspiciatis undeeijwdiojdoiwjed weiojdowjeodioewdnweiodiojwed iowjedojwodjoiwjd wioedjiowjd oieidojew ewojdopjweodew wioejdojewkendowdj Sed ut perspiciatis undeeijwdiojdoiwjed weiojdowjeodioewdnweiodiojwed iowjedojwodjoiwjd wioedjiowjd oieidojew ewojdopjweodew wioejdojewkendowdj
-                Sed ut perspiciatis undeeijwdiojdoiwjed weiojdowjeodioewdnweiodiojwed iowjedojwodjoiwjd wioedjiowjd oieidojew ewojdopjweodew wioejdojewkendowdj Sed ut perspiciatis undeeijwdiojdoiwjed weiojdowjeodioewdnweiodiojwed iowjedojwodjoiwjd wioedjiowjd oieidojew ewojdopjweodew wioejdojewkendowdj Sed ut perspiciatis undeeijwdiojdoiwjed weiojdowjeodioewdnweiodiojwed iowjedojwodjoiwjd wioedjiowjd oieidojew ewojdopjweodew wioejdojewkendowdj
+                {anime.data?.synopsis}
               </Paragraph>
             </Col>
           </Row>
@@ -189,16 +151,16 @@ const Anime = () => {
                     <Text strong type='secondary'>SCORE</Text>
                   </Col>
                   <Col>
-                    <Text strong type='secondary' className='anime-banner-info-score'>6.86</Text>
+                    <Text strong type='secondary' className='anime-banner-info-score'>{anime.data?.score}</Text>
                   </Col>
                   <Col>
-                    <Text type='secondary'>1,432 users</Text>
+                    <Text type='secondary'>{anime.data?.scored_by.toLocaleString()} users</Text>
                   </Col>
                 </Row>
               </div>
             </Col>
             <Col flex='auto'>
-              <Table dataSource={dataSource} columns={columns} pagination={false} className='anime-banner-info-table overflow-scroll' />
+              <Table dataSource={[getAnimeInfoDataSource()]} columns={infoColumns} pagination={false} className='anime-banner-info-table overflow-scroll' />
             </Col>
           </Row>
         </div>

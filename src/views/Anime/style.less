@@ -36,6 +36,7 @@
   height: 320px;
   object-fit: cover;
   border-radius: 16px;
+  box-shadow: @box-shadow;
 }
 
 .anime-banner-info-score-container {
@@ -61,8 +62,11 @@
   border-radius: 16px;
   height: 100%;
   * {
-    color: @color-white !important;
+    color: @color-white;
     background-color: transparent !important;
+  }
+  th {
+    color: @color-white !important;
   }
   .ant-table-thead {
 
