@@ -26,7 +26,7 @@ type AnimeState = {
     error?: Error
   }
   reviews: {
-    data?: Review[]
+    data: Review[]
     loading: boolean
     error?: Error
   }

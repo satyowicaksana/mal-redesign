@@ -13,7 +13,7 @@ interface VoiceActor {
   language: string
 }
 
-interface Character {
+export interface Character {
   mal_id: number
   url: string
   image_url: string
@@ -22,7 +22,7 @@ interface Character {
   voice_actors: VoiceActor[]
 }
 
-interface Staff {
+export interface Staff {
   mal_id: number
   url: string
   name: string

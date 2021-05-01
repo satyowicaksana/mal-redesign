@@ -2,6 +2,7 @@ import AnimeCard from './AnimeCard'
 import AnimeCardsSection from './AnimeCardsSection'
 import BannerCarousel from './BannerCarousel'
 import Carousel from './Carousel'
+import CharactersAndStaffCard from './CharactersAndStaffCard'
 import Footer from './Footer'
 import LoginModal from './LoginModal'
 import Navbar from './Navbar'
@@ -13,6 +14,7 @@ export {
   AnimeCardsSection,
   BannerCarousel,
   Carousel,
+  CharactersAndStaffCard,
   Footer,
   LoginModal,
   Navbar,

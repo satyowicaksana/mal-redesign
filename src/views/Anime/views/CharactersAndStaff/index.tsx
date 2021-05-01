@@ -5,6 +5,9 @@ import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
 
 import {
+  CharactersAndStaffCard
+} from 'components'
+import {
   selectCharactersAndStaff,
   getCharactersAndStaff
 } from 'store/anime'
@@ -30,9 +33,19 @@ const CharactersAndStaff = () => {
     console.log('charactersAndStaff', charactersAndStaff)
   }, [charactersAndStaff])
 
+  if(!(characters && characters[0])) {
+    return null
+  }
+
   return (
     <div>
-      {JSON.stringify(charactersAndStaff)}
+      <Row gutter={32}>
+        {characters.map(character => (
+          <Col span={12} className='mb-4'>
+            <CharactersAndStaffCard character={character}/>
+          </Col>
+        ))}
+      </Row>
     </div>
   ) 
 }

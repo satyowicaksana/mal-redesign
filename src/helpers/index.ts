@@ -1,5 +1,7 @@
+import formatter from './formatter'
 import validator from './validator'
 
 export {
-  validator,
+  formatter,
+  validator
 }

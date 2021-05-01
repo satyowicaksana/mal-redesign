@@ -11,6 +11,9 @@ import {
   selectReviews,
   getReviews
 } from 'store/anime'
+import {
+  formatter
+} from 'helpers'
 import './style.less'
 
 const { Title, Text, Paragraph, Link } = Typography
@@ -27,7 +30,11 @@ const Reviews = () => {
   }, [dispatch])
   useEffect(() => {
     console.log('reviews', reviews)
+    if(reviews.data[0])
+      console.log(reviews.data[0].content.replaceAll('\r', '').replaceAll('\n', '') )
   }, [reviews])
+
+  
 
   return (
     <div>
@@ -94,7 +101,9 @@ const Reviews = () => {
                   </Title>
                 </Col>
               </Row>
-              <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}} >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Paragraph>
+              <Paragraph style={{whiteSpace: 'pre-line'}} ellipsis={{rows: 4, expandable: true, symbol: 'More'}} >
+                {formatter.htmlDecode(review.content.replace(/\\n/g, ""))}
+              </Paragraph>
             </div>
           </Col>
         </Row>
