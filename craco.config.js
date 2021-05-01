@@ -8,9 +8,9 @@ module.exports = {
         lessLoaderOptions: {
           lessOptions: {
             modifyVars: {
-              '@primary-color': 'rgb(54,119,255)',
+              '@primary-color': 'rgb(46,81,162)',
               '@error-color': 'rgb(232,93,117)',
-              '@warning-color': 'rgb(247,192,99)',
+              '@warning-color': 'rgb(235,97,1)',
               '@table-row-hover-bg':'unset'
             },
             javascriptEnabled: true,
