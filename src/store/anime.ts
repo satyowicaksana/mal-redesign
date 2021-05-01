@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
-import { Anime, Season } from 'interfaces/anime'
+import { Anime, Season, CharactersAndStaff } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
@@ -20,19 +20,31 @@ type AnimeState = {
     loading: boolean
     error?: Error
   }
+  charactersAndStaff: {
+    data?: CharactersAndStaff
+    loading: boolean
+    error?: Error
+  }
 }
 
 let initialState: AnimeState = {
   currentSeason: {
-    loading: false,
+    loading: false
   },
   topAiringAnimes: {
     data: [],
-    loading: false,
+    loading: false
   },
   anime: {
     loading: false
-  }
+  },
+  charactersAndStaff: {
+    data: {
+      characters: [],
+      staff: []
+    },
+    loading: false
+  },
 }
 
 export const getCurrentSeason = createAsyncThunk(
@@ -63,6 +75,15 @@ export const getAnime = createAsyncThunk(
   async (id: string) => {
     const response = await fetch(jikanAPI.getAnime(id))
     const data: Anime = await response.json()
+    return data
+  }
+)
+
+export const getCharactersAndStaff = createAsyncThunk(
+  'anime/getCharactersAndStaff',
+  async (id: string) => {
+    const response = await fetch(jikanAPI.getCharactersAndStaff(id))
+    const data: CharactersAndStaff = await response.json()
     return data
   }
 )
@@ -108,11 +129,24 @@ const animeSlice = createSlice({
       alert('error')
       console.log(action)
     })
+    builder.addCase(getCharactersAndStaff.pending, state => {
+      state.anime.loading = true
+    })
+    builder.addCase(getCharactersAndStaff.fulfilled, (state, { payload }) => {
+      state.charactersAndStaff.data = payload
+      state.anime.loading = false
+    })
+    builder.addCase(getCharactersAndStaff.rejected, (state, action) => {
+      state.anime.loading = false
+      alert('error')
+      console.log(action)
+    })
   },
 })
 
 export const selectCurrentSeason = (state: RootState) => state.anime.currentSeason
 export const selectTopAiringAnimes = (state: RootState) => state.anime.topAiringAnimes
 export const selectAnime = (state: RootState) => state.anime.anime
+export const selectCharactersAndStaff = (state: RootState) => state.anime.charactersAndStaff
 
 export default animeSlice.reducer

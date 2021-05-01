@@ -5,6 +5,36 @@ export interface Reference {
   url: string
 }
 
+interface VoiceActor {
+  mal_id: number
+  name: string
+  url: string
+  image_url: string
+  language: string
+}
+
+interface Character {
+  mal_id: number
+  url: string
+  image_url: string
+  name: string
+  role: string
+  voice_actors: VoiceActor[]
+}
+
+interface Staff {
+  mal_id: number
+  url: string
+  name: string
+  image_url: string
+  positions: string[]
+}
+
+export interface CharactersAndStaff {
+  characters: Character[],
+  staff: Staff[]
+}
+
 export interface Anime {
   aired: {
     from: string,
@@ -46,9 +76,6 @@ export interface Anime {
     'Side story': Reference[]
     Summary: Reference[]
   }
-  request_cache_expiry: number
-  request_cached: boolean
-  request_hash: string
   score: number
   scored_by: number
   source: string

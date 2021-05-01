@@ -11,6 +11,9 @@ import {
 import {
   Reference
 } from 'interfaces/anime'
+import {
+  CharactersAndStaff
+} from './views'
 import './style.less'
 
 const { Title, Text, Paragraph, Link } = Typography
@@ -167,14 +170,15 @@ const Anime = () => {
       </div>
       <div className='centered-flex pt-4 pb-5'>
         <div className='content-container'>
-          <Menu mode='horizontal' className='anime-menu mb-5'>
-            <Menu.Item>VIDEOS</Menu.Item>
+          <Menu mode='horizontal' className='anime-menu mb-5' >
+            <Menu.Item>CHARACTERS & STAFF</Menu.Item>
             <Menu.Item>VIDEOS</Menu.Item>
             <Menu.Item>VIDEOS</Menu.Item>
             <Menu.Item>VIDEOS</Menu.Item>
             <Menu.Item>VIDEOS</Menu.Item>
             <Menu.Item>VIDEOS</Menu.Item>
           </Menu>
+          <CharactersAndStaff/>
           <Row gutter={16} justify='end' className='mb-2'>
             <Col>
               <Row gutter={8} align='middle'>
