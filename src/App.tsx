@@ -49,6 +49,9 @@ const App = () => {
             <Route exact path='/anime/:id'>
               <Anime />
             </Route>
+            <Route exact path='/anime/:id/:menu'>
+              <Anime />
+            </Route>
           </Switch>
         </div>
       <Footer />
