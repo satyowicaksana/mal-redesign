@@ -35,6 +35,31 @@ export interface CharactersAndStaff {
   staff: Staff[]
 }
 
+interface Reviewer {
+  url: string
+  image_url: string
+  username: string
+  episodes_seen: number
+  scores: {
+    overall: number
+    story: number
+    animation: number
+    sound: number
+    character: number
+    enjoyment: number
+  }
+}
+
+export interface Review {
+  mal_id: number
+  url: string
+  type: string
+  helpful_count: number
+  date: string
+  reviewer: Reviewer
+  content: string
+}
+
 export interface Anime {
   aired: {
     from: string,

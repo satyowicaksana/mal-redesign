@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
-import { Anime, Season, CharactersAndStaff } from 'interfaces/anime'
+import { Anime, Season, CharactersAndStaff, Review } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
@@ -25,6 +25,11 @@ type AnimeState = {
     loading: boolean
     error?: Error
   }
+  reviews: {
+    data?: Review[]
+    loading: boolean
+    error?: Error
+  }
 }
 
 let initialState: AnimeState = {
@@ -45,6 +50,10 @@ let initialState: AnimeState = {
     },
     loading: false
   },
+  reviews: {
+    data: [],
+    loading: false
+  }
 }
 
 export const getCurrentSeason = createAsyncThunk(
@@ -85,6 +94,17 @@ export const getCharactersAndStaff = createAsyncThunk(
     const response = await fetch(jikanAPI.getCharactersAndStaff(id))
     const data: CharactersAndStaff = await response.json()
     return data
+  }
+)
+
+export const getReviews = createAsyncThunk(
+  'anime/getReviews',
+  async (id: string) => {
+    const response = await fetch(jikanAPI.getReviews(id))
+    const data: {
+      reviews: Review[]
+    } = await response.json()
+    return data.reviews
   }
 )
 
@@ -130,14 +150,26 @@ const animeSlice = createSlice({
       console.log(action)
     })
     builder.addCase(getCharactersAndStaff.pending, state => {
-      state.anime.loading = true
+      state.charactersAndStaff.loading = true
     })
     builder.addCase(getCharactersAndStaff.fulfilled, (state, { payload }) => {
       state.charactersAndStaff.data = payload
-      state.anime.loading = false
+      state.charactersAndStaff.loading = false
     })
     builder.addCase(getCharactersAndStaff.rejected, (state, action) => {
-      state.anime.loading = false
+      state.charactersAndStaff.loading = false
+      alert('error')
+      console.log(action)
+    })
+    builder.addCase(getReviews.pending, state => {
+      state.reviews.loading = true
+    })
+    builder.addCase(getReviews.fulfilled, (state, { payload }) => {
+      state.reviews.data = payload
+      state.reviews.loading = false
+    })
+    builder.addCase(getReviews.rejected, (state, action) => {
+      state.reviews.loading = false
       alert('error')
       console.log(action)
     })
@@ -148,5 +180,6 @@ export const selectCurrentSeason = (state: RootState) => state.anime.currentSeas
 export const selectTopAiringAnimes = (state: RootState) => state.anime.topAiringAnimes
 export const selectAnime = (state: RootState) => state.anime.anime
 export const selectCharactersAndStaff = (state: RootState) => state.anime.charactersAndStaff
+export const selectReviews = (state: RootState) => state.anime.reviews
 
 export default animeSlice.reducer
