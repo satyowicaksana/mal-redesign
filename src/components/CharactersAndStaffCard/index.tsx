@@ -1,10 +1,7 @@
 import { HTMLAttributes } from 'react';
 import { Row, Col, Typography } from 'antd';
-import { FaRegCalendarAlt } from 'react-icons/fa'
 
-import { windowSizes } from 'consts'
-import { useWindowSize } from 'hooks'
-import { Character, Staff } from 'interfaces/anime'
+import { Character } from 'interfaces/anime'
 import './style.less';
 
 const { Text, Link } = Typography;

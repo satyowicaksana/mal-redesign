@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
-import { Anime, Season, CharactersAndStaff, Review } from 'interfaces/anime'
+import { Anime, Season, CharactersAndStaff, Review, Character, Staff } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
@@ -46,7 +46,7 @@ let initialState: AnimeState = {
   charactersAndStaff: {
     data: {
       characters: [],
-      staff: []
+      staffList: []
     },
     loading: false
   },
@@ -92,8 +92,15 @@ export const getCharactersAndStaff = createAsyncThunk(
   'anime/getCharactersAndStaff',
   async (id: string) => {
     const response = await fetch(jikanAPI.getCharactersAndStaff(id))
-    const data: CharactersAndStaff = await response.json()
-    return data
+    const data: {
+      characters: Character[],
+      staff: Staff[]
+    } = await response.json()
+    const convertedData: CharactersAndStaff = {
+      ...data,
+      staffList: data.staff
+    }
+    return convertedData
   }
 )
 

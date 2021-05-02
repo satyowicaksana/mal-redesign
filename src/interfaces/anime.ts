@@ -32,7 +32,7 @@ export interface Staff {
 
 export interface CharactersAndStaff {
   characters: Character[],
-  staff: Staff[]
+  staffList: Staff[]
 }
 
 interface Reviewer {

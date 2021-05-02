@@ -13,7 +13,8 @@ import {
   Reference
 } from 'interfaces/anime'
 import {
-  CharactersAndStaff,
+  Characters,
+  Staff,
   Reviews
 } from './views'
 import './style.less'
@@ -175,12 +176,16 @@ const Anime = () => {
       <div className='centered-flex pt-4 pb-5'>
         <div className='content-container'>
           <Menu mode='horizontal' selectedKeys={[menu || 'characters']} className='anime-menu mb-5' >
-            <Menu.Item key='characters' onClick={() => history.push(`/anime/${id}`)}>CHARACTERS & STAFF</Menu.Item>
+            <Menu.Item key='characters' onClick={() => history.push(`/anime/${id}`)}>CHARACTERS</Menu.Item>
+            <Menu.Item key='staff' onClick={() => history.push(`/anime/${id}/staff`)}>STAFF</Menu.Item>
             <Menu.Item key='reviews' onClick={() => history.push(`/anime/${id}/reviews`)}>REVIEWS</Menu.Item>
           </Menu>
           <Switch>
             <Route exact path='/anime/:id'>
-              <CharactersAndStaff/>
+              <Characters/>
+            </Route>
+            <Route exact path='/anime/:id/staff'>
+              <Staff/>
             </Route>
             <Route exact path='/anime/:id/reviews'>
               <Reviews/>

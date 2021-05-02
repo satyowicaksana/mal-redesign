@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Row, Col, Typography, Button, Table, Menu, Select, Avatar, Tag } from 'antd'
-import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
+import { Row, Col, Typography, Button, Select, Avatar, Tag } from 'antd'
+import { AiFillStar } from 'react-icons/ai'
 import { ImArrowUp, ImArrowDown } from 'react-icons/im'
 import moment from 'moment'
 
 import {
   selectAnime,
-  getAnime,
   selectReviews,
   getReviews
 } from 'store/anime'
@@ -33,8 +32,6 @@ const Reviews = () => {
     if(reviews.data[0])
       console.log(reviews.data[0].content.replaceAll('\r', '').replaceAll('\n', '') )
   }, [reviews])
-
-  
 
   return (
     <div>

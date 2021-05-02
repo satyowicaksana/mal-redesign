@@ -1,7 +1,9 @@
-import CharactersAndStaff from './CharactersAndStaff'
+import Characters from './Characters'
 import Reviews from './Reviews'
+import Staff from './Staff'
 
 export {
-  CharactersAndStaff,
-  Reviews
+  Characters,
+  Reviews,
+  Staff
 }
