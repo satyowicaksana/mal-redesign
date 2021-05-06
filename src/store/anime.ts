@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
-import { Anime, Season, CharactersAndStaff, Review, Character, Staff } from 'interfaces/anime'
+import { Anime, Season, CharactersAndStaff, Review, Character, Staff, Article } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
@@ -30,6 +30,11 @@ type AnimeState = {
     loading: boolean
     error?: Error
   }
+  articles: {
+    data: Article[]
+    loading: boolean
+    error?: Error
+  }
 }
 
 let initialState: AnimeState = {
@@ -51,6 +56,10 @@ let initialState: AnimeState = {
     loading: false
   },
   reviews: {
+    data: [],
+    loading: false
+  },
+  articles: {
     data: [],
     loading: false
   }
@@ -112,6 +121,17 @@ export const getReviews = createAsyncThunk(
       reviews: Review[]
     } = await response.json()
     return data.reviews
+  }
+)
+
+export const getArticles = createAsyncThunk(
+  'anime/getArticles',
+  async (id: string) => {
+    const response = await fetch(jikanAPI.getArticles(id))
+    const data: {
+      articles: Article[]
+    } = await response.json()
+    return data.articles
   }
 )
 
@@ -180,6 +200,18 @@ const animeSlice = createSlice({
       alert('error')
       console.log(action)
     })
+    builder.addCase(getArticles.pending, state => {
+      state.articles.loading = true
+    })
+    builder.addCase(getArticles.fulfilled, (state, { payload }) => {
+      state.articles.data = payload
+      state.articles.loading = false
+    })
+    builder.addCase(getArticles.rejected, (state, action) => {
+      state.articles.loading = false
+      alert('error')
+      console.log(action)
+    })
   },
 })
 
@@ -188,5 +220,6 @@ export const selectTopAiringAnimes = (state: RootState) => state.anime.topAiring
 export const selectAnime = (state: RootState) => state.anime.anime
 export const selectCharactersAndStaff = (state: RootState) => state.anime.charactersAndStaff
 export const selectReviews = (state: RootState) => state.anime.reviews
+export const selectArticles = (state: RootState) => state.anime.articles
 
 export default animeSlice.reducer

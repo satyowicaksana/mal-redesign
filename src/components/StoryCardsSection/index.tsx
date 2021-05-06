@@ -17,7 +17,7 @@ const StoryCardsSection = ({
 }: StoryCardsSectionProps) => {
   return (
     <div className='mb-5'>
-      <Row gutter={{xs: 0, md: 32}} align='middle' className='mb-3'>
+      {/*<Row gutter={{xs: 0, md: 32}} align='middle' className='mb-3'>
         <Col>
           <Title level={3}>Anime & Manga News</Title>
         </Col>
@@ -55,7 +55,7 @@ const StoryCardsSection = ({
         <Col>
           <Link strong>VIEW MORE</Link>
         </Col>
-      </Row>
+      </Row>*/}
     </div>
   );
 }

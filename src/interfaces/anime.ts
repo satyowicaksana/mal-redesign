@@ -60,6 +60,18 @@ export interface Review {
   content: string
 }
 
+export interface Article {
+  url: string
+  title: string
+  date: string
+  author_name: string
+  author_url: string
+  forum_url: string
+  image_url: string
+  comments: number
+  intro: string
+}
+
 export interface Anime {
   aired: {
     from: string,
