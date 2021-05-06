@@ -72,6 +72,22 @@ export interface Article {
   intro: string
 }
 
+export interface Topic {
+  topic_id: number,
+  url: string,
+  title: string
+  date_posted: string
+  author_name: string
+  author_url: string
+  replies: number
+  last_post: {
+    url: string
+    author_name: string
+    author_url: string
+    date_posted: string
+  }
+}
+
 export interface Anime {
   aired: {
     from: string,

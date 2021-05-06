@@ -9,6 +9,7 @@ import Navbar from './Navbar'
 import StaffCard from './StaffCard'
 import StoryCard from './StoryCard'
 import StoryCardsSection from './StoryCardsSection'
+import TopicCard from './TopicCard'
 
 export {
   AnimeCard,
@@ -21,5 +22,6 @@ export {
   Navbar,
   StaffCard,
   StoryCard,
-  StoryCardsSection
+  StoryCardsSection,
+  TopicCard
 }

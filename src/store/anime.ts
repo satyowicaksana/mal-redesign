@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
-import { Anime, Season, CharactersAndStaff, Review, Character, Staff, Article } from 'interfaces/anime'
+import { Anime, Season, CharactersAndStaff, Review, Character, Staff, Article, Topic } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
@@ -35,6 +35,11 @@ type AnimeState = {
     loading: boolean
     error?: Error
   }
+  topics: {
+    data: Topic[]
+    loading: boolean
+    error?: Error
+  }
 }
 
 let initialState: AnimeState = {
@@ -60,6 +65,10 @@ let initialState: AnimeState = {
     loading: false
   },
   articles: {
+    data: [],
+    loading: false
+  },
+  topics: {
     data: [],
     loading: false
   }
@@ -132,6 +141,17 @@ export const getArticles = createAsyncThunk(
       articles: Article[]
     } = await response.json()
     return data.articles
+  }
+)
+
+export const getTopics = createAsyncThunk(
+  'anime/getTopics',
+  async (id: string) => {
+    const response = await fetch(jikanAPI.getTopics(id))
+    const data: {
+      topics: Topic[]
+    } = await response.json()
+    return data.topics
   }
 )
 
@@ -212,6 +232,18 @@ const animeSlice = createSlice({
       alert('error')
       console.log(action)
     })
+    builder.addCase(getTopics.pending, state => {
+      state.topics.loading = true
+    })
+    builder.addCase(getTopics.fulfilled, (state, { payload }) => {
+      state.topics.data = payload
+      state.topics.loading = false
+    })
+    builder.addCase(getTopics.rejected, (state, action) => {
+      state.topics.loading = false
+      alert('error')
+      console.log(action)
+    })
   },
 })
 
@@ -221,5 +253,6 @@ export const selectAnime = (state: RootState) => state.anime.anime
 export const selectCharactersAndStaff = (state: RootState) => state.anime.charactersAndStaff
 export const selectReviews = (state: RootState) => state.anime.reviews
 export const selectArticles = (state: RootState) => state.anime.articles
+export const selectTopics = (state: RootState) => state.anime.topics
 
 export default animeSlice.reducer

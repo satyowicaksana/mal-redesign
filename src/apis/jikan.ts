@@ -7,7 +7,8 @@ const jikanAPI = {
   getAnime: (id: string) => `${baseUrl}/anime/${id}`,
   getCharactersAndStaff: (id: string) => `${baseUrl}/anime/${id}/characters_staff`,
   getReviews: (id: string) => `${baseUrl}/anime/${id}/reviews`,
-  getArticles: (id: string) => `${baseUrl}/anime/${id}/news`
+  getArticles: (id: string) => `${baseUrl}/anime/${id}/news`,
+  getTopics: (id: string) => `${baseUrl}/anime/${id}/forum`
 }
 
 export default jikanAPI
