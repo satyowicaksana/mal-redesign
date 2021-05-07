@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
-import { Anime, Season, CharactersAndStaff, Review, Character, Staff, Article, Topic } from 'interfaces/anime'
+import { Anime, Season, CharactersAndStaff, Review, Character, Staff, Article, Topic, Recommendation } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
@@ -40,6 +40,11 @@ type AnimeState = {
     loading: boolean
     error?: Error
   }
+  recommendations: {
+    data: Recommendation[]
+    loading: boolean
+    error?: Error
+  }
 }
 
 let initialState: AnimeState = {
@@ -69,6 +74,10 @@ let initialState: AnimeState = {
     loading: false
   },
   topics: {
+    data: [],
+    loading: false
+  },
+  recommendations: {
     data: [],
     loading: false
   }
@@ -154,6 +163,18 @@ export const getTopics = createAsyncThunk(
     return data.topics
   }
 )
+
+export const getRecommendations = createAsyncThunk(
+  'anime/getRecommendations',
+  async (id: string) => {
+    const response = await fetch(jikanAPI.getRecommendations(id))
+    const data: {
+      recommendations: Recommendation[]
+    } = await response.json()
+    return data.recommendations
+  }
+)
+
 
 const animeSlice = createSlice({
   name: 'anime',
@@ -244,6 +265,18 @@ const animeSlice = createSlice({
       alert('error')
       console.log(action)
     })
+    builder.addCase(getRecommendations.pending, state => {
+      state.recommendations.loading = true
+    })
+    builder.addCase(getRecommendations.fulfilled, (state, { payload }) => {
+      state.recommendations.data = payload
+      state.recommendations.loading = false
+    })
+    builder.addCase(getRecommendations.rejected, (state, action) => {
+      state.recommendations.loading = false
+      alert('error')
+      console.log(action)
+    })
   },
 })
 
@@ -254,5 +287,6 @@ export const selectCharactersAndStaff = (state: RootState) => state.anime.charac
 export const selectReviews = (state: RootState) => state.anime.reviews
 export const selectArticles = (state: RootState) => state.anime.articles
 export const selectTopics = (state: RootState) => state.anime.topics
+export const selectRecommendations = (state: RootState) => state.anime.recommendations
 
 export default animeSlice.reducer

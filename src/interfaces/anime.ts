@@ -88,6 +88,15 @@ export interface Topic {
   }
 }
 
+export interface Recommendation {
+  mal_id: number
+  url: string
+  image_url: string
+  recommendation_url: string
+  title: string
+  recommendation_count: number
+}
+
 export interface Anime {
   aired: {
     from: string,

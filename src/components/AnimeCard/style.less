@@ -1,7 +1,7 @@
 @import 'lib.less';
 
 .anime-card {
-  transition: width 0.2s, padding-top 0.2s, border 0.2s;
+  transition: width 0.2s, padding-top 0.2s, border 0.2s, box-shadow 0.2s;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -12,9 +12,10 @@
 
   @media @xl, @lg {
     &:hover {
+      box-shadow: 0px 0px 0px 8px @primary-color;
 
       .anime-card-image {
-        border-width: 2px;
+        transform: scale(1.1);
         background-color: @primary-color;
       }
   
@@ -48,6 +49,18 @@
   bottom: 0;
   opacity: 0;
   width: 100%;
+
+  @media @xl, @lg {
+    background-color: @primary-opaque-color;
+  }
+}
+
+.anime-card-icon-container {
+  transition: opacity 0.2s;
+  position: absolute;
+  top: 0;
+  opacity: 1;
+  border-bottom-right-radius: 16px;
 
   @media @xl, @lg {
     background-color: @primary-opaque-color;

@@ -17,7 +17,8 @@ import {
   Staff,
   Reviews,
   News,
-  Forums
+  Forums,
+  Recommendations
 } from './views'
 import './style.less'
 
@@ -183,6 +184,7 @@ const Anime = () => {
             <Menu.Item key='reviews' onClick={() => history.push(`/anime/${id}/reviews`)}>REVIEWS</Menu.Item>
             <Menu.Item key='news' onClick={() => history.push(`/anime/${id}/news`)}>NEWS</Menu.Item>
             <Menu.Item key='forums' onClick={() => history.push(`/anime/${id}/forums`)}>FORUMS</Menu.Item>
+            <Menu.Item key='recommendations' onClick={() => history.push(`/anime/${id}/recommendations`)}>RECOMMENDATIONS</Menu.Item>
           </Menu>
           <Switch>
             <Route exact path='/anime/:id'>
@@ -199,6 +201,9 @@ const Anime = () => {
             </Route>
             <Route exact path='/anime/:id/forums'>
               <Forums/>
+            </Route>
+            <Route exact path='/anime/:id/recommendations'>
+              <Recommendations/>
             </Route>
           </Switch>
         </div>
