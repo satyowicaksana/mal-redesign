@@ -18,13 +18,7 @@ import {
 import './style.less'
 
 const News = () => {
-  const dispatch = useDispatch()
-
   const articles = useSelector(selectArticles)
-
-  useEffect(() => {
-    dispatch(getArticles("1"))
-  }, [dispatch])
 
   useEffect(() => {
     console.log(articles)

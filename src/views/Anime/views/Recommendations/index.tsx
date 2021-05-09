@@ -26,10 +26,6 @@ const Recommendations = () => {
   const recommendations = useSelector(selectRecommendations)
 
   useEffect(() => {
-    dispatch(getRecommendations("1"))
-  }, [dispatch])
-
-  useEffect(() => {
     console.log(recommendations)
   }, [recommendations])
 

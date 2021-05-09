@@ -6,6 +6,7 @@ import CharactersAndStaffCard from './CharactersAndStaffCard'
 import Footer from './Footer'
 import LoginModal from './LoginModal'
 import Navbar from './Navbar'
+import ReviewCard from './ReviewCard'
 import StaffCard from './StaffCard'
 import StoryCard from './StoryCard'
 import StoryCardsSection from './StoryCardsSection'
@@ -20,6 +21,7 @@ export {
   Footer,
   LoginModal,
   Navbar,
+  ReviewCard,
   StaffCard,
   StoryCard,
   StoryCardsSection,

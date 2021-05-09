@@ -7,12 +7,18 @@ import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
 
 import {
   selectAnime,
-  getAnime
+  getAnime,
+  getCharactersAndStaff,
+  getReviews,
+  getArticles,
+  getTopics,
+  getRecommendations
 } from 'store/anime'
 import {
   Reference
 } from 'interfaces/anime'
 import {
+  Overview,
   Characters,
   Staff,
   Reviews,
@@ -58,6 +64,11 @@ const Anime = () => {
 
   useEffect(() => {
     dispatch(getAnime("1"))
+    dispatch(getCharactersAndStaff("1"))
+    dispatch(getReviews("1"))
+    dispatch(getArticles("1"))
+    dispatch(getTopics("1"))
+    dispatch(getRecommendations("1"))
   }, [dispatch])
   useEffect(() => {
     console.log(anime)
@@ -178,8 +189,9 @@ const Anime = () => {
       </div>
       <div className='centered-flex pt-4 pb-5'>
         <div className='content-container'>
-          <Menu mode='horizontal' selectedKeys={[menu || 'characters']} className='anime-menu mb-5' >
-            <Menu.Item key='characters' onClick={() => history.push(`/anime/${id}`)}>CHARACTERS</Menu.Item>
+          <Menu mode='horizontal' selectedKeys={[menu || 'overview']} className='anime-menu mb-5' >
+            <Menu.Item key='overview' onClick={() => history.push(`/anime/${id}`)}>OVERVIEW</Menu.Item>
+            <Menu.Item key='characters' onClick={() => history.push(`/anime/${id}/characters`)}>CHARACTERS</Menu.Item>
             <Menu.Item key='staff' onClick={() => history.push(`/anime/${id}/staff`)}>STAFF</Menu.Item>
             <Menu.Item key='reviews' onClick={() => history.push(`/anime/${id}/reviews`)}>REVIEWS</Menu.Item>
             <Menu.Item key='news' onClick={() => history.push(`/anime/${id}/news`)}>NEWS</Menu.Item>
@@ -188,6 +200,9 @@ const Anime = () => {
           </Menu>
           <Switch>
             <Route exact path='/anime/:id'>
+              <Overview/>
+            </Route>
+            <Route exact path='/anime/:id/characters'>
               <Characters/>
             </Route>
             <Route exact path='/anime/:id/staff'>

@@ -18,13 +18,8 @@ import {
 import './style.less'
 
 const Forums = () => {
-  const dispatch = useDispatch()
 
   const topics = useSelector(selectTopics)
-
-  useEffect(() => {
-    dispatch(getTopics("1"))
-  }, [dispatch])
 
   useEffect(() => {
     console.log(topics)

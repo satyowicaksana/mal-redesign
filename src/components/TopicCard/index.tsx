@@ -24,7 +24,7 @@ const TopicCard = ({
   const { width } = useWindowSize();
 
   return (
-    <Row gutter={16} {...props} justify='space-between' className='topic-card p-3 mb-2'>
+    <Row gutter={16} {...props} justify='space-between' className='topic-card p-3'>
       <Col>
         <Title level={5} className='mb-1'><Link onClick={() => window.open(url, '_blank')}>{title}</Link></Title>
         <Link onClick={() => window.open(author_url, '_blank')}>{author_name}</Link><Text> - {moment(date_posted).format('MMM DD, YYYY')}</Text>
