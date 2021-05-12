@@ -1,23 +1,25 @@
 import AnimeCard from './AnimeCard'
 import AnimeCardsSection from './AnimeCardsSection'
+import ArticleCard from './ArticleCard'
 import BannerCarousel from './BannerCarousel'
 import Carousel from './Carousel'
-import CharactersAndStaffCard from './CharactersAndStaffCard'
+import CharacterCard from './CharacterCard'
 import Footer from './Footer'
 import LoginModal from './LoginModal'
 import Navbar from './Navbar'
 import ReviewCard from './ReviewCard'
 import StaffCard from './StaffCard'
-import StoryCard from './StoryCard'
+import StoryCard from './ArticleCard'
 import StoryCardsSection from './StoryCardsSection'
 import TopicCard from './TopicCard'
 
 export {
   AnimeCard,
   AnimeCardsSection,
+  ArticleCard,
   BannerCarousel,
   Carousel,
-  CharactersAndStaffCard,
+  CharacterCard,
   Footer,
   LoginModal,
   Navbar,

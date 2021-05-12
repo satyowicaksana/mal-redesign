@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react'
-import { Typography } from 'antd';
+import { Skeleton, Typography } from 'antd';
 import { FaUserCheck } from 'react-icons/fa'
 
 import { Anime, Recommendation } from 'interfaces/anime'
@@ -10,13 +10,22 @@ const { Text } = Typography;
 interface AnimeCardProps extends HTMLAttributes<HTMLDivElement> {
   anime?: Anime
   recommendation?: Recommendation
+  loading?: boolean
 }
 
 const AnimeCard = ({
   anime,
   recommendation,
+  loading,
   ...props
 }: AnimeCardProps) => {
+
+  if(!anime && !recommendation) return (
+    <div {...props} className='anime-card no-pointer'>
+      <Skeleton.Button active={loading} className='skeleton-stretch anime-card-skeleton'/>
+    </div>
+  )
+
   return (
     <div {...props} className='anime-card'>
       <img src={anime?.image_url || recommendation?.image_url} alt='' className='anime-card-image'/>

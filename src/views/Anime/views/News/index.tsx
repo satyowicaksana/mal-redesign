@@ -6,7 +6,7 @@ import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
 
 import {
-  StoryCard
+  ArticleCard
 } from 'components'
 import {
   selectArticles,
@@ -45,7 +45,7 @@ const News = () => {
         <Row gutter={32}>
           {articles.data.slice(0, totalShowedCharacters).map(article => (
             <Col span={12} className='mb-4'>
-              <StoryCard story={article} />
+              <ArticleCard article={article} />
             </Col>
           ))}
         </Row>

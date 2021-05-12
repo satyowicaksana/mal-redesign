@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Switch, Route, useHistory, useParams } from 'react-router-dom'
-import { Row, Col, Typography, Button, Table, Menu, Select, Avatar, Tag } from 'antd'
+import { Row, Col, Typography, Button, Table, Menu, Select, Avatar, Tag, Skeleton } from 'antd'
 import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
 
@@ -103,20 +103,29 @@ const Anime = () => {
     <div>
       <div className='anime-banner-image-container'>
         <div className='anime-banner-image-text-container content-container py-4'>
-          <Row>
+          <Row wrap={false}>
             <Col flex='282px'/>
             <Col flex='auto'>
-              <Row align='bottom' justify='space-between'>
+              <Row gutter={32} wrap={false} align='bottom' justify='space-between'>
                 <Col>
-                  <Title type='secondary' className='mb-1'>
-                    {anime.data?.title_english}
-                  </Title>
-                  <Text type='secondary' className='typography-h4'>
-                    {anime.data?.title}
-                  </Text>
+                  {anime.loading ? (
+                    <>
+                      <Skeleton.Button active className='anime-title-skeleton mb-1'/>
+                      <Skeleton.Button active className='anime-subtitle-skeleton'/>
+                    </>
+                  ) : (
+                    <>
+                      <Title type='secondary' ellipsis={{rows: 1, tooltip: true}} className='mb-1'>
+                        {anime.data?.title_english}
+                      </Title>
+                      <Paragraph type='secondary' ellipsis={{rows: 4, tooltip: true}} className='typography-h4'>
+                        {anime.data?.title}
+                      </Paragraph>
+                    </>
+                  )}
                 </Col>
                 <Col>
-                  <Row gutter={16}>
+                  <Row wrap={false} gutter={16}>
                     <Col>
                       <Button ghost shape='circle'>
                         <AiOutlinePlus/>
@@ -133,40 +142,48 @@ const Anime = () => {
             </Col>
           </Row>
         </div>
-        <img src="https://i.pinimg.com/originals/ac/43/52/ac4352f877cd4265d69538bd7532b7b3.jpg" alt='' className='anime-banner-image'/>
+        <img src={anime.data?.image_url} alt='' className='anime-banner-image'/>
       </div>
       <div className='anime-banner-info-container py-4'>
         <div className='content-container'>
           <Row wrap={false} gutter={50} className='mb-4'>
             <Col flex='282px'>
-              <img src={anime.data?.image_url} alt='' className='anime-banner-info-image'/>
+              {anime.loading
+              ? <Skeleton.Button active className='anime-banner-info-image-skeleton'/>
+              : <img src={anime.data?.image_url} alt='' className='anime-banner-info-image'/>
+              }
             </Col>
             <Col flex='auto'>
               <Row justify='space-between' className='mb-2'>
                 <Col>
                   <Title level={4} type='secondary'>Synopsis</Title>
                 </Col>
-                <Col>
-                  <Row gutter={16}>
-                    <Col>
-                      <Text type='secondary' strong>Ranked: </Text><Text type='secondary'>#{anime.data?.rank}</Text>
-                    </Col>
-                    <Col>
-                      <Text type='secondary' strong>Popularity: </Text><Text type='secondary'>#{anime.data?.popularity}</Text>
-                    </Col>
-                    <Col>
-                      <Text type='secondary' strong>Members: </Text><Text type='secondary'>{anime.data?.members.toLocaleString()}</Text>
-                    </Col>
-                  </Row>
-                </Col>
+                {!anime.loading && (
+                  <Col>
+                    <Row gutter={16}>
+                      <Col>
+                        <Text type='secondary' strong>Ranked: </Text><Text type='secondary'>#{anime.data?.rank}</Text>
+                      </Col>
+                      <Col>
+                        <Text type='secondary' strong>Popularity: </Text><Text type='secondary'>#{anime.data?.popularity}</Text>
+                      </Col>
+                      <Col>
+                        <Text type='secondary' strong>Members: </Text><Text type='secondary'>{anime.data?.members.toLocaleString()}</Text>
+                      </Col>
+                    </Row>
+                  </Col>
+                )}
               </Row>
-              <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}} type='secondary'>
-                {anime.data?.synopsis}
-              </Paragraph>
+              {anime.loading
+              ? <Skeleton active paragraph={{rows: 1}}/>
+              : <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}} type='secondary'>
+                  {anime.data?.synopsis}
+                </Paragraph>
+              }
             </Col>
           </Row>
           <Row gutter={24} wrap={false}>
-            <Col>
+            <Col span={3}>
               <div className='anime-banner-info-score-container centered-flex p-1'>
                 <Row align='middle' className='row-vertical'>
                   <Col>
@@ -182,7 +199,7 @@ const Anime = () => {
               </div>
             </Col>
             <Col flex='auto'>
-              <Table dataSource={[getAnimeInfoDataSource()]} columns={infoColumns} pagination={false} className='anime-banner-info-table overflow-scroll' />
+              <Table loading={anime.loading} dataSource={[getAnimeInfoDataSource()]} columns={infoColumns} pagination={false} className='anime-banner-info-table overflow-scroll' />
             </Col>
           </Row>
         </div>

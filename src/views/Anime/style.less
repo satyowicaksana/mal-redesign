@@ -21,6 +21,7 @@
   object-fit: cover;
   object-position: 50% 0%;
   opacity: 0.2;
+  filter: blur(10px);
 }
 
 .anime-banner-info-container {
@@ -37,6 +38,16 @@
   object-fit: cover;
   border-radius: 16px;
   box-shadow: @box-shadow;
+}
+
+.anime-banner-info-image-skeleton {
+  span {
+    width: 250px !important;
+    position: absolute;
+    top: -160px - 32px !important;
+    height: 320px !important;
+    border-radius: 16px !important;
+  }
 }
 
 .anime-banner-info-score-container {
@@ -90,4 +101,15 @@
   .ant-menu-item {
     font-weight: 800;
   }
+}
+
+.anime-title-skeleton {
+  height: 60px !important;
+  width: 400px !important;
+  display: block !important;
+}
+
+.anime-subtitle-skeleton {
+  width: 320px !important;
+  display: block !important;
 }

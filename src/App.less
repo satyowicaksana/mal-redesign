@@ -282,39 +282,16 @@ a.ant-typography-warning {
   }
 }
 
-.story-card {
-  background-color: white;
-  cursor: pointer;
-  width: 100%;
-  height: 200px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: @box-shadow;
-
-  @media @sm, @xs {
-    height: 100px;
-  }
-}
-
-.characters-and-staff-card {
-  background-color: white;
-  width: 100%;
-  height: 150px;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: @box-shadow;
-
-  @media @sm, @xs {
-    height: 100px;
-  }
-}
-
 .loading {
   cursor: unset;
 }
 
 .clickable {
   cursor: pointer;
+}
+
+.no-pointer {
+  pointer-events: none;
 }
 
 .overflow-scroll {
@@ -375,6 +352,10 @@ a.ant-typography-warning {
   height: 100% !important;
 }
 
+.skeleton-avatar-large {
+  width: 80px !important;
+  height: 80px !important;
+}
 
 // spacing
 

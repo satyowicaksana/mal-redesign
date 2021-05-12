@@ -6,7 +6,7 @@ import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
 import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
 
 import {
-  CharactersAndStaffCard
+  CharacterCard
 } from 'components'
 import {
   selectCharactersAndStaff,
@@ -56,7 +56,7 @@ const Characters = () => {
         <Row gutter={32}>
           {characters.slice(0, totalShowedCharacters).map(character => (
             <Col span={12} className='mb-4'>
-              <CharactersAndStaffCard character={character}/>
+              <CharacterCard character={character}/>
             </Col>
           ))}
         </Row>

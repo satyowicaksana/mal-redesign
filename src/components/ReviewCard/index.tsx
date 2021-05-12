@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react'
 import { useSelector } from 'react-redux'
-import { Row, Col, Typography, Avatar, Tag,  } from 'antd'
+import { Row, Col, Typography, Avatar, Tag, Skeleton,  } from 'antd'
 import { ImArrowDown, ImArrowUp } from 'react-icons/im'
 import { AiFillStar } from 'react-icons/ai'
 import moment from 'moment'
@@ -15,13 +15,33 @@ import './style.less'
 const { Text, Link, Title, Paragraph } = Typography;
 
 interface ReviewCardProps extends HTMLAttributes<HTMLDivElement> {
-  review: Review
+  review?: Review
+  loading?: boolean
 }
 
 const ReviewCard = ({
-  review
+  review,
+  loading
 }: ReviewCardProps) => {
   const anime = useSelector(selectAnime)
+
+  if(!review) {
+    return (
+      <Row gutter={16} wrap={false} className='mb-4'>
+        <Col className='anime-review-reviewer-profile-container'>
+          <Skeleton.Avatar active={loading} className='skeleton-avatar-large'/>
+        </Col>
+        <Col flex='auto'>
+          <div className='anime-review-item-arrow'/>
+          <div className='anime-review-item-container p-2'>
+            <Row justify='space-between' wrap={false} className='mb-1'>
+              <Skeleton active={loading}/>
+            </Row>
+          </div>
+        </Col>
+      </Row>
+    )
+  }
 
   return (
     <Row gutter={16} wrap={false} className='mb-4'>

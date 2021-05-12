@@ -1,9 +1,10 @@
 @import 'lib.less';
 
-.staff-card {
+.article-card {
   background-color: white;
+  cursor: pointer;
   width: 100%;
-  height: 150px;
+  height: 200px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: @box-shadow;
@@ -13,16 +14,20 @@
   }
 }
 
-.staff-card-image {
+.article-card-image {
   position: absolute;
   object-fit: cover;
   width: 100%;
   height: 100%;
 }
 
-.staff-card-info-container {
+.article-card-info-container {
   display: flex !important;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+}
+
+.article-card-calendar-icon {
+  color: @primary-color;
 }

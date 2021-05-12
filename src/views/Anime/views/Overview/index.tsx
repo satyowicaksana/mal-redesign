@@ -3,14 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import InfiniteScroll from 'react-infinite-scroller'
 import { Row, Col, Typography, Spin, Table, Menu, Select, Avatar, Tag, Divider } from 'antd'
-import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
-import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
 
 import {
-  CharactersAndStaffCard,
+  CharacterCard,
   StaffCard,
   ReviewCard,
-  StoryCard,
+  ArticleCard,
   TopicCard,
   AnimeCard
 } from 'components'
@@ -24,6 +22,7 @@ import {
 import {
   Character
 } from 'interfaces/anime'
+import { checker } from 'helpers'
 import './style.less'
 
 const { Title, Text, Paragraph, Link } = Typography
@@ -53,15 +52,6 @@ const Characters = () => {
     }
   }, [characters])
 
-
-  if(!characters) {
-    return null
-  }
-
-  if(charactersAndStaff.loading) {
-    return <p>loading</p>
-  }
-
   const renderTitle = (type: string) => (
     <Row gutter={32} align='middle' className='mb-3'>
       <Col>
@@ -80,49 +70,85 @@ const Characters = () => {
     <div>
       {renderTitle('characters')}
       <Row gutter={32} className='mb-5'>
-        {filteredCharacters.slice(0, 4).map(character => (
-          <Col span={12} className='mb-4'>
-            <CharactersAndStaffCard character={character}/>
+        {charactersAndStaff.data && charactersAndStaff.data.characters.length > 0 && !charactersAndStaff.loading
+        ? filteredCharacters.slice(0, 4).map((character, i) => (
+          <Col key={i} span={12} className='mb-4'>
+            <CharacterCard character={character}/>
+          </Col>
+        ))
+        : Array.from(Array(4).keys()).map((i) => (
+          <Col key={i} span={12} className='mb-4'>
+            <CharacterCard loading={charactersAndStaff.loading}/>
           </Col>
         ))}
       </Row>
       {renderTitle('staff')}
       <Row gutter={32} className='mb-5'>
-        {staffList?.slice(0, 4).map(staff => (
+        {charactersAndStaff.data && charactersAndStaff.data.characters.length > 0 && !charactersAndStaff.loading
+        ? staffList?.slice(0, 4).map(staff => (
           <Col span={12} className='mb-4'>
             <StaffCard staff={staff}/>
+          </Col>
+        ))
+        : Array.from(Array(4).keys()).map((i) => (
+          <Col span={12} className='mb-4'>
+            <StaffCard loading={charactersAndStaff.loading}/>
           </Col>
         ))}
       </Row>
       {renderTitle('reviews')}
       <Row gutter={32} className='mb-5'>
-        {reviews.data?.slice(0, 2).map(review => (
+        {checker.isFetched(reviews)
+        ? reviews.data.slice(0, 2).map(review => (
           <Col span={24} className='mb-4'>
             <ReviewCard review={review}/>
+          </Col>
+        ))
+        : Array.from(Array(2).keys()).map((i) => (
+          <Col span={24} className='mb-4'>
+            <ReviewCard loading={reviews.loading}/>
           </Col>
         ))}
       </Row>
       {renderTitle('news')}
       <Row gutter={32} className='mb-5'>
-        {articles.data?.slice(0, 4).map(article => (
+        {checker.isFetched(articles)
+        ? articles.data.slice(0, 4).map(article => (
           <Col span={12} className='mb-4'>
-            <StoryCard story={article} />
+            <ArticleCard article={article} />
+          </Col>
+        ))
+        : Array.from(Array(4).keys()).map((i) => (
+          <Col span={12} className='mb-4'>
+            <ArticleCard loading={articles.loading}/>
           </Col>
         ))}
       </Row>
       {renderTitle('forums')}
       <Row gutter={32} className='mb-5'>
-        {topics.data?.slice(0, 3).map(topic => (
+        {checker.isFetched(topics)
+        ? topics.data.slice(0, 3).map(topic => (
           <Col span={24} className='mb-2'>
             <TopicCard topic={topic} />
+          </Col>
+        ))
+        : Array.from(Array(3).keys()).map((i) => (
+          <Col span={24} className='mb-2'>
+            <TopicCard loading={topics.loading} />
           </Col>
         ))}
       </Row>
       {renderTitle('recommendations')}
       <Row gutter={32} className='mb-5'>
-        {recommendations.data?.slice(0, 6).map(recommendation => (
+        {checker.isFetched(recommendations)
+        ? recommendations.data.slice(0, 6).map(recommendation => (
           <Col span={4} className='mb-2'>
             <AnimeCard recommendation={recommendation} />
+          </Col>
+        ))
+        : Array.from(Array(6).keys()).map((i) => (
+          <Col span={4} className='mb-2'>
+            <AnimeCard loading={recommendations.loading} />
           </Col>
         ))}
       </Row>

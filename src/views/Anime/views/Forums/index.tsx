@@ -44,7 +44,7 @@ const Forums = () => {
         threshold={50}
       >
           {topics.data.slice(0, totalShowedCharacters).map(topic => (
-              <TopicCard topic={topic}/>
+              <TopicCard topic={topic} className='mb-2'/>
           ))}
       </InfiniteScroll>
     </div>
