@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Switch, Route, useHistory, useParams } from 'react-router-dom'
 import { Row, Col, Typography, Button, Table, Menu, Select, Avatar, Tag, Skeleton } from 'antd'
 import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
-import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
+import { FaArrowAltCircleUp, FaArrowAltCircleDown, FaUser, FaUserCheck, FaTrophy, FaHeart } from 'react-icons/fa'
 
 import {
   selectAnime,
@@ -104,7 +104,7 @@ const Anime = () => {
       <div className='anime-banner-image-container'>
         <div className='anime-banner-image-text-container content-container py-4'>
           <Row wrap={false}>
-            <Col flex='282px'/>
+            <Col flex='282px' className='desktop'/>
             <Col flex='auto'>
               <Row gutter={32} wrap={false} align='bottom' justify='space-between'>
                 <Col>
@@ -147,7 +147,7 @@ const Anime = () => {
       <div className='anime-banner-info-container py-4'>
         <div className='content-container'>
           <Row wrap={false} gutter={50} className='mb-4'>
-            <Col flex='282px'>
+            <Col flex='282px' className='desktop'>
               {anime.loading
               ? <Skeleton.Button active className='anime-banner-info-image-skeleton'/>
               : <img src={anime.data?.image_url} alt='' className='anime-banner-info-image'/>
@@ -162,13 +162,13 @@ const Anime = () => {
                   <Col>
                     <Row gutter={16}>
                       <Col>
-                        <Text type='secondary' strong>Ranked: </Text><Text type='secondary'>#{anime.data?.rank}</Text>
+                        <Text type='secondary'><FaTrophy/> #{anime.data?.rank}</Text>
                       </Col>
                       <Col>
-                        <Text type='secondary' strong>Popularity: </Text><Text type='secondary'>#{anime.data?.popularity}</Text>
+                        <Text type='secondary'><FaHeart/> #{anime.data?.popularity}</Text>
                       </Col>
                       <Col>
-                        <Text type='secondary' strong>Members: </Text><Text type='secondary'>{anime.data?.members.toLocaleString()}</Text>
+                        <Text type='secondary'><FaUser/> {anime.data?.members.toLocaleString()}</Text>
                       </Col>
                     </Row>
                   </Col>
@@ -183,8 +183,8 @@ const Anime = () => {
             </Col>
           </Row>
           <Row gutter={24} wrap={false}>
-            <Col span={3}>
-              <div className='anime-banner-info-score-container centered-flex p-1'>
+            <Col>
+              <div className='anime-banner-info-score-container centered-flex py-1 px-2'>
                 <Row align='middle' className='row-vertical'>
                   <Col>
                     <Text strong type='secondary'>SCORE</Text>
@@ -193,7 +193,7 @@ const Anime = () => {
                     <Text strong type='secondary' className='anime-banner-info-score'>{anime.data?.score}</Text>
                   </Col>
                   <Col>
-                    <Text type='secondary'>{anime.data?.scored_by.toLocaleString()} users</Text>
+                    <Text type='secondary'>{anime.data?.scored_by.toLocaleString()} <FaUserCheck/></Text>
                   </Col>
                 </Row>
               </div>
