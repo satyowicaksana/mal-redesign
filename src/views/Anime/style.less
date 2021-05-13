@@ -7,7 +7,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  background-color: @primary-dark-color;
+  background: @primary-gradient-color;
+  border-radius: 0 0 16px 16px;
 }
 
 .anime-banner-image-text-container {
@@ -22,12 +23,13 @@
   object-position: 50% 0%;
   opacity: 0.2;
   filter: blur(10px);
+  border-radius: 0 0 16px 16px;
 }
 
 .anime-banner-info-container {
   display: flex;
   justify-content: center;
-  background-color: @primary-color;
+  box-shadow: @box-shadow;
 }
 
 .anime-banner-info-image {
@@ -54,7 +56,10 @@
   background-color: @warning-color;
   border-radius: 16px;
   white-space: pre;
-  height: 100%;
+  * {
+    color: @color-white !important;
+  }
+  height: 100% !important;
 }
 
 .anime-banner-info-score {
@@ -63,21 +68,17 @@
 }
 
 .anime-banner-info-table-container {
-  border: solid 3px @border-color;
+  border: solid 2px @border-color;
   border-radius: 16px;
   height: 100%;
 }
 
 .anime-banner-info-table {
-  border: solid 3px @border-color;
+  border: solid 2px @border-color;
   border-radius: 16px;
   height: 100%;
   * {
-    color: @color-white;
     background-color: transparent !important;
-  }
-  th {
-    color: @color-white !important;
   }
   .ant-table-thead {
 
@@ -85,7 +86,7 @@
       font-weight: 800;
     }
     .ant-table-cell {
-      border-bottom: solid 3px @border-color;
+      border-bottom: solid 2px @border-color;
     }
   }
   .ant-table-cell {

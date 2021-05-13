@@ -5,7 +5,7 @@ import { FaUserCheck } from 'react-icons/fa'
 import { Anime, Recommendation } from 'interfaces/anime'
 import './style.less';
 
-const { Text } = Typography;
+const { Text, Paragraph } = Typography;
 
 interface AnimeCardProps extends HTMLAttributes<HTMLDivElement> {
   anime?: Anime
@@ -35,7 +35,7 @@ const AnimeCard = ({
         </div>
       }
       <div className='anime-card-title-container p-1'>
-        <Text strong className='anime-card-title'>{anime?.title || recommendation?.title}</Text>
+        <Paragraph strong className='anime-card-title' ellipsis >{anime?.title || recommendation?.title}</Paragraph>
       </div>
     </div>
   );

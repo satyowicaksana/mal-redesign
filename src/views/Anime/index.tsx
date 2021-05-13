@@ -77,7 +77,7 @@ const Anime = () => {
   const generateReferenceText = (references: Reference[]) => (<>
     {references.map((reference, i) => (
       <>
-      <Link type='warning' onClick={() => window.open(reference.url, '_blank')}>
+      <Link onClick={() => window.open(reference.url, '_blank')}>
         {reference.name}
       </Link>
       {i < references.length - 1 && ', '}
@@ -156,19 +156,19 @@ const Anime = () => {
             <Col flex='auto'>
               <Row justify='space-between' className='mb-2'>
                 <Col>
-                  <Title level={4} type='secondary'>Synopsis</Title>
+                  <Title level={4}>Synopsis</Title>
                 </Col>
                 {!anime.loading && (
                   <Col>
                     <Row gutter={16}>
                       <Col>
-                        <Text type='secondary'><FaTrophy/> #{anime.data?.rank}</Text>
+                        <Text strong><FaTrophy className='color-warning'/> #{anime.data?.rank}</Text>
                       </Col>
                       <Col>
-                        <Text type='secondary'><FaHeart/> #{anime.data?.popularity}</Text>
+                        <Text strong><FaHeart className='color-error'/> #{anime.data?.popularity}</Text>
                       </Col>
                       <Col>
-                        <Text type='secondary'><FaUser/> {anime.data?.members.toLocaleString()}</Text>
+                        <Text strong><FaUser className='color-success'/> {anime.data?.members.toLocaleString()}</Text>
                       </Col>
                     </Row>
                   </Col>
@@ -176,7 +176,7 @@ const Anime = () => {
               </Row>
               {anime.loading
               ? <Skeleton active paragraph={{rows: 1}}/>
-              : <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}} type='secondary'>
+              : <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}}>
                   {anime.data?.synopsis}
                 </Paragraph>
               }
@@ -187,13 +187,13 @@ const Anime = () => {
               <div className='anime-banner-info-score-container centered-flex py-1 px-2'>
                 <Row align='middle' className='row-vertical'>
                   <Col>
-                    <Text strong type='secondary'>SCORE</Text>
+                    <Text strong>SCORE</Text>
                   </Col>
                   <Col>
-                    <Text strong type='secondary' className='anime-banner-info-score'>{anime.data?.score}</Text>
+                    <Text strong className='anime-banner-info-score'>{anime.data?.score}</Text>
                   </Col>
                   <Col>
-                    <Text type='secondary'>{anime.data?.scored_by.toLocaleString()} <FaUserCheck/></Text>
+                    <Text>{anime.data?.scored_by.toLocaleString()} <FaUserCheck/></Text>
                   </Col>
                 </Row>
               </div>

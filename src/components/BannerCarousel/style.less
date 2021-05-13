@@ -4,10 +4,12 @@
 
 .banner-carousel-wrapper {
   position: relative;
-  background-color: @primary-color;
+  background: @primary-color;
+  background: @primary-gradient-color;
   display: flex;
   justify-content: center;
   padding-top: 64px;
+  border-radius: 0 0 8% 8%;
 }
 
 .banner-carousel-background-image {
@@ -19,6 +21,7 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
+  border-radius: 0 0 8% 8%;
 
   &.selected {
     opacity: 0.1;

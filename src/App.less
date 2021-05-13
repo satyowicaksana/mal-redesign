@@ -2,7 +2,7 @@
 @import '~antd/dist/antd.less';
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .app-content-wrapper {
@@ -16,7 +16,7 @@ body {
 /* style adjustment */
 
 h1, h2, h3, h4, h5, strong {
-  font-weight: 800 !important;
+  font-weight: bolder !important;
 
   @media @sm, @xs {
     font-size: 16px !important;
@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, strong {
 //typography
 
 .ant-typography {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin-bottom: 0 !important;
 }
 
@@ -115,16 +115,6 @@ a.ant-typography-warning {
   @media @sm, @xs {
     padding: 2px 6px;
   }
-}
-
-.ant-tag-blue {
-  background-color: @primary-color;
-  color: @color-white;
-}
-
-.ant-tag-orange {
-  background-color: @warning-color;
-  color: @color-white;
 }
 
 // popover
@@ -243,7 +233,7 @@ a.ant-typography-warning {
 
 .ant-divider {
   margin: 0;
-  border-top: 4px solid rgba(0, 0, 0, 0.06);
+  border-top: 2px solid rgba(0, 0, 0, 0.06);
 }
 
 /* custom styles */
@@ -301,6 +291,22 @@ a.ant-typography-warning {
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.color-primary {
+  color: @primary-color;
+}
+
+.color-error {
+  color: @error-color;
+}
+
+.color-warning {
+  color: @warning-color;
+}
+
+.color-success {
+  color: @success-color;
 }
 
 // typography
