@@ -309,6 +309,41 @@ a.ant-typography-warning {
   color: @success-color;
 }
 
+// button
+
+.button-ghost-warning {
+  &:active {
+    border-color: @warning-color-dark !important;
+    color: @warning-color-dark !important;
+
+    &:hover {
+      border-color: @warning-color-dark;
+      color: @warning-color-dark;
+    }
+  }
+  &:hover, &:focus {
+    border-color: @warning-color;
+    color: @warning-color;
+  }
+}
+
+.button-ghost-error {
+  &:active {
+    border-color: @error-color-dark !important;
+    color: @error-color-dark !important;
+
+    &:hover {
+      border-color: @error-color-dark;
+      color: @error-color-dark;
+    }
+  }
+  &:hover, &:focus {
+    border-color: @error-color;
+    color: @error-color;
+  }
+}
+
+
 // typography
 
 .typography-fade {

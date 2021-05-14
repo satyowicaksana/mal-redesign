@@ -127,12 +127,12 @@ const Anime = () => {
                 <Col>
                   <Row wrap={false} gutter={16}>
                     <Col>
-                      <Button ghost shape='circle'>
+                      <Button ghost shape='circle' className='button-ghost-warning'>
                         <AiOutlinePlus/>
                       </Button>
                     </Col>
                     <Col>
-                      <Button ghost shape='circle'>
+                      <Button ghost shape='circle' className='button-ghost-error'>
                         <AiOutlineHeart/>
                       </Button>
                     </Col>
