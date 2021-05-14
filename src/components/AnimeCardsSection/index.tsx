@@ -34,7 +34,7 @@ const AnimeCardsSection = ({
 
   return (
     <div className='mb-5'>
-      <Row gutter={{xs: 0, md: 32}} align='middle' className='mb-3'>
+      {/*<Row gutter={{xs: 0, md: 32}} align='middle' className='mb-3'>
         <Col>
           <Title level={3}>{title}</Title>
         </Col>
@@ -90,7 +90,7 @@ const AnimeCardsSection = ({
         <Col>
           <Link strong>VIEW MORE</Link>
         </Col>
-      </Row>
+      </Row>*/}
     </div>
   );
 }

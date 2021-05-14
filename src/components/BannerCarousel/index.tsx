@@ -78,7 +78,7 @@ const BannerCarousel = ({
                 </Col>
                 <Col md={10} xs={24} className='banner-carousel-card-info-container p-3'>
                   <div>
-                    <Row className='mb-2'>
+                    <Row gutter={8} className='mb-2'>
                       <Col>
                         <Tag color='blue'>FEATURED</Tag>
                       </Col>

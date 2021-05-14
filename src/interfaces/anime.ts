@@ -153,8 +153,98 @@ export interface Anime {
   url: string
 }
 
+export interface Anime {
+  aired: {
+    from: string,
+    to: string,
+    prop: {
+      from: {
+        day: number
+        month: number
+        year: number
+      }
+      to: {
+        day: number
+        month: number
+        year: number
+      }
+    }
+    string: string
+  }
+  airing: boolean
+  background: string
+  broadcast: string
+  duration: string
+  ending_themes: string[]
+  episodes: number
+  favorites: number
+  genres: Reference[]
+  image_url: string
+  licensors: Reference[]
+  mal_id: number
+  members: number
+  opening_themes: string[]
+  popularity: number
+  premiered: string
+  producers: Reference[]
+  rank: number
+  rating: string
+  related: {
+    Adaptation: Reference[] 
+    'Side story': Reference[]
+    Summary: Reference[]
+  }
+  score: number
+  scored_by: number
+  source: string
+  status: string
+  studios: Reference[]
+  synopsis: string
+  title: string
+  title_english: string
+  title_japanese: string
+  title_synonyms: string[]
+  trailer_url: string
+  type: string
+  url: string
+}
+
+export interface SeasonAnime {
+  airing_start: string
+  continuing: boolean
+  episodes: number
+  genres: Reference[]
+  image_url: string
+  kids: boolean
+  licensors: string[]
+  mal_id: number
+  members: number
+  producers: Reference[]
+  r18: boolean
+  score: number
+  source: string
+  synopsis: string
+  title: string
+  type: string
+  url: string
+}
+
+export interface TopAnime {
+  end_date: string
+  episodes: number
+  image_url: string
+  mal_id: number
+  members: number
+  rank: number
+  score: number
+  start_date: string
+  title: string
+  type: string
+  url: string
+}
+
 export interface Season {
   season_name: string
   season_year: number
-  anime: Anime[]
+  anime: SeasonAnime[]
 }

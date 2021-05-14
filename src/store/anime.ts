@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
-import { Anime, Season, CharactersAndStaff, Review, Character, Staff, Article, Topic, Recommendation } from 'interfaces/anime'
+import { Anime, TopAnime, Season, CharactersAndStaff, Review, Character, Staff, Article, Topic, Recommendation } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
@@ -11,7 +11,7 @@ type AnimeState = {
     error?: Error
   }
   topAiringAnimes: {
-    data: Anime[]
+    data: TopAnime[]
     loading: boolean
     error?: Error
   }
@@ -100,7 +100,7 @@ export const getTopAiringAnimes = createAsyncThunk(
   async () => {
     const response = await fetch(jikanAPI.getTopAiringAnimes)
     const data: {
-      top: Anime[]
+      top: TopAnime[]
     } = await response.json()
     return data.top.slice(0, 24)
   }

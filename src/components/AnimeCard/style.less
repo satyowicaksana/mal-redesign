@@ -1,39 +1,62 @@
 @import 'lib.less';
 
 .anime-card {
-  transition: width 0.2s, padding-top 0.2s, border 0.2s, box-shadow 0.2s;
   overflow: hidden;
+  box-shadow: @box-shadow;
+  transition: width 0.2s, padding-top 0.2s, border 0.2s, box-shadow 0.2s;
   position: relative;
-  border-radius: 16px;
   padding-top: 150%;
+  border-radius: 16px;
   box-shadow: @box-shadow;
   cursor: pointer;
+  transition: all 0.2s;
 
   @media @xl, @lg {
-    &:hover {
-      box-shadow: 0px 0px 0px 8px @primary-color;
-
-      .anime-card-image {
-        transform: scale(1.1);
+    &.hovered {
+      box-shadow: @box-shadow-heavy;
+      .anime-card-title-container-blur {
+        opacity: 0;
       }
-    }
-  }
-
-  @media @md, @sm, @xs {
-    .anime-card-title-container {
-      opacity: 1;
+      .anime-card-title-container {
+        opacity: 0;
+      }
     }
   }
 }
 
 .anime-card-image {
+  overflow: hidden;
   transition: all 0.2s;
+  border-radius: 16px;
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   border: solid 0 @primary-color;
+  z-index: 1;
+}
+
+.anime-card-title-container-blur {
+  transition: opacity 0.2s;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: black;
+  height: 36px;
+  border-radius: 0 0 16px 16px;
+  filter: blur(5px);
+  opacity: 0.5;
+}
+
+.anime-card-popover-container {
+  width: 320px;
+
+  .anime-card-popover-synopsis-container {
+    max-height: 88px;
+    overflow: scroll;
+  }
 }
 
 .anime-card-title-container {
@@ -41,7 +64,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  backdrop-filter: blur(20px);
+  z-index: 1;
 }
 
 .anime-card-icon-container {

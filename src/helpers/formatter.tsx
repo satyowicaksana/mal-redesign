@@ -1,4 +1,3 @@
-
 const htmlDecode = (input: string) => {
   var e = document.createElement('div');
   e.innerHTML = input;
