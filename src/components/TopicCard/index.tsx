@@ -35,20 +35,30 @@ const TopicCard = ({
 
   return (
     <div {...props}>
-      <Row gutter={16} justify='space-between' className='topic-card p-2'>
-        <Col>
-          <Title level={5} className='mb-1'><Link onClick={() => window.open(url, '_blank')}>{title}</Link></Title>
-          <Link onClick={() => window.open(author_url, '_blank')}>{author_name}</Link><Text> - {moment(date_posted).format('MMM DD, YYYY')}</Text>
-        </Col>
-        <Col>
-          <Row justify='end'>
+      <div className='topic-card p-2'>
+        <Row wrap={false} justify='space-between'>
+          <Col className='mr-2'>
+            <Title level={5} className='mb-1'><Link onClick={() => window.open(url, '_blank')}>{title}</Link></Title>
+            <Link onClick={() => window.open(author_url, '_blank')}>{author_name}</Link><Text> - {moment(date_posted).format('MMM DD, YYYY')}</Text>
+          </Col>
+          <Col className='desktop'>
+            <Row justify='end'>
+              <Col>
+                <Text className='typography-fade'><FaComment/> {replies}</Text>
+              </Col>
+            </Row>
+            <Text className='typography-fade'>{moment(last_post.date_posted).fromNow()}</Text>
+          </Col>
+        </Row>
+        <div className='mobile mt-1'>
+          <Row align='middle' justify='end'>
             <Col>
               <Text className='typography-fade'><FaComment/> {replies}</Text>
+              <Text className='typography-fade'>{moment(last_post.date_posted).fromNow()}</Text>
             </Col>
           </Row>
-          <Text className='typography-fade'>{moment(last_post.date_posted).fromNow()}</Text>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </div>
   );
 }

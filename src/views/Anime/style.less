@@ -3,12 +3,11 @@
 @banner-image-height: 260px;
 
 .anime-banner-image-container {
-  height: @banner-image-height;
+  min-height: @banner-image-height;
   display: flex;
   align-items: flex-end;
   justify-content: center;
   background: @primary-gradient-color;
-  border-radius: 0 0 16px 16px;
 }
 
 .anime-banner-image-text-container {
@@ -30,16 +29,25 @@
   display: flex;
   justify-content: center;
   box-shadow: @box-shadow;
+  background-color: @primary-fade-color;
 }
 
 .anime-banner-info-image {
-  width: 250px;
-  position: absolute;
-  top: -160px - 32px;
-  height: 320px;
   object-fit: cover;
   border-radius: 16px;
   box-shadow: @box-shadow;
+
+  @media @md, @lg, @xl {
+    width: 250px;
+    position: absolute;
+    top: -160px - 32px;
+    height: 320px;
+  }
+
+  @media @xs, @sm {
+    width: 120px;
+    height: 160px;
+  }
 }
 
 .anime-banner-info-image-skeleton {
@@ -53,7 +61,7 @@
 }
 
 .anime-banner-info-score-container {
-  background-color: @warning-color;
+  background: @warning-gradient-color;
   border-radius: 16px;
   white-space: pre;
   * {
@@ -113,4 +121,8 @@
 .anime-subtitle-skeleton {
   width: 320px !important;
   display: block !important;
+}
+
+.anime-banner-info-image-detail-container {
+  height: 100%;
 }

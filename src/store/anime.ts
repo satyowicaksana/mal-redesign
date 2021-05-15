@@ -190,7 +190,6 @@ const animeSlice = createSlice({
     })
     builder.addCase(getCurrentSeason.rejected, (state, action) => {
       state.currentSeason.loading = false
-      alert('error')
       console.log(action)
     })
     builder.addCase(getTopAiringAnimes.pending, state => {
@@ -202,7 +201,6 @@ const animeSlice = createSlice({
     })
     builder.addCase(getTopAiringAnimes.rejected, (state, action) => {
       state.topAiringAnimes.loading = false
-      alert('error')
       console.log(action)
     })
     builder.addCase(getAnime.pending, state => {
@@ -214,7 +212,6 @@ const animeSlice = createSlice({
     })
     builder.addCase(getAnime.rejected, (state, action) => {
       state.anime.loading = false
-      alert('error')
       console.log(action)
     })
     builder.addCase(getCharactersAndStaff.pending, state => {
@@ -226,7 +223,6 @@ const animeSlice = createSlice({
     })
     builder.addCase(getCharactersAndStaff.rejected, (state, action) => {
       state.charactersAndStaff.loading = false
-      alert('error')
       console.log(action)
     })
     builder.addCase(getReviews.pending, state => {
@@ -238,7 +234,6 @@ const animeSlice = createSlice({
     })
     builder.addCase(getReviews.rejected, (state, action) => {
       state.reviews.loading = false
-      alert('error')
       console.log(action)
     })
     builder.addCase(getArticles.pending, state => {
@@ -250,7 +245,6 @@ const animeSlice = createSlice({
     })
     builder.addCase(getArticles.rejected, (state, action) => {
       state.articles.loading = false
-      alert('error')
       console.log(action)
     })
     builder.addCase(getTopics.pending, state => {
@@ -262,7 +256,6 @@ const animeSlice = createSlice({
     })
     builder.addCase(getTopics.rejected, (state, action) => {
       state.topics.loading = false
-      alert('error')
       console.log(action)
     })
     builder.addCase(getRecommendations.pending, state => {
@@ -274,7 +267,6 @@ const animeSlice = createSlice({
     })
     builder.addCase(getRecommendations.rejected, (state, action) => {
       state.recommendations.loading = false
-      alert('error')
       console.log(action)
     })
   },

@@ -4,7 +4,7 @@ import { Row, Col, Typography, Skeleton } from 'antd';
 import { Character } from 'interfaces/anime'
 import './style.less';
 
-const { Text, Link } = Typography;
+const { Text, Link, Paragraph  } = Typography;
 
 interface CharacterCardProps extends HTMLAttributes<HTMLDivElement> {
   character?: Character
@@ -43,25 +43,29 @@ const CharacterCard = ({
 
   return (
     <Row {...props} className='character-card'>
-      <Col xs={8} md={4}>
+      <Col span={4}>
         <img src={character.image_url} alt='' className='character-card-image'/>
       </Col>
       <Col span={16} className='character-card-info-container p-2'>
         <Row gutter={8} justify='space-between' wrap={false}>
           <Col span={12}>
-            <Link strong onClick={() => window.open(character.url)}>{character.name}</Link>
+            <Paragraph ellipsis={{rows: 2}}>
+              <Link strong onClick={() => window.open(character.url)}>{character.name}</Link>
+            </Paragraph>
             <Text className='typography-block'>{character.role}</Text>
           </Col>
           {hasRightSection && (
             <Col span={12} className='character-card-voice-actor-name-container'>
-              <Link strong onClick={() => window.open(character.voice_actors[0].url)}>{character.voice_actors[0].name}</Link>
+              <Paragraph ellipsis={{rows: 2}}>
+                <Link strong onClick={() => window.open(character.voice_actors[0].url)}>{character.voice_actors[0].name}</Link>
+              </Paragraph>
               <Text className='typography-block'>{character.voice_actors[0].language}</Text>
             </Col>
           )}
         </Row>
       </Col>
       {hasRightSection && (
-        <Col xs={8} md={4}>
+        <Col span={4}>
           <img src={getLargeVoiceActorImage()} alt='' className='character-card-image'/>
         </Col>
       )}

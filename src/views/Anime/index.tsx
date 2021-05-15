@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Switch, Route, useHistory, useParams } from 'react-router-dom'
 import { Row, Col, Typography, Button, Table, Menu, Select, Avatar, Tag, Skeleton } from 'antd'
 import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
-import { FaArrowAltCircleUp, FaArrowAltCircleDown, FaUser, FaUserCheck, FaTrophy, FaHeart } from 'react-icons/fa'
+import { FaArrowAltCircleUp, FaArrowAltCircleDown, FaUser, FaUserCheck, FaTrophy, FaHeart, FaStar } from 'react-icons/fa'
 
 import {
   selectAnime,
@@ -27,6 +27,7 @@ import {
   Recommendations
 } from './views'
 import './style.less'
+import { useWindowSize } from 'hooks'
 
 const { Title, Text, Paragraph, Link } = Typography
 const { Option } = Select
@@ -99,44 +100,70 @@ const Anime = () => {
     }
   }
 
+  const renderAnimeTitle = () => (
+    anime.loading ? (
+      <>
+        <Skeleton.Button active className='anime-title-skeleton mb-1'/>
+        <Skeleton.Button active className='anime-subtitle-skeleton'/>
+      </>
+    ) : (
+      <>
+        <Title type='secondary' ellipsis={{rows: 1, tooltip: true}} className='mb-1'>
+          {anime.data?.title_english}
+        </Title>
+        <Paragraph type='secondary' ellipsis={{rows: 1, tooltip: true}} className='typography-h4'>
+          {anime.data?.title}
+        </Paragraph>
+      </>
+    )
+  )
+
+  const renderActionButtons = () => (
+    <Row wrap={false} gutter={{xs: 8, md: 16}}>
+      <Col>
+        <Button ghost shape='circle' className='button-ghost-warning'>
+          <AiOutlinePlus/>
+        </Button>
+      </Col>
+      <Col>
+        <Button ghost shape='circle' className='button-ghost-error'>
+          <AiOutlineHeart/>
+        </Button>
+      </Col>
+    </Row>
+  )
+
   return (
     <div>
       <div className='anime-banner-image-container'>
         <div className='anime-banner-image-text-container content-container py-4'>
-          <Row wrap={false}>
-            <Col flex='282px' className='desktop'/>
+          <Row gutter={16} wrap={false} className='mt-4 mobile'>
+            <Col>
+              {anime.loading
+              ? <Skeleton.Button active className='anime-banner-info-image-skeleton'/>
+              : <img src={anime.data?.image_url} alt='' className='anime-banner-info-image'/>
+              }
+            </Col>
+            <Col>
+              <Row justify='space-between' className='row-vertical anime-banner-info-image-detail-container'>
+                <Col>
+                  {renderAnimeTitle()}
+                </Col>
+                <Col>
+                  {renderActionButtons()}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row wrap={false} className='desktop'>
+            <Col flex='282px'/>
             <Col flex='auto'>
               <Row gutter={32} wrap={false} align='bottom' justify='space-between'>
                 <Col>
-                  {anime.loading ? (
-                    <>
-                      <Skeleton.Button active className='anime-title-skeleton mb-1'/>
-                      <Skeleton.Button active className='anime-subtitle-skeleton'/>
-                    </>
-                  ) : (
-                    <>
-                      <Title type='secondary' ellipsis={{rows: 1, tooltip: true}} className='mb-1'>
-                        {anime.data?.title_english}
-                      </Title>
-                      <Paragraph type='secondary' ellipsis={{rows: 4, tooltip: true}} className='typography-h4'>
-                        {anime.data?.title}
-                      </Paragraph>
-                    </>
-                  )}
+                  {renderAnimeTitle()}
                 </Col>
                 <Col>
-                  <Row wrap={false} gutter={16}>
-                    <Col>
-                      <Button ghost shape='circle' className='button-ghost-warning'>
-                        <AiOutlinePlus/>
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button ghost shape='circle' className='button-ghost-error'>
-                        <AiOutlineHeart/>
-                      </Button>
-                    </Col>
-                  </Row>
+                  {renderActionButtons()}
                 </Col>
               </Row>
             </Col>
@@ -146,7 +173,7 @@ const Anime = () => {
       </div>
       <div className='anime-banner-info-container py-4'>
         <div className='content-container'>
-          <Row wrap={false} gutter={50} className='mb-4'>
+          <Row wrap={false} className='mb-4'>
             <Col flex='282px' className='desktop'>
               {anime.loading
               ? <Skeleton.Button active className='anime-banner-info-image-skeleton'/>
@@ -156,7 +183,8 @@ const Anime = () => {
             <Col flex='auto'>
               <Row justify='space-between' className='mb-2'>
                 <Col>
-                  <Title level={4}>Synopsis</Title>
+                  <Title level={4} className='desktop'>Synopsis</Title>
+                  <Tag color='warning' className='mobile'><Title><FaStar/> {anime.data?.score}</Title></Tag>
                 </Col>
                 {!anime.loading && (
                   <Col>
@@ -174,6 +202,7 @@ const Anime = () => {
                   </Col>
                 )}
               </Row>
+              <Title level={4} className='mobile mb-1'>Synopsis</Title>
               {anime.loading
               ? <Skeleton active paragraph={{rows: 1}}/>
               : <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}}>
@@ -183,16 +212,16 @@ const Anime = () => {
             </Col>
           </Row>
           <Row gutter={24} wrap={false}>
-            <Col>
+            <Col className='desktop'>
               <div className='anime-banner-info-score-container centered-flex py-1 px-2'>
                 <Row align='middle' className='row-vertical'>
-                  <Col>
+                  <Col >
                     <Text strong>SCORE</Text>
                   </Col>
                   <Col>
-                    <Text strong className='anime-banner-info-score'>{anime.data?.score}</Text>
+                    <FaStar className='mobile'/> <Text strong className='anime-banner-info-score'>{anime.data?.score}</Text>
                   </Col>
-                  <Col>
+                  <Col >
                     <Text>{anime.data?.scored_by.toLocaleString()} <FaUserCheck/></Text>
                   </Col>
                 </Row>

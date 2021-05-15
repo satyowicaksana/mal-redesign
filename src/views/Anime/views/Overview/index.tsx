@@ -24,12 +24,15 @@ import {
 } from 'interfaces/anime'
 import { checker } from 'helpers'
 import './style.less'
+import { useWindowSize } from 'hooks'
+import { windowSizes } from 'consts'
 
 const { Title, Text, Paragraph, Link } = Typography
 const { Option } = Select
 
 const Characters = () => {
   const history = useHistory()
+  const { width } = useWindowSize()
 
   const charactersAndStaff = useSelector(selectCharactersAndStaff)
   const characters = charactersAndStaff.data?.characters
@@ -57,10 +60,10 @@ const Characters = () => {
       <Col>
         <Title level={3}>{type.toUpperCase()}</Title>
       </Col>
-      <Col flex='auto' className='desktop'>
+      <Col flex='auto'>
         <Divider/>
       </Col>
-      <Col className='desktop'>
+      <Col>
         <Link onClick={() => history.push(`/anime/1/${type}`)} strong>VIEW MORE</Link>
       </Col>
     </Row>
@@ -72,12 +75,12 @@ const Characters = () => {
       <Row gutter={32} className='mb-5'>
         {charactersAndStaff.data && charactersAndStaff.data.characters.length > 0 && !charactersAndStaff.loading
         ? filteredCharacters.slice(0, 4).map((character, i) => (
-          <Col key={i} span={12} className='mb-4'>
+          <Col key={i} span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
             <CharacterCard character={character}/>
           </Col>
         ))
         : Array.from(Array(4).keys()).map((i) => (
-          <Col key={i} span={12} className='mb-4'>
+          <Col key={i} span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
             <CharacterCard loading={charactersAndStaff.loading}/>
           </Col>
         ))}
@@ -86,12 +89,12 @@ const Characters = () => {
       <Row gutter={32} className='mb-5'>
         {charactersAndStaff.data && charactersAndStaff.data.characters.length > 0 && !charactersAndStaff.loading
         ? staffList?.slice(0, 4).map(staff => (
-          <Col span={12} className='mb-4'>
+          <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
             <StaffCard staff={staff}/>
           </Col>
         ))
         : Array.from(Array(4).keys()).map((i) => (
-          <Col span={12} className='mb-4'>
+          <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
             <StaffCard loading={charactersAndStaff.loading}/>
           </Col>
         ))}
@@ -100,12 +103,12 @@ const Characters = () => {
       <Row gutter={32} className='mb-5'>
         {checker.isFetched(reviews)
         ? reviews.data.slice(0, 2).map(review => (
-          <Col span={24} className='mb-4'>
+          <Col span={24} className='mb-4 sm-mb-2'>
             <ReviewCard review={review}/>
           </Col>
         ))
         : Array.from(Array(2).keys()).map((i) => (
-          <Col span={24} className='mb-4'>
+          <Col span={24} className='mb-4 sm-mb-2'>
             <ReviewCard loading={reviews.loading}/>
           </Col>
         ))}
@@ -114,40 +117,36 @@ const Characters = () => {
       <Row gutter={32} className='mb-5'>
         {checker.isFetched(articles)
         ? articles.data.slice(0, 4).map(article => (
-          <Col span={12} className='mb-4'>
+          <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
             <ArticleCard article={article} />
           </Col>
         ))
         : Array.from(Array(4).keys()).map((i) => (
-          <Col span={12} className='mb-4'>
+          <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
             <ArticleCard loading={articles.loading}/>
           </Col>
         ))}
       </Row>
       {renderTitle('forums')}
-      <Row gutter={32} className='mb-5'>
+      <div className='mb-5'>
         {checker.isFetched(topics)
         ? topics.data.slice(0, 3).map(topic => (
-          <Col span={24} className='mb-2'>
-            <TopicCard topic={topic} />
-          </Col>
+            <TopicCard topic={topic} className='mb-4 sm-mb-2'/>
         ))
         : Array.from(Array(3).keys()).map((i) => (
-          <Col span={24} className='mb-2'>
-            <TopicCard loading={topics.loading} />
-          </Col>
+            <TopicCard loading={topics.loading} className='mb-4 sm-mb-2'/>
         ))}
-      </Row>
+      </div>
       {renderTitle('recommendations')}
-      <Row gutter={32} className='mb-5'>
+      <Row gutter={{xs: 8, sm: 8, md: 32}} className='mb-5'>
         {checker.isFetched(recommendations)
         ? recommendations.data.slice(0, 6).map(recommendation => (
-          <Col span={4} className='mb-2'>
+          <Col span={width <= windowSizes.sm.max ? 8 : width <= windowSizes.md.max ? 6 : 4} className='mb-2'>
             <AnimeCard recommendation={recommendation} />
           </Col>
         ))
         : Array.from(Array(6).keys()).map((i) => (
-          <Col span={4} className='mb-2'>
+          <Col span={width <= windowSizes.sm.max ? 8 : width <= windowSizes.md.max ? 6 : 4} className='mb-2'>
             <AnimeCard loading={recommendations.loading} />
           </Col>
         ))}
