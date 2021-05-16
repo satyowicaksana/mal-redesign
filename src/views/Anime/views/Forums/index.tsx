@@ -16,20 +16,13 @@ import {
   Reference
 } from 'interfaces/anime'
 import './style.less'
+import { checker } from 'helpers'
 
 const Forums = () => {
 
   const topics = useSelector(selectTopics)
 
-  useEffect(() => {
-    console.log(topics)
-  }, [topics])
-
   const [totalShowedCharacters, setTotalShowedCharacters] = useState(12)
-
-  if(topics.loading) {
-    return <p>loading</p>
-  }
 
   return (
     <div>
@@ -43,9 +36,13 @@ const Forums = () => {
         }, 500)}
         threshold={50}
       >
-          {topics.data.slice(0, totalShowedCharacters).map(topic => (
-              <TopicCard topic={topic} className='mb-2'/>
-          ))}
+        {checker.isFetched(topics)
+        ? topics.data.slice(0, totalShowedCharacters).map(topic => (
+            <TopicCard topic={topic} className='mb-4 sm-mb-2'/>
+        ))
+        : Array.from(Array(3).keys()).map((i) => (
+            <TopicCard loading={topics.loading} className='mb-4 sm-mb-2'/>
+        ))}
       </InfiniteScroll>
     </div>
   ) 

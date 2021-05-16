@@ -16,19 +16,15 @@ import {
   Reference
 } from 'interfaces/anime'
 import './style.less'
+import { checker } from 'helpers'
+import { windowSizes } from 'consts'
+import { useWindowSize } from 'hooks'
 
 const News = () => {
   const articles = useSelector(selectArticles)
-
-  useEffect(() => {
-    console.log(articles)
-  }, [articles])
+  const { width } = useWindowSize()
 
   const [totalShowedCharacters, setTotalShowedCharacters] = useState(12)
-
-  if(articles.loading) {
-    return <p>loading</p>
-  }
 
   return (
     <div>
@@ -43,9 +39,15 @@ const News = () => {
         threshold={50}
       >
         <Row gutter={32}>
-          {articles.data.slice(0, totalShowedCharacters).map(article => (
-            <Col span={12} className='mb-4'>
+          {checker.isFetched(articles)
+          ? articles.data.slice(0, 4).map(article => (
+            <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
               <ArticleCard article={article} />
+            </Col>
+          ))
+          : Array.from(Array(4).keys()).map((i) => (
+            <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
+              <ArticleCard loading={articles.loading}/>
             </Col>
           ))}
         </Row>

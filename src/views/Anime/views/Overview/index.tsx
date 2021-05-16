@@ -100,19 +100,19 @@ const Characters = () => {
         ))}
       </Row>
       {renderTitle('reviews')}
-      <Row gutter={32} className='mb-5'>
+      <div className='mb-5'>
         {checker.isFetched(reviews)
         ? reviews.data.slice(0, 2).map(review => (
-          <Col span={24} className='mb-4 sm-mb-2'>
+          <div className='mb-4 sm-mb-2'>
             <ReviewCard review={review}/>
-          </Col>
+          </div>
         ))
         : Array.from(Array(2).keys()).map((i) => (
-          <Col span={24} className='mb-4 sm-mb-2'>
+          <div className='mb-4 sm-mb-2'>
             <ReviewCard loading={reviews.loading}/>
-          </Col>
+          </div>
         ))}
-      </Row>
+      </div>
       {renderTitle('news')}
       <Row gutter={32} className='mb-5'>
         {checker.isFetched(articles)

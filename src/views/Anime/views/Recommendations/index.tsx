@@ -19,21 +19,17 @@ import {
   Reference
 } from 'interfaces/anime'
 import './style.less'
+import { useWindowSize } from 'hooks'
+import { checker } from 'helpers'
+import { windowSizes } from 'consts'
 
 const Recommendations = () => {
   const dispatch = useDispatch()
+  const { width } = useWindowSize()
 
   const recommendations = useSelector(selectRecommendations)
 
-  useEffect(() => {
-    console.log(recommendations)
-  }, [recommendations])
-
   const [totalShowedCharacters, setTotalShowedCharacters] = useState(12)
-
-  if(recommendations.loading) {
-    return <p>loading</p>
-  }
 
   return (
     <div>
@@ -47,10 +43,16 @@ const Recommendations = () => {
         }, 500)}
         threshold={50}
       >
-        <Row gutter={32}>
-          {recommendations.data.slice(0, totalShowedCharacters).map(recommendation => (
-            <Col span={4} className='mb-4'>
-              <AnimeCard recommendation={recommendation}/>
+        <Row gutter={{xs: 8, sm: 8, md: 32}} className='mb-5'>
+          {checker.isFetched(recommendations)
+          ? recommendations.data.slice(0, totalShowedCharacters).map(recommendation => (
+            <Col span={width <= windowSizes.sm.max ? 8 : width <= windowSizes.md.max ? 6 : 4} className='mb-2'>
+              <AnimeCard recommendation={recommendation} />
+            </Col>
+          ))
+          : Array.from(Array(6).keys()).map((i) => (
+            <Col span={width <= windowSizes.sm.max ? 8 : width <= windowSizes.md.max ? 6 : 4} className='mb-2'>
+              <AnimeCard loading={recommendations.loading} />
             </Col>
           ))}
         </Row>

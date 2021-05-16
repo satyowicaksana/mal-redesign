@@ -61,17 +61,27 @@ const AnimeCard = ({
         </div>
       )
     }
+    if(recommendation) {
+      return (
+        <div className='anime-card-popover-container p-2'>
+          <Title level={5} className='mb-1'>{recommendation.title}</Title>
+          <Row align='middle' gutter={8}>
+            <Col>
+              <Tag color='success'><Text><FaUserCheck/> {recommendation.recommendation_count}</Text></Tag>
+            </Col>
+            <Col>
+              <Link className='typography-small'>VIEW DETAIL</Link>
+            </Col>
+          </Row>
+        </div>
+      )
+    }
   }
 
   return (
     <Popover onVisibleChange={visible => setPopoverOpen(visible)} placement='rightTop' content={renderPopoverContent()}>
       <div {...props} className={`anime-card ${popoverOpen ? 'hovered' : ''}`}>
         <img src={seasonAnime?.image_url || recommendation?.image_url} alt='' className='anime-card-image'/>
-        {recommendation &&
-          <div className='anime-card-icon-container p-1'>
-            <Text type='secondary'><FaUserCheck/> {recommendation?.recommendation_count}</Text>
-          </div>
-        }
         <div className='anime-card-title-container-blur'/>
         <div className='anime-card-title-container p-1'>
           <Paragraph strong className='anime-card-title' ellipsis >{seasonAnime?.title || recommendation?.title}</Paragraph>

@@ -13,6 +13,7 @@ import {
   ReviewCard
 } from 'components'
 import {
+  checker,
   formatter
 } from 'helpers'
 import './style.less'
@@ -21,7 +22,6 @@ const { Title, Text, Paragraph, Link } = Typography
 const { Option } = Select
 
 const Reviews = () => {
-  const anime = useSelector(selectAnime)
   const reviews = useSelector(selectReviews)
 
   return (
@@ -43,9 +43,17 @@ const Reviews = () => {
           <Button type='default'>WRITE REVIEW</Button>
         </Col>
       </Row>
-      {reviews.data?.map(review => (
-        <ReviewCard review={review}/>
-      ))}
+      {checker.isFetched(reviews)
+        ? reviews.data.slice(0, 2).map(review => (
+          <div className='mb-4 sm-mb-2'>
+            <ReviewCard review={review}/>
+          </div>
+        ))
+        : Array.from(Array(2).keys()).map((i) => (
+          <div className='mb-4 sm-mb-2'>
+            <ReviewCard loading={reviews.loading}/>
+          </div>
+        ))}
     </div>
   ) 
 }

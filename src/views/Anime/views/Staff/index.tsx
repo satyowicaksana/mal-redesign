@@ -16,51 +16,44 @@ import {
   Reference
 } from 'interfaces/anime'
 import './style.less'
+import { windowSizes } from 'consts'
+import { useWindowSize } from 'hooks'
 
 const { Title, Text, Paragraph, Link } = Typography
 const { Option } = Select
 
 const Staff = () => {
   const dispatch = useDispatch()
+  const { width } = useWindowSize()
 
   const charactersAndStaff = useSelector(selectCharactersAndStaff)
-
-  useEffect(() => {
-    dispatch(getCharactersAndStaff("1"))
-  }, [dispatch])
-
-  useEffect(() => {
-    console.log(charactersAndStaff)
-  }, [charactersAndStaff])
 
   const [totalShowedCharacters, setTotalShowedCharacters] = useState(12)
 
   const staffList = charactersAndStaff.data?.staffList
-
-  if(!staffList) {
-    return null
-  }
-
-  if(charactersAndStaff.loading) {
-    return <p>loading</p>
-  }
-
+  
   return (
     <div>
       <InfiniteScroll
-        hasMore={totalShowedCharacters < staffList.length}
+        hasMore={staffList && totalShowedCharacters < staffList.length}
         loader={<div className='centered-flex'>
           <Spin />
         </div>}
         loadMore={() => setTimeout(() => {
-          setTotalShowedCharacters(totalShowedCharacters + 12 <= staffList.length ? totalShowedCharacters + 12 : staffList.length)
+          setTotalShowedCharacters(staffList ? totalShowedCharacters + 12 <= staffList.length ? totalShowedCharacters + 12 : staffList.length : 0)
         }, 500)}
         threshold={50}
       >
         <Row gutter={32}>
-          {staffList.slice(0, totalShowedCharacters).map(staff => (
-            <Col span={12} className='mb-4'>
+          {charactersAndStaff.data && charactersAndStaff.data.characters.length > 0 && !charactersAndStaff.loading
+          ? staffList?.slice(0, totalShowedCharacters).map(staff => (
+            <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
               <StaffCard staff={staff}/>
+            </Col>
+          ))
+          : Array.from(Array(4).keys()).map((i) => (
+            <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
+              <StaffCard loading={charactersAndStaff.loading}/>
             </Col>
           ))}
         </Row>
