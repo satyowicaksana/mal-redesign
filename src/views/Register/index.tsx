@@ -33,28 +33,28 @@ const Register = () => {
                 rules={[{validator: validator.email}]}
                 className='mb-2'
               >
-                <Input placeholder='Email' />
+                <Input size='large' placeholder='Email' />
               </Form.Item>
               <Form.Item
                 name='username'
                 help='(Between 2 and 16 characters)'
                 className='mb-2'
               >
-                <Input placeholder='Username' />
+                <Input size='large' placeholder='Username' />
               </Form.Item>
               <Form.Item
                 name='password'
                 rules={[{validator: validator.password}]}
                 className='mb-2'
               >
-                <Input.Password placeholder='Password' />
+                <Input.Password size='large' placeholder='Password' />
               </Form.Item>
               <Form.Item
                 name='birthday'
                 help='Your birthday won’t be shown publicly by default.'
                 className='mb-2'
               >
-                <DatePicker placeholder='Birthday'/>
+                <DatePicker size='large' placeholder='Birthday'/>
               </Form.Item>
               <Form.Item
                 name='agree'
@@ -91,12 +91,13 @@ const Register = () => {
       </Col>
       <Col flex='auto' className='register-banner-container'>
         <div className='p-5'>
-          <Title type='secondary' className='mb-5'>Start Using MyAnimeList</Title>
-          <Title type='secondary' level={5} className='register-banner-description'>Join MAL to catalog your anime and manga,</Title>
-          <Title type='secondary' level={5} className='register-banner-description'>compare with your friends, create your own profile, and plenty more.</Title>
-          <Title type='secondary' level={5} className='register-banner-description'>It's FREE.</Title>
+          <Title className='typography-fade mb-5 register-banner-title'>Start Using MyAnimeList</Title>
+          <Title level={5} className='typography-fade register-banner-description'>Join MAL to catalog your anime and manga,</Title>
+          <Title level={5} className='typography-fade register-banner-description'>compare with your friends, create your own profile, and plenty more.</Title>
+          <Title level={5} className='typography-fade register-banner-description'>It's FREE.</Title>
         </div>
         <img src={registerIllustration} alt='' className='register-illustration'/>
+        <div className='register-banner-blur-blob'/>
       </Col>
     </Row>
   )

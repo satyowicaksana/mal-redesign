@@ -19,25 +19,23 @@ import './App.less';
 const App = () => {
   const history = useHistory()
 
-  const [isNavbarOverlay, setIsNavbarOverlay] = useState(false)
   const [showNavbar, setShowNavbar] = useState(false)
+  const [showFooter, setShowFooter] = useState(false)
 
   useEffect(() => {
-    setIsNavbarOverlay(history.location.pathname === '/' ||
-    history.location.pathname.startsWith('/anime'))
     setShowNavbar(history.location.pathname === '/' ||
     history.location.pathname.startsWith('/anime'))
+    setShowFooter(history.location.pathname !== '/register')
     return history.listen(() => {
-      setIsNavbarOverlay(history.location.pathname === '/' ||
-      history.location.pathname.startsWith('/anime'))
       setShowNavbar(history.location.pathname === '/' ||
       history.location.pathname.startsWith('/anime'))
+      setShowFooter(history.location.pathname !== '/register')
     })
   }, [history])
 
   return (
     <div>
-        {showNavbar && <Navbar transparent={isNavbarOverlay} />}
+        {showNavbar && <Navbar/>}
         <div className='app-content-wrapper'>
           <Switch>
             <Route exact path='/'>
@@ -54,7 +52,7 @@ const App = () => {
             </Route>
           </Switch>
         </div>
-      <Footer />
+        {showFooter && <Footer />}
     </div>
   );
 }

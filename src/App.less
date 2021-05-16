@@ -200,8 +200,13 @@ a.ant-typography-warning {
 .ant-picker {
   border-radius: 16px;
   border-width: 2px;
-  height: 40px;
-  padding: 0 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  border-right-width: 2px !important;
+  &:focus, &:hover {
+    border-right-width: 2px !important;
+  }
 }
 
 // form

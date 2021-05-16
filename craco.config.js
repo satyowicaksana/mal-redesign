@@ -12,7 +12,7 @@ module.exports = {
               '@error-color': 'rgb(234,57,67)',
               '@warning-color': 'rgb(234, 160, 57)',
               '@success-color': 'rgb(27,200,133)',
-              '@table-row-hover-bg':'unset'
+              '@table-row-hover-bg': 'unset'
             },
             javascriptEnabled: true,
           },
