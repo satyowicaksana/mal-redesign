@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from 'store'
-import { Anime, TopAnime, Season, CharactersAndStaff, Review, Character, Staff, Article, Topic, Recommendation } from 'interfaces/anime'
+import { Anime, TopAnime, Season, SearchedAnime, CharactersAndStaff, Review, Character, Staff, Article, Topic, Recommendation } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
 type AnimeState = {
@@ -12,6 +12,11 @@ type AnimeState = {
   }
   topAiringAnimes: {
     data: TopAnime[]
+    loading: boolean
+    error?: Error
+  }
+  animes: {
+    data: SearchedAnime[]
     loading: boolean
     error?: Error
   }
@@ -52,6 +57,10 @@ let initialState: AnimeState = {
     loading: false
   },
   topAiringAnimes: {
+    data: [],
+    loading: false
+  },
+  animes: {
     data: [],
     loading: false
   },
@@ -103,6 +112,17 @@ export const getTopAiringAnimes = createAsyncThunk(
       top: TopAnime[]
     } = await response.json()
     return data.top.slice(0, 24)
+  }
+)
+
+export const getAnimes = createAsyncThunk(
+  'anime/getAnimes',
+  async (query: string) => {
+    const response = await fetch(jikanAPI.getAnimes(query))
+    const data: {
+      results: SearchedAnime[]
+    } = await response.json()
+    return data.results
   }
 )
 
@@ -203,6 +223,17 @@ const animeSlice = createSlice({
       state.topAiringAnimes.loading = false
       console.log(action)
     })
+    builder.addCase(getAnimes.pending, state => {
+      state.animes.loading = true
+    })
+    builder.addCase(getAnimes.fulfilled, (state, { payload }) => {
+      state.animes.data = payload
+      state.animes.loading = false
+    })
+    builder.addCase(getAnimes.rejected, (state, action) => {
+      state.animes.loading = false
+      console.log(action)
+    })
     builder.addCase(getAnime.pending, state => {
       state.anime.loading = true
     })
@@ -275,6 +306,7 @@ const animeSlice = createSlice({
 export const selectCurrentSeason = (state: RootState) => state.anime.currentSeason
 export const selectTopAiringAnimes = (state: RootState) => state.anime.topAiringAnimes
 export const selectAnime = (state: RootState) => state.anime.anime
+export const selectAnimes = (state: RootState) => state.anime.animes
 export const selectCharactersAndStaff = (state: RootState) => state.anime.charactersAndStaff
 export const selectReviews = (state: RootState) => state.anime.reviews
 export const selectArticles = (state: RootState) => state.anime.articles

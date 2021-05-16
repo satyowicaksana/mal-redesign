@@ -2,19 +2,21 @@ import { HTMLAttributes, useState } from 'react'
 import { Skeleton, Typography, Popover, Row, Col, Tag } from 'antd';
 import { FaHeart, FaStar, FaTrophy, FaUser, FaUserCheck } from 'react-icons/fa'
 
-import { Anime, Recommendation, SeasonAnime } from 'interfaces/anime'
+import { Anime, Recommendation, SearchedAnime, SeasonAnime } from 'interfaces/anime'
 import { styler } from 'helpers'
 import './style.less';
 
 const { Text, Paragraph, Title, Link } = Typography;
 
 interface AnimeCardProps extends HTMLAttributes<HTMLDivElement> {
+  anime?: SearchedAnime
   seasonAnime?: SeasonAnime
   recommendation?: Recommendation
   loading?: boolean
 }
 
 const AnimeCard = ({
+  anime,
   seasonAnime,
   recommendation,
   loading,
@@ -22,7 +24,7 @@ const AnimeCard = ({
 }: AnimeCardProps) => {
   const [popoverOpen, setPopoverOpen] = useState(false)
 
-  if(!seasonAnime && !recommendation) return (
+  if(!anime && !seasonAnime && !recommendation) return (
     <div {...props} className='anime-card no-pointer'>
       <Skeleton.Button active={loading} className='skeleton-stretch anime-card-skeleton'/>
     </div>
@@ -81,10 +83,10 @@ const AnimeCard = ({
   return (
     <Popover onVisibleChange={visible => setPopoverOpen(visible)} placement='rightTop' content={renderPopoverContent()}>
       <div {...props} className={`anime-card ${popoverOpen ? 'hovered' : ''}`}>
-        <img src={seasonAnime?.image_url || recommendation?.image_url} alt='' className='anime-card-image'/>
+        <img src={anime?.image_url || seasonAnime?.image_url || recommendation?.image_url} alt='' className='anime-card-image'/>
         <div className='anime-card-title-container-blur'/>
         <div className='anime-card-title-container p-1'>
-          <Paragraph strong className='anime-card-title' ellipsis >{seasonAnime?.title || recommendation?.title}</Paragraph>
+          <Paragraph strong className='anime-card-title' ellipsis >{anime?.title || seasonAnime?.title || recommendation?.title}</Paragraph>
         </div>
       </div>
     </Popover>

@@ -68,7 +68,7 @@ const Home = () => {
                 <Divider/>
               </Col>
               <Col className='desktop'>
-                <Link strong>VIEW MORE</Link>
+                <Link onClick={() => history.push('/animes')} strong>VIEW MORE</Link>
               </Col>
             </Row>
             {width <= windowSizes.md.max ? (
@@ -114,7 +114,7 @@ const Home = () => {
             )}
             <Row justify='end' className='mobile mt-2'>
               <Col>
-                <Link strong>VIEW MORE</Link>
+                <Link onClick={() => history.push('/animes')} strong>VIEW MORE</Link>
               </Col>
             </Row>
           </div>

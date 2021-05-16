@@ -8,7 +8,8 @@ import {
 import {
   Home,
   Anime,
-  Register
+  Register,
+  Animes
 } from 'views'
 import {
   Navbar,
@@ -38,24 +39,27 @@ const App = () => {
 
   return (
     <div>
-        {showNavbar && <Navbar/>}
-        <div className='app-content-wrapper'>
-          <Switch>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route exact path='/register'>
-              <Register />
-            </Route>
-            <Route exact path='/anime/:id'>
-              <Anime />
-            </Route>
-            <Route exact path='/anime/:id/:menu'>
-              <Anime />
-            </Route>
-          </Switch>
-        </div>
-        {showFooter && <Footer />}
+      {showNavbar && <Navbar/>}
+      <div className='app-content-wrapper'>
+        <Switch>
+          <Route exact path='/'>
+            <Home />
+          </Route>
+          <Route exact path='/register'>
+            <Register />
+          </Route>
+          <Route exact path='/anime/:id'>
+            <Anime />
+          </Route>
+          <Route exact path='/anime/:id/:menu'>
+            <Anime />
+          </Route>
+          <Route exact path='/animes'>
+            <Animes />
+          </Route>
+        </Switch>
+      </div>
+      {showFooter && <Footer />}
     </div>
   );
 }

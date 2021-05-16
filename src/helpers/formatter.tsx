@@ -4,8 +4,17 @@ const htmlDecode = (input: string) => {
   return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 }
 
+const objectToQuery = (object: {[key: string]: any}) => {
+  let queries = []
+  for (const [key, value] of Object.entries(object)) {
+    queries.push(`${key}=${value}`)
+  }
+  return queries.join('&')
+}
+
 const formatter = {
-  htmlDecode
+  htmlDecode,
+  objectToQuery
 }
 
 export default formatter
