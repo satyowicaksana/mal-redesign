@@ -160,8 +160,8 @@ a.ant-typography-warning {
 .ant-input {
   border-radius: 16px;
   border-width: 2px;
-  height: 40px;
-  padding: 0 16px;
+  padding-right: 16px;
+  padding-left: 16px;
   &:focus, &:hover {
     border-right-width: 2px !important;
   }
@@ -180,8 +180,8 @@ a.ant-typography-warning {
 .ant-input-affix-wrapper {
   border-radius: 16px;
   border-width: 2px !important;
-  height: 40px;
-  padding: 0 16px;
+  padding-left: 16px;
+  padding-right: 16px;
 
   &:not(.ant-input-affix-wrapper-disabled):focus, &:not(.ant-input-affix-wrapper-disabled):hover {
     border-right-width: 2px !important;
@@ -190,7 +190,8 @@ a.ant-typography-warning {
   .ant-input {
     border-radius: unset;
     height: unset;
-    padding: unset;
+    padding-left: unset;
+    padding-right: unset;
   }
 }
 
@@ -250,6 +251,10 @@ a.ant-typography-warning {
 
 .ant-btn-circle {
   justify-content: center;
+}
+
+.ant-btn[disabled] {
+  border: none;
 }
 
 // divider
@@ -520,6 +525,13 @@ a.ant-typography-warning {
 
 .pb-5 {
   padding-bottom: 40px;
+}
+
+.sm-px-0 {
+  @media @sm, @xs {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .sm-mb-2 {

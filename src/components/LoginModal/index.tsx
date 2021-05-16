@@ -15,31 +15,32 @@ const LoginModal = ({
   const history = useHistory()
 
   const [loginForm] = Form.useForm()
+  const { getFieldsValue } = loginForm
 
   return (
     <Modal {...props}>
-      <div className='p-3'>
+      <div className='p-3 sm-px-0'>
         <Row align='middle' gutter={24} className='mb-4'>
           <Col>
-            <Title>SIGN IN</Title>
+            <Title>LOGIN</Title>
           </Col>
           <Col flex='auto'>
             <Divider />
           </Col>
         </Row>
-        <Form form={loginForm} onFinish={values => alert(JSON.stringify(values))} validateTrigger='onSubmit'>
+        <Form form={loginForm} onFinish={values => alert(JSON.stringify(values))}>
           <Form.Item
             name="email"
             rules={[{validator: validator.email}]}
             className='mb-2'
           >
-            <Input placeholder='Email' />
+            <Input size='large' placeholder='Email' />
           </Form.Item>
           <Form.Item
             name="password"
             rules={[{validator: validator.password}]}
           >
-            <Input.Password placeholder='Password' />
+            <Input.Password size='large' placeholder='Password' />
           </Form.Item>
           <Row justify='end' className='mb-4'>
             <Col>
@@ -50,14 +51,21 @@ const LoginModal = ({
           </Row>
           <Row justify='end' className='mb-1'>
             <Col>
-              <Form.Item>
-                <Button
-                  type="primary"
-                  size='large'
-                  htmlType="submit"
-                >
-                  SUBMIT
-                </Button>
+              <Form.Item shouldUpdate>
+                {() => (
+                  <Button
+                    size='large'
+                    type="primary"
+                    htmlType="submit"
+                    disabled={
+                      !loginForm.isFieldsTouched(true) ||
+                      loginForm.getFieldsError().filter(({ errors }) => errors.length)
+                        .length > 0
+                    }
+                  >
+                    LOGIN
+                  </Button>
+                )}
               </Form.Item>
             </Col>
           </Row>
