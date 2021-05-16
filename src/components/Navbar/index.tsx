@@ -34,13 +34,7 @@ const links = [
   }
 ]
 
-type NavbarProps = {
-  transparent?: boolean;
-}
-
-const Navbar = ({
-  transparent = false
-}: NavbarProps) => {
+const Navbar = () => {
   const history = useHistory()
 
   const [search, setSearch] = useState('')
@@ -53,7 +47,7 @@ const Navbar = ({
 
   return (
     <>
-    <div className={`navbar-wrapper ${(!transparent || scrollY > 60) ? 'bg-primary' : ''} py-2`}>
+    <div className={`navbar-wrapper ${(scrollY > 60) ? 'bg-primary' : ''} py-2`}>
       <div className='content-container'>
         <Row align='middle' justify='space-between'>
           <Col onClick={() => history.push('/')} className='clickable'>

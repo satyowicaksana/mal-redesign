@@ -15,7 +15,7 @@ body {
 
 /* style adjustment */
 
-h1, h2, h3, h4, h5, strong {
+h1, h2, h3, h4, h5 {
   font-weight: bolder !important;
 
   @media @sm, @xs {
@@ -396,6 +396,10 @@ a.ant-typography-warning {
 
 .typography-small {
   font-size: 11px;
+
+  * {
+  font-size: 11px !important;
+  }
 }
 
 // row
@@ -536,6 +540,13 @@ a.ant-typography-warning {
   @media @sm, @xs {
     padding-left: 0;
     padding-right: 0;
+  }
+}
+
+.sm-px-3 {
+  @media @sm, @xs {
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
 

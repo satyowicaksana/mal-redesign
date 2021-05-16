@@ -16,7 +16,7 @@ const Register = () => {
 
   return (
     <Row wrap={false}>
-      <Col flex='480px' className='register-form-container p-5'>
+      <Col flex='480px' className='register-form-container p-5 sm-px-3'>
         <Row justify='space-between' className='row-vertical register-form-content-container'>
           <Col>
             <Row gutter={24} align='middle' className='mb-5'>
@@ -77,9 +77,9 @@ const Register = () => {
                   </Form.Item>
                 </Col>
               </Row>
-              <Row justify='end'>
+              <Row justify='end' className='mb-4'>
                 <Col>
-                  <Text className='typography-fade'>Already have an account? </Text><Link strong onClick={() => history.push('/register')}>Sign in</Link>
+                  <Text className='typography-fade'>Already have an account? </Text><Link strong onClick={() => history.push('/register')}>Login</Link>
                 </Col>
               </Row>
             </Form>
