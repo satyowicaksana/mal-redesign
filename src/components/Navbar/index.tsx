@@ -42,9 +42,6 @@ const Navbar = () => {
 
   const { scrollY } = useScroll();
 
-  useEffect(() => {
-  }, [scrollY])
-
   return (
     <>
     <div className={`navbar-wrapper ${(scrollY > 60) ? 'bg-primary' : ''} py-2`}>

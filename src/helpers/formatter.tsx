@@ -5,7 +5,7 @@ const htmlDecode = (input: string) => {
 }
 
 const formatter = {
-  htmlDecode,
+  htmlDecode
 }
 
 export default formatter

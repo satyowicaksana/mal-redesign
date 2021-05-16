@@ -5,7 +5,7 @@ import { Row, Col, Typography, Button, Table, Menu, Select, Avatar, Tag, Skeleto
 import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
 import { FaArrowAltCircleUp, FaArrowAltCircleDown, FaUser, FaUserCheck, FaTrophy, FaHeart, FaStar } from 'react-icons/fa'
 
-import {
+import anime, {
   selectAnime,
   getAnime,
   getCharactersAndStaff,
@@ -28,6 +28,7 @@ import {
 } from './views'
 import './style.less'
 import { useWindowSize } from 'hooks'
+import { formatter } from 'helpers'
 
 const { Title, Text, Paragraph, Link } = Typography
 const { Option } = Select
@@ -48,14 +49,6 @@ const infoColumnKeys = [
   'rating'
 ]
 
-const infoColumns = infoColumnKeys.map(key => (
-  {
-    title: `${key.charAt(0).toUpperCase()}${key.slice(1)}`,
-    dataIndex: key,
-    key,
-  }
-));
-
 const Anime = () => {
   const dispatch = useDispatch()
   const history = useHistory()
@@ -63,14 +56,22 @@ const Anime = () => {
 
   const anime = useSelector(selectAnime)
 
+  const infoColumns = infoColumnKeys.map(key => (
+    {
+      title: `${key.charAt(0).toUpperCase()}${key.slice(1)}`,
+      dataIndex: key,
+      key,
+    }
+  ));
+
   useEffect(() => {
-    dispatch(getAnime("1"))
-    dispatch(getCharactersAndStaff("1"))
-    dispatch(getReviews("1"))
-    dispatch(getArticles("1"))
-    dispatch(getTopics("1"))
-    dispatch(getRecommendations("1"))
-  }, [dispatch])
+    dispatch(getAnime(id))
+    dispatch(getCharactersAndStaff(id))
+    dispatch(getReviews(id))
+    dispatch(getArticles(id))
+    dispatch(getTopics(id))
+    dispatch(getRecommendations(id))
+  }, [dispatch, id])
   useEffect(() => {
     console.log(anime)
   }, [anime])
@@ -109,10 +110,10 @@ const Anime = () => {
     ) : (
       <>
         <Title type='secondary' ellipsis={{rows: 1, tooltip: true}} className='mb-1'>
-          {anime.data?.title_english}
+          {anime.data?.title}
         </Title>
         <Paragraph type='secondary' ellipsis={{rows: 1, tooltip: true}} className='typography-h4'>
-          {anime.data?.title}
+          {anime.data?.title_english}
         </Paragraph>
       </>
     )

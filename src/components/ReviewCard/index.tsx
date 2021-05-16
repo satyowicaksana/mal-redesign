@@ -76,7 +76,7 @@ const ReviewCard = ({
             <Col>
               <Row gutter={8} wrap={false}>
                 <Col>
-                  <Tag color='success'>
+                  <Tag color={styler.getScoreColor(review.reviewer.scores.overall)}>
                     <Row gutter={4} wrap={false} align='middle'>
                       <Col>
                         <Title level={4} className='centered-flex'><AiFillStar/></Title>

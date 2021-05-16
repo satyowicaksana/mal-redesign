@@ -30,6 +30,9 @@ const App = () => {
       setShowNavbar(history.location.pathname === '/' ||
       history.location.pathname.startsWith('/anime'))
       setShowFooter(history.location.pathname !== '/register')
+      if(!(history.location.pathname.startsWith('/anime') && history.location.pathname.split('/')[3])) {
+        window.scrollTo(0, 0)
+      }
     })
   }, [history])
 
