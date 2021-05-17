@@ -108,7 +108,6 @@ a.ant-typography-warning {
 .ant-tag {
   border-radius: 24px;
   padding: 4px 12px;
-  font-weight: 900;
   border: none;
   margin: 0;
 
@@ -158,55 +157,27 @@ a.ant-typography-warning {
 // input
 
 .ant-input {
-  border-radius: 16px;
-  border-width: 2px;
-  padding-right: 16px;
-  padding-left: 16px;
-  &:focus, &:hover {
-    border-right-width: 2px !important;
-  }
-}
-
-.ant-form-item-has-error {
-  &.ant-input:focus, &.ant-input:hover {
-    border-right-width: 2px !important;
-  }
-}
-
-.ant-form-item-has-error .ant-input:focus, .ant-form-item-has-error .ant-input-affix-wrapper:focus, .ant-form-item-has-error .ant-input-focused, .ant-form-item-has-error .ant-input-affix-wrapper-focused {
-  border-right-width: 2px !important;
+  border-radius: 8px;
+  background-color: rgb(240,241,247);
+  border-color: rgb(240,241,247);
 }
 
 .ant-input-affix-wrapper {
-  border-radius: 16px;
-  border-width: 2px !important;
-  padding-left: 16px;
-  padding-right: 16px;
-
-  &:not(.ant-input-affix-wrapper-disabled):focus, &:not(.ant-input-affix-wrapper-disabled):hover {
-    border-right-width: 2px !important;
-  }
+  border-radius: 8px;
+  background-color: rgb(240,241,247);
+  border-color: rgb(240,241,247);
 
   .ant-input {
     border-radius: unset;
-    height: unset;
-    padding-left: unset;
-    padding-right: unset;
   }
 }
 
 // picker
 
 .ant-picker {
-  border-radius: 16px;
-  border-width: 2px;
-  padding-left: 16px;
-  padding-right: 16px;
-
-  border-right-width: 2px !important;
-  &:focus, &:hover {
-    border-right-width: 2px !important;
-  }
+  border-radius: 8px;
+  background-color: rgb(240,241,247);
+  border-color: rgb(240,241,247); 
 }
 
 // form
@@ -305,6 +276,10 @@ a.ant-typography-warning {
   }
 }
 
+.hidden {
+  display: none;
+}
+
 .loading {
   cursor: unset;
 }
@@ -343,7 +318,7 @@ a.ant-typography-warning {
 }
 .navbar-padding {
   height: @navbar-height;
-  background-color: black;
+  background-color: @primary-color;
 }
 
 // button
@@ -480,6 +455,11 @@ a.ant-typography-warning {
 .px-3 {
   padding-left: 24px;
   padding-right: 24px;
+}
+
+.px-5 {
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .my-4 {

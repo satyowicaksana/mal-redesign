@@ -4,6 +4,8 @@ import { RootState } from 'store'
 import { Anime, TopAnime, Season, SearchedAnime, CharactersAndStaff, Review, Character, Staff, Article, Topic, Recommendation } from 'interfaces/anime'
 import { jikanAPI } from 'apis'
 
+const SEARCHED_ANIME_PAGE_SIZE = 20
+
 type AnimeState = {
   currentSeason: {
     data?: Season
@@ -17,6 +19,10 @@ type AnimeState = {
   }
   animes: {
     data: SearchedAnime[]
+    pagination: {
+      pageSize: number
+      total: number
+    }
     loading: boolean
     error?: Error
   }
@@ -62,6 +68,10 @@ let initialState: AnimeState = {
   },
   animes: {
     data: [],
+    pagination: {
+      pageSize: SEARCHED_ANIME_PAGE_SIZE,
+      total: 0
+    },
     loading: false
   },
   anime: {
@@ -120,9 +130,16 @@ export const getAnimes = createAsyncThunk(
   async (query: string) => {
     const response = await fetch(jikanAPI.getAnimes(query))
     const data: {
-      results: SearchedAnime[]
+      results: SearchedAnime[],
+      last_page: number
     } = await response.json()
-    return data.results
+    return {
+      data: data.results,
+      pagination: {
+        pageSize: SEARCHED_ANIME_PAGE_SIZE,
+        total: SEARCHED_ANIME_PAGE_SIZE * data.last_page
+      }
+    }
   }
 )
 
@@ -227,7 +244,8 @@ const animeSlice = createSlice({
       state.animes.loading = true
     })
     builder.addCase(getAnimes.fulfilled, (state, { payload }) => {
-      state.animes.data = payload
+      state.animes.data = payload.data
+      state.animes.pagination = payload.pagination
       state.animes.loading = false
     })
     builder.addCase(getAnimes.rejected, (state, action) => {

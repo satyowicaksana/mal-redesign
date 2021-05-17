@@ -91,13 +91,12 @@ const Register = () => {
       </Col>
       <Col flex='auto' className='register-banner-container'>
         <div className='p-5'>
-          <Title className='typography-fade mb-5 register-banner-title'>Start Using MyAnimeList</Title>
-          <Title level={5} className='typography-fade register-banner-description'>Join MAL to catalog your anime and manga,</Title>
-          <Title level={5} className='typography-fade register-banner-description'>compare with your friends, create your own profile, and plenty more.</Title>
-          <Title level={5} className='typography-fade register-banner-description'>It's FREE.</Title>
+          <Title type='secondary' className='mb-5 register-banner-title'>Start Using MyAnimeList</Title>
+          <Title level={5} type='secondary' className='register-banner-description'>Join MAL to catalog your anime and manga,</Title>
+          <Title level={5} type='secondary' className='register-banner-description'>compare with your friends, create your own profile, and plenty more.</Title>
+          <Title level={5} type='secondary' className='register-banner-description'>It's FREE.</Title>
         </div>
         <img src={registerIllustration} alt='' className='register-illustration'/>
-        <div className='register-banner-blur-blob'/>
       </Col>
     </Row>
   )

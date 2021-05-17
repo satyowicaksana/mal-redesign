@@ -174,7 +174,7 @@ const Anime = () => {
       </div>
       <div className='anime-banner-info-container py-4'>
         <div className='content-container'>
-          <Row wrap={false} className='mb-4'>
+          <Row wrap={false} className='mb-5'>
             <Col flex='282px' className='desktop'>
               {anime.loading
               ? <Skeleton.Button active className='anime-banner-info-image-skeleton'/>
@@ -206,7 +206,7 @@ const Anime = () => {
               <Title level={4} className='mobile mb-1'>Synopsis</Title>
               {anime.loading
               ? <Skeleton active paragraph={{rows: 1}}/>
-              : <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}}>
+              : <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}} className='anime-banner-info-synopsis'>
                   {anime.data?.synopsis}
                 </Paragraph>
               }

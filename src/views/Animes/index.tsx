@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useLocation } from 'react-router';
-import { Row, Col, Form, Input,  Skeleton, Typography } from 'antd';
+import { Row, Col, Form, Input,  Skeleton, Typography, Pagination, Button } from 'antd';
 
 import {
   BannerCarousel,
@@ -25,6 +25,7 @@ import {
 import { useWindowSize } from 'hooks';
 import { windowSizes } from 'consts';
 import { checker, formatter } from 'helpers';
+import { FaSearch } from 'react-icons/fa';
 
 const { Title, Link } = Typography
 
@@ -43,39 +44,88 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getAnimes(String(history.location.search)))
+    const params = new URLSearchParams(history.location.search)
+    // set form fields initial value from url search params
+    form.setFieldsValue({
+      q: params.get('q'),
+      page: Number(params.get('page')) || 1
+    })
     return history.listen(() => {
       dispatch(getAnimes(String(history.location.search)))
     })
-  }, [history, dispatch])
+  }, [history, dispatch, form])
+
+  const handlePaginationChange = (page: number) => {
+    form.setFields([{
+      name: 'page',
+      value: page
+    }])
+    form.submit()
+  }
+
+  const handleValuesChange = () => {
+    form.setFields([{
+      name: 'page',
+      value: 1
+    }])
+    form.submit()
+  }
 
   return (
     <div>
       <div className='navbar-padding'/>
       <div className='centered-flex'>
         <div className='content-container py-5'>
-          <Form form={form} onFinish={values => history.push(`/animes?${formatter.objectToQuery(values)}`)} validateTrigger='onSubmit' className='mb-4'>
-            <Row>
-              <Col>
+          <Row wrap={false} gutter={40}>
+            <Col>
+              <Form form={form} onValuesChange={handleValuesChange} onFinish={values => history.push(`/animes?${formatter.objectToQuery(values)}`)} className='mb-4'>
+                <Title level={5} className='mb-1'>Search</Title>
                 <Form.Item
                   name='q'
                 >
-                  <Input size='large' placeholder='Search' />
+                  <Input prefix={<FaSearch className='mr-1'/>} />
                 </Form.Item>
-              </Col>
-            </Row>
-          </Form>
-          <Row gutter={{xs: 8, sm: 8, md: 48}} className='mb-5'>
-            {checker.isFetched(animes)
-            ? animes.data.map(anime => (
-              <Col style={{width: '20%'}} className='mb-5'>
-                <AnimeCard anime={anime} />
-              </Col>
-            ))
-            : Array.from(Array(15).keys()).map((i) => (
-              <Col style={{width: '20%'}} className='mb-5'>
-                <AnimeCard loading={animes.loading} />
-              </Col>
-            ))}
+                <Form.Item
+                  name='page'
+                  className='hidden'
+                >
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  className='hidden'
+                >
+                    <Button
+                      type='primary'
+                      size='large'
+                      htmlType='submit'
+                    >
+                      CREATE ACCOUNT
+                    </Button>
+                  </Form.Item>
+              </Form>
+            </Col>
+            <Col flex='auto'>
+              <Row gutter={{xs: 8, sm: 8, md: 24}} className='mb-2'>
+                {checker.isFetched(animes)
+                ? animes.data.map(anime => (
+                  <Col style={{width: '20%'}} className='mb-3'>
+                    <AnimeCard anime={anime} />
+                  </Col>
+                ))
+                : Array.from(Array(15).keys()).map((i) => (
+                  <Col style={{width: '20%'}} className='mb-5'>
+                    <AnimeCard loading={animes.loading} />
+                  </Col>
+                ))}
+              </Row>
+              <Pagination
+                current={form.getFieldValue('page')}
+                pageSize={animes.pagination.pageSize}
+                showSizeChanger={false}
+                total={animes.pagination.total}
+                onChange={handlePaginationChange}
+              />
+            </Col>
           </Row>
         </div>
       </div>
