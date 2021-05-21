@@ -1,3 +1,7 @@
+import options from './options';
 import windowSizes from './windowSizes';
 
-export { windowSizes }
+export {
+  options,
+  windowSizes
+}

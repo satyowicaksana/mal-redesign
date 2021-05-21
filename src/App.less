@@ -80,8 +80,20 @@ a.ant-typography-warning {
 // select
 
 .ant-select-selector {
-  border-radius: 16px !important;
-  font-weight: 800;
+  border-radius: 8px !important;
+  background-color: @color-grey !important;
+  
+  &:not(:hover) {
+    border-color: @color-grey !important;
+  }
+}
+
+.ant-select-selection-item {
+  background-color: @primary-color !important;
+  border-radius: 8px !important;
+  * {
+    color: @color-white;
+  }
 }
 
 // menu
@@ -158,14 +170,14 @@ a.ant-typography-warning {
 
 .ant-input {
   border-radius: 8px;
-  background-color: rgb(240,241,247);
-  border-color: rgb(240,241,247);
+  background-color: @color-grey;
+  border-color: @color-grey;
 }
 
 .ant-input-affix-wrapper {
   border-radius: 8px;
-  background-color: rgb(240,241,247);
-  border-color: rgb(240,241,247);
+  background-color: @color-grey;
+  border-color: @color-grey;
 
   .ant-input {
     border-radius: unset;
@@ -176,8 +188,8 @@ a.ant-typography-warning {
 
 .ant-picker {
   border-radius: 8px;
-  background-color: rgb(240,241,247);
-  border-color: rgb(240,241,247); 
+  background-color: @color-grey;
+  border-color: @color-grey; 
 }
 
 // form
@@ -238,6 +250,27 @@ a.ant-typography-warning {
 .ant-divider {
   margin: 0;
   border-top: 2px solid rgba(0, 0, 0, 0.06);
+}
+
+// pagination
+
+.ant-pagination-item {
+  border-radius: 8px !important;
+  background-color: @color-grey !important;
+  border-color: @color-grey !important;
+}
+
+.ant-pagination-item-active {
+  background-color: @primary-color !important;
+  * {
+    color: @color-white !important;
+  }
+}
+
+.ant-pagination-item-link {
+  border-radius: 50% !important;
+  background-color: @color-grey !important;
+  border-color: @color-grey !important;
 }
 
 /* custom styles */

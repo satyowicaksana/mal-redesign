@@ -7,7 +7,8 @@ const htmlDecode = (input: string) => {
 const objectToQuery = (object: {[key: string]: any}) => {
   let queries = []
   for (const [key, value] of Object.entries(object)) {
-    object[key] && queries.push(`${key}=${value}`)
+    if(Array.isArray(object[key])) object[key].length > 0 && queries.push(`${key}=${value}`)
+    else object[key] && queries.push(`${key}=${value}`)
   }
   return queries.join('&')
 }
