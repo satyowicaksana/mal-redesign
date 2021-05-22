@@ -30,7 +30,7 @@ const revGenres = {
   41: 'Thriller'
 }
 
-const types = {
+const formats = {
   TV: 'tv',
   OVA: 'ova',
   Movie: 'movie',
@@ -39,7 +39,7 @@ const types = {
   Music: 'music'
 }
 
-const revTypes = {
+const revFormats = {
   tv: 'TV',
   ova: 'OVA',
   movie: 'Movie',
@@ -51,8 +51,8 @@ const revTypes = {
 const options = {
   genres,
   revGenres,
-  types,
-  revTypes
+  formats,
+  revFormats
 }
 
 export default options;

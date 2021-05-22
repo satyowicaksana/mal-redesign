@@ -5,7 +5,7 @@ const jikanAPI = {
   getCurrentSeason: `${baseUrl}/season`,
   getTopAiringAnimes: `${baseUrl}/top/anime/1/airing`,
   getAnime: (id: string) => `${baseUrl}/anime/${id}`,
-  getAnimes: (query: string) => `${baseUrl}/search/anime${query}`,
+  getAnimes: (query: string) => `${baseUrl}/search/anime?${query}`,
   getCharactersAndStaff: (id: string) => `${baseUrl}/anime/${id}/characters_staff`,
   getReviews: (id: string) => `${baseUrl}/anime/${id}/reviews`,
   getArticles: (id: string) => `${baseUrl}/anime/${id}/news`,
