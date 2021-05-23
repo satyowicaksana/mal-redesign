@@ -48,11 +48,27 @@ const revFormats = {
   music: 'Music'
 }
 
+const sorts = {
+  Title: 'title',
+  Format: 'type',
+  Score: 'score',
+  Date: 'start_date',
+}
+
+const revSorts = {
+  title: 'Title',
+  type: 'Format',
+  score: 'Score',
+  start_date: 'Date',
+}
+
 const options = {
   genres,
   revGenres,
   formats,
-  revFormats
+  revFormats,
+  sorts,
+  revSorts
 }
 
 export default options;
