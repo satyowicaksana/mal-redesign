@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/static/css/main.570242da.chunk.css",
-    "main.js": "/static/js/main.0f6fff27.chunk.js",
-    "main.js.map": "/static/js/main.0f6fff27.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.4a222bb0.js",
-    "runtime-main.js.map": "/static/js/runtime-main.4a222bb0.js.map",
-    "static/js/2.a56dfe81.chunk.js": "/static/js/2.a56dfe81.chunk.js",
-    "static/js/2.a56dfe81.chunk.js.map": "/static/js/2.a56dfe81.chunk.js.map",
-    "static/js/3.49463909.chunk.js": "/static/js/3.49463909.chunk.js",
-    "static/js/3.49463909.chunk.js.map": "/static/js/3.49463909.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.570242da.chunk.css.map": "/static/css/main.570242da.chunk.css.map",
-    "static/js/2.a56dfe81.chunk.js.LICENSE.txt": "/static/js/2.a56dfe81.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/static/media/AGRevueCyr-Roman-Medium.c22169c5.woff",
-    "static/media/apple-store-badge.6d21b830.png": "/static/media/apple-store-badge.6d21b830.png",
-    "static/media/google-play-badge.d2b386b1.png": "/static/media/google-play-badge.d2b386b1.png",
-    "static/media/register-illustration.91487de2.png": "/static/media/register-illustration.91487de2.png"
+    "main.css": "/mal-redesign/static/css/main.a0723598.chunk.css",
+    "main.js": "/mal-redesign/static/js/main.0f6fff27.chunk.js",
+    "main.js.map": "/mal-redesign/static/js/main.0f6fff27.chunk.js.map",
+    "runtime-main.js": "/mal-redesign/static/js/runtime-main.28cdccce.js",
+    "runtime-main.js.map": "/mal-redesign/static/js/runtime-main.28cdccce.js.map",
+    "static/js/2.10df2f80.chunk.js": "/mal-redesign/static/js/2.10df2f80.chunk.js",
+    "static/js/2.10df2f80.chunk.js.map": "/mal-redesign/static/js/2.10df2f80.chunk.js.map",
+    "static/js/3.49463909.chunk.js": "/mal-redesign/static/js/3.49463909.chunk.js",
+    "static/js/3.49463909.chunk.js.map": "/mal-redesign/static/js/3.49463909.chunk.js.map",
+    "index.html": "/mal-redesign/index.html",
+    "static/css/main.a0723598.chunk.css.map": "/mal-redesign/static/css/main.a0723598.chunk.css.map",
+    "static/js/2.10df2f80.chunk.js.LICENSE.txt": "/mal-redesign/static/js/2.10df2f80.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/mal-redesign/static/media/AGRevueCyr-Roman-Medium.c22169c5.woff",
+    "static/media/apple-store-badge.6d21b830.png": "/mal-redesign/static/media/apple-store-badge.6d21b830.png",
+    "static/media/google-play-badge.d2b386b1.png": "/mal-redesign/static/media/google-play-badge.d2b386b1.png",
+    "static/media/register-illustration.91487de2.png": "/mal-redesign/static/media/register-illustration.91487de2.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.4a222bb0.js",
-    "static/js/2.a56dfe81.chunk.js",
-    "static/css/main.570242da.chunk.css",
+    "static/js/runtime-main.28cdccce.js",
+    "static/js/2.10df2f80.chunk.js",
+    "static/css/main.a0723598.chunk.css",
     "static/js/main.0f6fff27.chunk.js"
   ]
 }
