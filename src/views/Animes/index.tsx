@@ -56,7 +56,14 @@ const Home = () => {
       queryObj.start_date = `${params.get('year')}-01-01`
       queryObj.end_date = `${params.get('year')}-12-31`
     }
-    if(params.get('order')) queryObj.sort = params.get('order')
+    queryObj.sort = params.get('order') || 'asc'
+    // default value
+    queryObj.limit = 20
+    // handle sort score order
+    if(queryObj.order_by === 'score') {
+      if(queryObj.sort === 'desc') queryObj.sort = 'asc'
+      else queryObj.sort = 'desc'
+    } 
     return formatter.objectToQuery(queryObj)
   }
 
@@ -150,7 +157,7 @@ const Home = () => {
         <div className='content-container py-5'>
           <Form form={form} onValuesChange={handleValuesChangeForm} onFinish={() => submitForm()} className='mb-4'>
             <Row gutter={40} className='mb-1' justify='space-between'>
-              <Col span={5}>
+              <Col xs={12} md={5}>
                 <Title level={5} className='mb-1'>Search</Title>
                 <Form.Item
                   name='search'
@@ -188,55 +195,63 @@ const Home = () => {
                 </Row>
               </Col>
             </Row>
-            <Row wrap={false} gutter={40}>
-              <Col span={5}>                
-                  <Title level={5} className='mb-1'>Genres</Title>
-                  <Form.Item
-                    name='genre'
-                    className='mb-2'
-                  >
-                    <Select
-                      allowClear
-                      mode='multiple'
+            <Row gutter={40}>
+              <Col xs={24} md={5} className='animes-filter-container overflow-scroll sm-mb-5'>
+                  <div className='sm-mr-2'>
+                    <Title level={5} className='mb-1'>Genres</Title>
+                    <Form.Item
+                      name='genre'
+                      className='mb-2'
                     >
-                      {Object.entries(options.genres).map((genre, i) => (
-                        <Option key={i} value={genre[0]}>{genre[0]}</Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                  <Title level={5} className='mb-1'>Format</Title>
-                  <Form.Item
-                    name='format'
-                    className='mb-2'
-                  >
-                    <Select
-                      allowClear
-                      mode='multiple'
+                      <Select
+                        allowClear
+                        mode='multiple'
+                      >
+                        {Object.entries(options.genres).map((genre, i) => (
+                          <Option key={i} value={genre[0]}>{genre[0]}</Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <div className='sm-mr-2'>
+                    <Title level={5} className='mb-1'>Format</Title>
+                    <Form.Item
+                      name='format'
+                      className='mb-2'
                     >
-                      {Object.entries(options.formats).map((format, i) => (
-                        <Option key={i} value={format[0]}>{format[0]}</Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                  <Title level={5} className='mb-1'>Score</Title>
-                  <Form.Item
-                    name='score'
-                    className='mb-2'
-                  >
-                    <Slider className='slider-reverse' min={0} max={10}/>
-                  </Form.Item>
-                  <Title level={5} className='mb-1'>Year</Title>
-                  <Form.Item
-                    name='year'
-                  >
-                    <DatePicker picker="year" placeholder='' disabledDate={current => current < moment('01-01-1940') || current > moment()} />
-                  </Form.Item>
+                      <Select
+                        allowClear
+                        mode='multiple'
+                      >
+                        {Object.entries(options.formats).map((format, i) => (
+                          <Option key={i} value={format[0]}>{format[0]}</Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  </div>
+                  <div className='sm-mr-2'>
+                    <Title level={5} className='mb-1'>Score</Title>
+                    <Form.Item
+                      name='score'
+                      className='mb-2'
+                    >
+                      <Slider className='slider-reverse' min={0} max={10}/>
+                    </Form.Item>
+                  </div>
+                  <div className='sm-mr-2'>
+                    <Title level={5} className='mb-1'>Year</Title>
+                    <Form.Item
+                      name='year'
+                    >
+                      <DatePicker picker="year" placeholder='' disabledDate={current => current < moment('01-01-1940') || current > moment()} />
+                    </Form.Item>
+                  </div>
               </Col>
               <Col flex='auto'>
-                <Row gutter={{xs: 8, sm: 8, md: 24}} className='mb-2'>
+                <Row gutter={24} className='mb-2'>
                   {checker.isFetched(animes)
                   ? animes.data.map(anime => (
-                    <Col style={{width: '20%'}} className='mb-3'>
+                    <Col style={{width: width > windowSizes.md.max ? '20%' : width > windowSizes.sm.max ? '25%' : '50%'}} className='mb-3'>
                       <AnimeCard anime={anime} />
                     </Col>
                   ))
