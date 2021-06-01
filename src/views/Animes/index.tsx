@@ -26,9 +26,10 @@ import {
 import { useWindowSize } from 'hooks';
 import { options, windowSizes } from 'consts';
 import { checker, formatter } from 'helpers';
-import { FaSearch, FaSortAmountUp, FaStar, FaStarAndCrescent } from 'react-icons/fa';
+import { FaSearch, FaSortAmountDown, FaSortAmountUp, FaStar, FaStarAndCrescent } from 'react-icons/fa';
+import { noResultIllustration } from 'assets/images';
 
-const { Title, Link } = Typography
+const { Title, Text } = Typography
 const { Option } = Select
 
 const Home = () => {
@@ -46,7 +47,7 @@ const Home = () => {
     const params = new URLSearchParams(history.location.search)
     let queryObj: any = {}
     if(params.get('search')) queryObj.q = params.get('search')
-    if(params.get('sort')) queryObj.order_by = params.get('sort')
+    queryObj.order_by = params.get('sort') || 'score' // default value
     if(params.get('page')) queryObj.page = params.get('page')
     if(params.get('genre')) queryObj.genre = params.get('genre')
     if(params.get('format')) queryObj.type = params.get('format')
@@ -55,20 +56,26 @@ const Home = () => {
       queryObj.start_date = `${params.get('year')}-01-01`
       queryObj.end_date = `${params.get('year')}-12-31`
     }
+    if(params.get('order')) queryObj.sort = params.get('order')
     return formatter.objectToQuery(queryObj)
   }
 
-  useEffect(() => {
+  const setFormValuesByParams = () => {
     const params = new URLSearchParams(history.location.search)
     // set form fields initial value from url search params
     form.setFieldsValue({
       search: params.get('search') || '', //@ts-ignore
       genre: params.get('genre')?.split(',').map(genreValue => options.revGenres[genreValue]) || [], //@ts-ignore
       type: params.get('format')?.split(',').map(formatValue => options.revFormats[formatValue]) || [],
-      score: params.get('score')?.split(',') || [0, 10], //@ts-ignore
-      sort: options.revSorts[params.get('sort')]
+      score: params.get('score'), //@ts-ignore
+      sort: options.revSorts[params.get('sort') || 'score'],
+      order: params.get('order') === 'desc' ? params.get('order') : 'asc'
     })
-    if(params.get('page'))  setPage(Number(params.get('page')))
+    if(params.get('page')) setPage(Number(params.get('page')))
+  }
+
+  useEffect(() => { 
+    setFormValuesByParams()
     dispatch(getAnimes(getApiQuery()))
     return history.listen(() => {
       dispatch(getAnimes(getApiQuery()))
@@ -99,10 +106,12 @@ const Home = () => {
 
     // clear values with default value
     if(values.page === 1) delete values.page
-    if(values.score.join(',') === '0,10') delete values.score
+    if(values.score === 0) delete values.score
     if(values.year) {
       values.year = moment(values.year).format('yyyy')
     }
+    if(values.sort === 'score') delete values.sort
+    if(values.order === 'asc') delete values.order
 
     history.push(`/animes?${formatter.objectToQuery(values)}`)
   }
@@ -111,6 +120,27 @@ const Home = () => {
     if(!changedValues.search) { // prevent search change to submit form
       submitForm()
     }
+  }
+
+  const handleResetSearch = () => {
+    history.push('/animes')
+    form.resetFields()
+    form.setFieldsValue({
+      sort: options.revSorts.score
+    })
+  }
+
+  const handleClickOrder = () => {
+    if(form.getFieldValue('order') === 'asc') {
+      form.setFieldsValue({
+        order: 'desc'
+      })
+    } else {
+      form.setFieldsValue({
+        order: 'asc'
+      })
+    }
+    form.submit()
   }
 
   return (
@@ -126,7 +156,7 @@ const Home = () => {
                   name='search'
                   className='mb-2'
                 >
-                  <Input suffix={<FaSearch onClick={() => submitForm()} className='clickable'/>} />
+                  <Input onKeyDown={e => e.key === 'Enter' && form.submit()} suffix={<FaSearch onClick={() => submitForm()} className='clickable'/>} />
                 </Form.Item>
               </Col>
               <Col>
@@ -136,17 +166,24 @@ const Home = () => {
                     <Form.Item
                       name='sort'
                     >
-                      <Select 
-                        allowClear
-                      >
+                      <Select>
                         {Object.entries(options.sorts).map((sort, i) => (
                           <Option key={i} value={sort[0]}>{sort[0]}</Option>
                         ))}
                       </Select>
                     </Form.Item>
                   </Col>
-                  <Col>
-                    <FaSortAmountUp/>
+                  <Col onClick={handleClickOrder} className='clickable'>
+                    <Form.Item
+                      name='order'
+                      className='hidden'
+                    >
+                      <Input />
+                    </Form.Item>
+                    {form.getFieldValue('order') === 'asc'
+                    ? <FaSortAmountUp/>
+                    : <FaSortAmountDown/>
+                    }
                   </Col>
                 </Row>
               </Col>
@@ -186,13 +223,13 @@ const Home = () => {
                     name='score'
                     className='mb-2'
                   >
-                    <Slider range defaultValue={[0, 10]} min={0} max={10}/>
+                    <Slider className='slider-reverse' min={0} max={10}/>
                   </Form.Item>
                   <Title level={5} className='mb-1'>Year</Title>
                   <Form.Item
                     name='year'
                   >
-                    <DatePicker picker="year" placeholder='' />
+                    <DatePicker picker="year" placeholder='' disabledDate={current => current < moment('01-01-1940') || current > moment()} />
                   </Form.Item>
               </Col>
               <Col flex='auto'>
@@ -203,24 +240,33 @@ const Home = () => {
                       <AnimeCard anime={anime} />
                     </Col>
                   ))
-                  : Array.from(Array(15).keys()).map((i) => (
+                  : animes.loading
+                  ? Array.from(Array(15).keys()).map((i) => (
                     <Col style={{width: '20%'}} className='mb-5'>
                       <AnimeCard loading={animes.loading} />
                     </Col>
-                  ))}
+                  ))
+                  : <div className='no-result-illustration-container'>
+                      <Text className='typography-fade mb-2'>No result found...</Text>
+                      <img src={noResultIllustration} alt='' className='mb-2'/>
+                      <Button onClick={handleResetSearch} type='primary'>Reset Search</Button>
+                  </div>
+                }
                 </Row>
-                <Row justify='end' className='mb-5'>
-                  <Col>
-                    <Pagination
-                      current={page || 1}
-                      pageSize={animes.pagination.pageSize}
-                      disabled={animes.loading}
-                      showSizeChanger={false}
-                      total={animes.pagination.total}
-                      onChange={handleChangePagination}
-                    />
-                  </Col>
-                </Row>
+                {animes.data.length > 0 && (
+                  <Row justify='end' className='mb-5'>
+                    <Col>
+                      <Pagination
+                        current={page || 1}
+                        pageSize={animes.pagination.pageSize}
+                        disabled={animes.loading}
+                        showSizeChanger={false}
+                        total={animes.pagination.total}
+                        onChange={handleChangePagination}
+                      />
+                    </Col>
+                  </Row>
+                )}
               </Col>
             </Row>
           </Form>

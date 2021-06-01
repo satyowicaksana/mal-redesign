@@ -134,7 +134,7 @@ export const getAnimes = createAsyncThunk(
       last_page: number
     } = await response.json()
     return {
-      data: data.results,
+      data: data.results || [],
       pagination: {
         pageSize: SEARCHED_ANIME_PAGE_SIZE,
         total: SEARCHED_ANIME_PAGE_SIZE * data.last_page

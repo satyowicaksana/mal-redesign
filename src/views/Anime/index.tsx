@@ -72,9 +72,6 @@ const Anime = () => {
     dispatch(getTopics(id))
     dispatch(getRecommendations(id))
   }, [dispatch, id])
-  useEffect(() => {
-    console.log(anime)
-  }, [anime])
 
   const generateReferenceText = (references: Reference[]) => (<>
     {references.map((reference, i) => (
