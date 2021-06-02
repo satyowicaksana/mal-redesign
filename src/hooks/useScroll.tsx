@@ -19,7 +19,7 @@ const useScroll = () => {
         bodyOffset: bodyOffset,
         scrollY: -bodyOffset.top,
         scrollX: bodyOffset.left,
-        scrollDirection: prevLastScrollTop > -bodyOffset.top ? 'down' : 'up',
+        scrollDirection: prevLastScrollTop > -bodyOffset.top ? 'up' : 'down',
       }
     })
   }, [])

@@ -1,8 +1,9 @@
 @import 'lib.less';
 
 .navbar-wrapper {
-  transition: background-color 0.2s;
+  transition: all 0.2s;
   position: fixed;
+  top: 0;
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,8 +12,13 @@
   background-color: rgba(0,0,0,0);
 
   &.bg-primary {
+    position: fixed;
     box-shadow: @box-shadow;
-    background-color: @primary-opaque-color;
+    background-color: @primary-color;
+  }
+
+  &.hide {
+    top: -64px;
   }
 }
 

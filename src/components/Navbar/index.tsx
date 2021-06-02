@@ -40,11 +40,12 @@ const Navbar = () => {
   const [search, setSearch] = useState('')
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false)
 
-  const { scrollY } = useScroll();
+  const { scrollY, scrollDirection } = useScroll();
+
 
   return (
     <>
-    <div className={`navbar-wrapper ${(scrollY > 1) ? 'bg-primary' : ''} py-2`}>
+    <div className={`navbar-wrapper ${scrollY > 32 ? `bg-primary ${scrollDirection === 'down' ? 'hide' : ''}` : ''} py-2`}>
       <div className='content-container'>
         <Row align='middle' justify='space-between'>
           <Col onClick={() => history.push('/')} className='clickable'>

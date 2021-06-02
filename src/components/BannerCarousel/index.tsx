@@ -21,7 +21,7 @@ const BannerCarousel = ({
   const [autoplay, setAutoplay] = useState(true);
 
   useInterval(() => {
-    if(autoplay) {
+    if(autoplay && newsList.length > 0) {
       handleClickRight();
     }
   }, 4000);
@@ -42,6 +42,7 @@ const BannerCarousel = ({
     }
   }
 
+
   return (
     <div className='banner-carousel-wrapper'>
       {!loading
@@ -54,15 +55,15 @@ const BannerCarousel = ({
           onMouseLeave={() => setAutoplay(true)}
           className='banner-carousel-cards-container'
         >
-          {loading
+          {newsList.length === 0 || loading
           ? <div 
             className='banner-carousel-card selected loading'>
               <Row className='banner-carousel-card-content-container'>
                 <Col md={14} xs={24}>
-                  <Skeleton.Button active className='skeleton-stretch'/>
+                  <Skeleton.Button active={loading} className='skeleton-stretch'/>
                 </Col>
                 <Col md={10} xs={24} className='banner-carousel-card-info-container p-3'>
-                  <Skeleton active/>
+                  <Skeleton active={loading}/>
                 </Col>
               </Row>
             </div>
@@ -100,7 +101,7 @@ const BannerCarousel = ({
               </Row>
             </div>
           )) }
-          {!loading
+          {!loading && newsList.length > 0
           && <>
               <FaChevronLeft onClick={handleClickLeft} className='banner-carousel-left-icon' />
               <FaChevronRight onClick={handleClickRight} className='banner-carousel-right-icon' />

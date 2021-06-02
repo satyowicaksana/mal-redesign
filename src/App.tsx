@@ -9,7 +9,8 @@ import {
   Home,
   Anime,
   Register,
-  Animes
+  Animes,
+  NotFound
 } from 'views'
 import {
   Navbar,
@@ -24,12 +25,10 @@ const App = () => {
   const [showFooter, setShowFooter] = useState(false)
 
   useEffect(() => {
-    setShowNavbar(history.location.pathname === '/' ||
-    history.location.pathname.startsWith('/anime'))
+    setShowNavbar(history.location.pathname !== '/register')
     setShowFooter(history.location.pathname !== '/register')
     return history.listen(() => {
-      setShowNavbar(history.location.pathname === '/' ||
-      history.location.pathname.startsWith('/anime'))
+      setShowNavbar(history.location.pathname !== '/register')
       setShowFooter(history.location.pathname !== '/register')
       if(!(history.location.pathname.startsWith('/anime') && history.location.pathname.split('/')[3])) {
         window.scrollTo(0, 0)
@@ -56,6 +55,9 @@ const App = () => {
           </Route>
           <Route exact path='/animes'>
             <Animes />
+          </Route>
+          <Route exact path='*'>
+            <NotFound/>
           </Route>
         </Switch>
       </div>
