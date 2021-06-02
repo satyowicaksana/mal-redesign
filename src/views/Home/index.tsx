@@ -188,7 +188,7 @@ const Home = () => {
                 <Divider/>
               </Col>
               <Col className='desktop'>
-                <Link strong>VIEW MORE</Link>
+                <Link href='https://myanimelist.net/news' target='_blank' strong>VIEW MORE</Link>
               </Col>
             </Row>
             <Row gutter={[{ md: 24, xl: 40 }, { xs: 8, sm: 8, md: 24, xl: 40 }]}>
@@ -211,7 +211,7 @@ const Home = () => {
             </Row>
             <Row justify='end' className='mobile mt-2'>
               <Col>
-                <Link strong>VIEW MORE</Link>
+                <Link href='https://myanimelist.net/news' target='_blank' strong>VIEW MORE</Link>
               </Col>
             </Row>
           </div>

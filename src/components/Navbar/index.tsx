@@ -12,25 +12,68 @@ const { Title, Text, Link } = Typography;
 
 const links = [
   {
-    text: 'ANIME'
+    text: 'ANIME',
+    subLinks: [
+      {
+        text: 'Anime Search',
+        link: 'https://myanimelist.net/anime.php'
+      },
+      {
+        text: 'Top Anime',
+        link: 'https://myanimelist.net/topanime.php'
+      },
+      {
+        text: 'Seasonal Anime',
+        link: 'https://myanimelist.net/anime/season'
+      }
+    ]
   },
   {
-    text: 'MANGA'
+    text: 'COMMUNITY',
+    subLinks: [
+      {
+        text: 'Forums',
+        link: 'https://myanimelist.net/forum'
+      },
+      {
+        text: 'Clubs',
+        link: 'https://myanimelist.net/clubs.php'
+      },
+      {
+        text: 'Blogs',
+        link: 'https://myanimelist.net/blog.php'
+      }
+    ]
   },
   {
-    text: 'COMMUNITY'
+    text: 'INDUSTRY',
+    subLinks: [
+      {
+        text: 'News',
+        link: 'https://myanimelist.net/news'
+      },
+      {
+        text: 'Featured Articles',
+        link: 'https://myanimelist.net/featured'
+      },
+      {
+        text: 'People',
+        link: 'https://myanimelist.net/people.php'
+      }
+    ]
   },
   {
-    text: 'INDUSTRY'
-  },
-  {
-    text: 'WATCH'
-  },
-  {
-    text: 'READ'
-  },
-  {
-    text: 'HELP'
+    text: 'HELP',
+    subLinks: [
+      {
+        text: 'About',
+        link: 'https://myanimelist.net/about.php'
+      },
+      {
+        text: 'Support',
+        link: 'https://myanimelist.net/about.php?go=support'
+      }
+    ]
   }
 ]
 
@@ -59,15 +102,11 @@ const Navbar = () => {
                   placement='bottomLeft'
                   content={
                     <div className='py-2'>
-                      <div className='navbar-popover-option-container py-1 px-3'>
-                        <Text>Option</Text>
-                      </div>
-                      <div className='navbar-popover-option-container py-1 px-3'>
-                        <Text>Option Long</Text>
-                      </div>
-                      <div className='navbar-popover-option-container py-1 px-3'>
-                        <Text>Option</Text>
-                      </div>
+                      {link.subLinks.map(subLink => (
+                        <div key={subLink.text} onClick={() => window.open(subLink.link, '_blank')} className='navbar-popover-option-container py-1 px-3'>
+                          <Text>{subLink.text}</Text>
+                        </div>
+                      ))}
                     </div>
                   }
                 >
