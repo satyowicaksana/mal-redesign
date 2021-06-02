@@ -7,7 +7,8 @@ import {
   Carousel,
   AnimeCardsSection,
   StoryCardsSection,
-  AnimeCard
+  AnimeCard,
+  ArticleCard
 } from 'components';
 import './style.less';
 import {
@@ -23,6 +24,7 @@ import {
 import { Col, Divider, Row, Skeleton, Typography } from 'antd';
 import { useWindowSize } from 'hooks';
 import { windowSizes } from 'consts';
+import { checker } from 'helpers';
 
 const { Title, Link } = Typography
 
@@ -118,10 +120,101 @@ const Home = () => {
               </Col>
             </Row>
           </div>
-          <StoryCardsSection
-            loading={featuredNewsList.loading}
-            stories={featuredNewsList.data || []}
-          />
+          <div className='mb-5'>
+            <Row gutter={{xs: 0, md: 32}} align='middle' className='mb-3'>
+              <Col>
+                <Title level={3}>Top Airing Anime</Title>
+              </Col>
+              <Col flex='auto' className='desktop'>
+                <Divider/>
+              </Col>
+              <Col className='desktop'>
+                <Link onClick={() => history.push('/animes')} strong>VIEW MORE</Link>
+              </Col>
+            </Row>
+            {width <= windowSizes.md.max ? (
+              <div className='anime-cards-section-swiper'>
+                {topAiringAnimes.loading
+                ? Array.from(Array(6).keys()).map(i => 
+                    <div key={i} className='anime-cards-section-swiper-card-container mr-2'>
+                      <Skeleton.Button key={i} active className='skeleton-anime-card'/>
+                    </div>
+                  )
+                : topAiringAnimes.data?.map((anime, i) => 
+                    <div key={i} className='anime-cards-section-swiper-card-container mr-2'>
+                      <AnimeCard
+                        topAiringAnime={anime}
+                      />
+                    </div>
+                  )}
+              </div>
+            ) : (
+              <Carousel
+                dots={false}
+                showArrows={!topAiringAnimes.loading}
+                className='anime-cards-section-carousel mb-1'
+              >
+                { Array.from(Array(Math.ceil((topAiringAnimes.loading ? 6 : topAiringAnimes.data?.length || 0) / 6)).keys()).map(i => (
+                  <div key={i}>
+                    <Row gutter={carouselCardColumn * 6} className='anime-cards-section-slide'>
+                      { Array.from(Array(carouselCardColumn).keys()).map(j => (
+                        <Col key={`${i}${j}`} span={24 / carouselCardColumn}>
+                          {topAiringAnimes.loading
+                          ? <Skeleton.Button active key={i} className='skeleton-anime-card'/>
+                          : topAiringAnimes.data[i * carouselCardColumn + j]
+                          && <AnimeCard
+                              onClick={() => history.push(`/anime/${topAiringAnimes.data[i * carouselCardColumn + j].mal_id}`)}
+                              topAiringAnime={topAiringAnimes.data[i * carouselCardColumn + j]}
+                            />}
+                        </Col>
+                      )) }
+                    </Row>
+                  </div>
+                )) }
+              </Carousel>
+            )}
+            <Row justify='end' className='mobile mt-2'>
+              <Col>
+                <Link onClick={() => history.push('/animes')} strong>VIEW MORE</Link>
+              </Col>
+            </Row>
+          </div>
+          <div className='mb-5'>
+            <Row gutter={{xs: 0, md: 32}} align='middle' className='mb-3'>
+              <Col>
+                <Title level={3}>Anime & Manga News</Title>
+              </Col>
+              <Col flex='auto' className='desktop'>
+                <Divider/>
+              </Col>
+              <Col className='desktop'>
+                <Link strong>VIEW MORE</Link>
+              </Col>
+            </Row>
+            <Row gutter={[{ md: 24, xl: 40 }, { xs: 8, sm: 8, md: 24, xl: 40 }]}>
+              {checker.isFetched(featuredNewsList)
+              ? featuredNewsList.data.map((news, i) => (
+                  <Col key={i} xs={24} lg={12}>
+                    <ArticleCard
+                      onClick={() => window.open(news.link, '_blank')}
+                      news={news}
+                    />
+                  </Col>
+                )) 
+              : Array.from(Array(4).keys()).map(i => (
+                <Col key={i} xs={24} lg={12}>
+                  <ArticleCard
+                    loading={featuredNewsList.loading}
+                  />
+                </Col>
+              ))}
+            </Row>
+            <Row justify='end' className='mobile mt-2'>
+              <Col>
+                <Link strong>VIEW MORE</Link>
+              </Col>
+            </Row>
+          </div>
         </div>
       </div>
     </div>

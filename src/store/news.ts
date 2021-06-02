@@ -4,17 +4,17 @@ import { RootState } from 'store'
 import { News } from 'interfaces/news'
 import { serverAPI } from 'apis'
 
-type AnimeState = {
+type NewsState = {
   featuredNewsList: {
-    data: News[] | undefined
+    data: News[]
     loading: boolean
     error: Error | undefined
   }
 }
 
-let initialState: AnimeState = {
+let initialState: NewsState = {
   featuredNewsList: {
-    data: undefined,
+    data: [],
     loading: false,
     error: undefined
   }
@@ -26,7 +26,7 @@ export const getFeaturedNewsList = createAsyncThunk(
     console.log(serverAPI.getFeaturedNewsList)
     const response = await fetch(serverAPI.getFeaturedNewsList)
     const data: News[] = await response.json()
-    return data
+    return data || []
   }
 )
 

@@ -2,15 +2,17 @@ import { HTMLAttributes, useState } from 'react'
 import { Skeleton, Typography, Popover, Row, Col, Tag } from 'antd';
 import { FaHeart, FaStar, FaTrophy, FaUser, FaUserCheck } from 'react-icons/fa'
 
-import { Anime, Recommendation, SearchedAnime, SeasonAnime } from 'interfaces/anime'
+import { Anime, Recommendation, SearchedAnime, SeasonAnime, TopAiringAnime } from 'interfaces/anime'
 import { styler } from 'helpers'
 import './style.less';
+import { useHistory } from 'react-router';
 
 const { Text, Paragraph, Title, Link } = Typography;
 
 interface AnimeCardProps extends HTMLAttributes<HTMLDivElement> {
   anime?: SearchedAnime
   seasonAnime?: SeasonAnime
+  topAiringAnime?: TopAiringAnime
   recommendation?: Recommendation
   loading?: boolean
 }
@@ -18,13 +20,15 @@ interface AnimeCardProps extends HTMLAttributes<HTMLDivElement> {
 const AnimeCard = ({
   anime,
   seasonAnime,
+  topAiringAnime,
   recommendation,
   loading,
   ...props
 }: AnimeCardProps) => {
+  const history = useHistory()
   const [popoverOpen, setPopoverOpen] = useState(false)
 
-  if(!anime && !seasonAnime && !recommendation) return (
+  if(!anime && !seasonAnime && !topAiringAnime && !recommendation) return (
     <div {...props} className='anime-card no-pointer'>
       <Skeleton.Button active={loading} className='skeleton-stretch anime-card-skeleton'/>
     </div>
@@ -57,7 +61,40 @@ const AnimeCard = ({
           </div>
           <Row justify='end'>
             <Col>
-              <Link className='typography-small' strong>VIEW DETAIL</Link>
+              <Link onClick={() => history.push(`/anime/${seasonAnime.mal_id}`)} className='typography-small' strong>VIEW DETAIL</Link>
+            </Col>
+          </Row>
+        </div>
+      )
+    }
+    if(topAiringAnime) {
+      return (
+        <div className='anime-card-popover-container p-2'>
+          <Row gutter={16} justify='space-between' wrap={false} className='mb-1'>
+            <Col>
+              <Title level={5}>{topAiringAnime.title}</Title>
+            </Col>
+            <Col>
+              <Tag color={styler.getScoreColor(topAiringAnime.score)}><FaStar/> {topAiringAnime.score}</Tag>
+            </Col>
+          </Row>
+          {/*{topAiringAnime.producers[0] && <Link strong>{topAiringAnime.producers[0].name.toUpperCase()}</Link>}*/}
+          {topAiringAnime.start_date && <div className='mb-1'><Tag color='blue'>{topAiringAnime.start_date}</Tag></div>}
+          {topAiringAnime.episodes && <div><Text className='typography-fade'>{topAiringAnime.episodes} episodes</Text></div>}
+          {/*{topAiringAnime.genres
+          && <Row gutter={8} className='mt-1'>
+              {topAiringAnime.genres.map((genre, i) => (
+                <Col key={i} className='mb-1'>
+                  <Tag color='blue' className='clickable'>{genre.name}</Tag>
+                </Col>
+              ))}
+            </Row>}
+          <div className='anime-card-popover-synopsis-container mb-1'>
+            <Paragraph>{topAiringAnime.synopsis}</Paragraph>
+          </div>*/}
+          <Row justify='end'>
+            <Col>
+              <Link onClick={() => history.push(`/anime/${topAiringAnime.mal_id}`)} className='typography-small' strong>VIEW DETAIL</Link>
             </Col>
           </Row>
         </div>
@@ -72,7 +109,7 @@ const AnimeCard = ({
               <Tag color='success'><Text><FaUserCheck/> {recommendation.recommendation_count}</Text></Tag>
             </Col>
             <Col>
-              <Link className='typography-small'>VIEW DETAIL</Link>
+              <Link onClick={() => history.push(`/anime/${recommendation.mal_id}`)}  className='typography-small'>VIEW DETAIL</Link>
             </Col>
           </Row>
         </div>
@@ -83,13 +120,13 @@ const AnimeCard = ({
   return (
     <Popover onVisibleChange={visible => setPopoverOpen(visible)} placement='rightTop' content={renderPopoverContent()}>
       <div {...props} className={`anime-card ${popoverOpen ? 'hovered' : ''}`}>
-        <img src={anime?.image_url || seasonAnime?.image_url || recommendation?.image_url} alt='' className={`anime-card-image ${anime?.rated === 'Rx' ? 'r-18' : ''}`}/>
+        <img src={anime?.image_url || seasonAnime?.image_url || topAiringAnime?.image_url || recommendation?.image_url} alt='' className={`anime-card-image ${anime?.rated === 'Rx' ? 'r-18' : ''}`}/>
         {anime?.rated === 'Rx' && <div className='anime-card-r-18-logo'>
           <Title>R18</Title>
         </div>}
         <div className='anime-card-title-container-blur'/>
         <div className='anime-card-title-container p-1'>
-          <Paragraph strong className='anime-card-title' ellipsis >{anime?.title || seasonAnime?.title || recommendation?.title}</Paragraph>
+          <Paragraph strong className='anime-card-title' ellipsis >{anime?.title || seasonAnime?.title || topAiringAnime?.title || recommendation?.title}</Paragraph>
         </div>
       </div>
     </Popover>

@@ -9,7 +9,6 @@ import LoginModal from './LoginModal'
 import Navbar from './Navbar'
 import ReviewCard from './ReviewCard'
 import StaffCard from './StaffCard'
-import StoryCard from './ArticleCard'
 import StoryCardsSection from './StoryCardsSection'
 import TopicCard from './TopicCard'
 
@@ -25,7 +24,6 @@ export {
   Navbar,
   ReviewCard,
   StaffCard,
-  StoryCard,
   StoryCardsSection,
   TopicCard
 }

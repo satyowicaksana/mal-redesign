@@ -229,7 +229,7 @@ export interface SeasonAnime {
   url: string
 }
 
-export interface TopAnime {
+export interface TopAiringAnime {
   end_date: string
   episodes: number
   image_url: string

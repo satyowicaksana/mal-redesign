@@ -13,17 +13,19 @@ const { Title, Text } = Typography;
 
 interface ArticleCardProps extends HTMLAttributes<HTMLDivElement> {
   article?: Article
+  news?: News
   loading?: boolean
 }
 
 const ArticleCard = ({
   article,
+  news,
   loading,
   ...props
 }: ArticleCardProps) => {
   const { width } = useWindowSize();
 
-  if(!article) return (
+  if(!article && !news) return (
     <Row {...props} className='article-card'>
       <Col xs={8} md={12}>
         <Skeleton.Button active={loading} className='skeleton-stretch'/>
@@ -34,25 +36,25 @@ const ArticleCard = ({
     </Row>
   )
 
-  const { title, image_url } = article;
-
   return (
     <Row {...props} className='article-card'>
       <Col xs={8} lg={12}>
-        <img src={image_url} alt='' className='article-card-image'/>
+        <img src={article?.image_url || news?.imageURL} alt='' className='article-card-image'/>
       </Col>
       <Col xs={16} lg={12} className='article-card-info-container p-2'>
         <Title level={4} ellipsis={{rows: width < windowSizes.md.min ? 3 : 4}}>
-        {title}
+        {article?.title || news?.title}
         </Title>
-        <Row gutter={4}>
-          <Col className='centered-flex'>
-            <FaRegCalendarAlt className='article-card-calendar-icon'/>
-          </Col>
-          <Col>
-            <Text>{moment(article.date).format('MMM DD, YYYY')}</Text>
-          </Col>
-        </Row>
+        {article && (
+          <Row gutter={4}>
+            <Col className='centered-flex'>
+              <FaRegCalendarAlt className='article-card-calendar-icon'/>
+            </Col>
+            <Col>
+              <Text>{moment(article.date).format('MMM DD, YYYY')}</Text>
+            </Col>
+          </Row>
+        )}
       </Col>
     </Row>
   );
