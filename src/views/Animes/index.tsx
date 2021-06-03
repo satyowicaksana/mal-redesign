@@ -124,7 +124,7 @@ const Home = () => {
   }
 
   const handleValuesChangeForm = (changedValues: any) => {
-    if(!changedValues.search) { // prevent search change to submit form
+    if(!changedValues.search && changedValues.search !== '') { // prevent search change to submit form
       submitForm()
     }
   }
@@ -150,9 +150,18 @@ const Home = () => {
     form.submit()
   }
 
+  const handleSubmitSearch = () => {
+    if(form.getFieldValue('search').length >= 3) {
+      form.setFieldsValue({
+        sort: options.revSorts.title
+      })
+      form.submit()
+    }
+  }
+
   return (
     <div>
-      <div className='navbar-padding'/>
+      <div className='navbar-background'/>
       <div className='centered-flex'>
         <div className='content-container py-5'>
           <Form form={form} onValuesChange={handleValuesChangeForm} onFinish={() => submitForm()} className='mb-4'>
@@ -163,7 +172,7 @@ const Home = () => {
                   name='search'
                   className='mb-2'
                 >
-                  <Input onKeyDown={e => e.key === 'Enter' && form.submit()} suffix={<FaSearch onClick={() => submitForm()} className='clickable'/>} />
+                  <Input onKeyDown={e => e.key === 'Enter' && handleSubmitSearch()} suffix={<FaSearch onClick={handleSubmitSearch} className='clickable'/>} />
                 </Form.Item>
               </Col>
               <Col>

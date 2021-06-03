@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Row, Col, Typography, Popover, Input, Button } from 'antd';
+import { Row, Col, Typography, Popover, Input, Button, Form } from 'antd';
 import { FaSearch } from 'react-icons/fa';
 import { BiLogInCircle } from 'react-icons/bi';
 
@@ -79,16 +79,21 @@ const links = [
 
 const Navbar = () => {
   const history = useHistory()
+  const [form] = Form.useForm()
 
   const [search, setSearch] = useState('')
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false)
 
   const { scrollY, scrollDirection } = useScroll();
 
-
+  const handleFinishSearch = (values: any) => {
+    if(values.search.length >= 3) {
+      history.push(`animes?search=${values.search}&sort=title`)
+    }
+  }
   return (
     <>
-    <div className={`navbar-wrapper ${scrollY > 32 ? `bg-primary ${scrollDirection === 'down' ? 'hide' : ''}` : ''} py-2`}>
+    <div className={`navbar-wrapper ${scrollY > 1 ? `bg-primary ${scrollDirection === 'down' ? 'hide' : ''}` : ''} py-2`}>
       <div className='content-container'>
         <Row align='middle' justify='space-between'>
           <Col onClick={() => history.push('/')} className='clickable'>
@@ -116,12 +121,18 @@ const Navbar = () => {
                 </Popover>
               )) }
               <Col>
-                <Input
-                  value={search}
-                  onChange={e => setSearch(e.target.value)}
-                  suffix={<FaSearch className='navbar-search-icon'/>}
-                  className={`navbar-search ${search ? 'expanded' : ''}`}
-                />
+                <Form form={form} onFinish={handleFinishSearch}>
+                  <Form.Item
+                    name='search'
+                  >
+                    <Input
+                      value={search}
+                      onChange={e => setSearch(e.target.value)}
+                      suffix={<FaSearch className='navbar-search-icon'/>}
+                      className={`navbar-search ${search ? 'expanded' : ''}`}
+                    />
+                  </Form.Item>
+                </Form>
               </Col>
               <Col>
                 <Button
