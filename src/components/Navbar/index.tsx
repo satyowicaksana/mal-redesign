@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Row, Col, Typography, Popover, Input, Button, Form } from 'antd';
+import { Row, Col, Typography, Popover, Input, Button, Form, Drawer, Collapse } from 'antd';
 import { FaSearch } from 'react-icons/fa';
+import { FiMenu } from 'react-icons/fi';
 import { BiLogInCircle } from 'react-icons/bi';
 
 import { LoginModal } from 'components'
 import { useScroll } from 'hooks'
 import './style.less';
 
-const { Title, Text, Link } = Typography;
+const { Title, Text, Link } = Typography
+const { Panel } = Collapse
 
 const links = [
   {
@@ -83,6 +85,7 @@ const Navbar = () => {
 
   const [search, setSearch] = useState('')
   const [isLoginModalVisible, setIsLoginModalVisible] = useState(false)
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false)
 
   const { scrollY, scrollDirection } = useScroll();
 
@@ -145,11 +148,41 @@ const Navbar = () => {
               </Col>
             </Row>
           </Col>
+          <Col onClick={() => setIsDrawerVisible(true)} className='mobile clickable'>
+            <Title type='secondary'><FiMenu/></Title>
+          </Col>
         </Row>
       </div>
     </div>
     <LoginModal visible={isLoginModalVisible} onCancel={() => setIsLoginModalVisible(false)}/>
-    </>
+    <Drawer
+      placement="right"
+      closable={false}
+      visible={isDrawerVisible}
+      onClose={() => setIsDrawerVisible(false)}
+    >
+      <div className='navbar-drawer-content-container'>
+        <Collapse ghost>
+          {links.map(link => (
+            <Panel header={link.text} key={link.text}>
+              {link.subLinks.map(subLink => (
+                <Link href={subLink.link} className='typography-block mb-2'>{subLink.text}</Link>
+              ))}
+            </Panel>
+          ))}
+        </Collapse>
+        <div>
+          <Button
+            type='default'
+            icon={<BiLogInCircle className='mr-1'/>}
+            onClick={() => setIsLoginModalVisible(true)}
+          >
+            SIGN IN
+          </Button>
+        </div>
+      </div>
+    </Drawer>
+  </>
   );
 }
 
