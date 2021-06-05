@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux'
-import { Row, Col, Typography, Button, Select } from 'antd'
 
 import {
   selectReviews
@@ -11,9 +10,6 @@ import {
   checker
 } from 'helpers'
 import './style.less'
-
-const { Text } = Typography
-const { Option } = Select
 
 const Reviews = () => {
   const reviews = useSelector(selectReviews)
