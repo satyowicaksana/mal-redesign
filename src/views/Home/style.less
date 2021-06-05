@@ -1,1 +1,28 @@
 @import 'lib.less';
+
+.anime-cards-section-carousel {
+  margin: -16px;
+}
+
+.anime-cards-section-slide {
+  padding: 16px;
+}
+
+.anime-cards-section-swiper {
+  display: flex;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.anime-cards-section-swiper-card-container {
+  @media @md {
+    flex: 0 0 25vw;
+  }
+  @media @sm, @xs {
+    flex: 0 0 35vw;
+  }
+} 

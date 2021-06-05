@@ -75,7 +75,7 @@ const Home = () => {
     return history.listen(() => {
       dispatch(getAnimes(getApiQuery()))
     })
-    /* eslint-disable */
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history, dispatch, form])
 
 
