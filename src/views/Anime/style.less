@@ -34,8 +34,8 @@
 
 .anime-banner-info-image {
   object-fit: cover;
-  border-radius: 16px;
   box-shadow: @box-shadow;
+  border-radius: 16px;
 
   @media @md, @lg, @xl {
     width: 250px;
@@ -51,12 +51,21 @@
 }
 
 .anime-banner-info-image-skeleton {
-  span {
-    width: 250px !important;
-    position: absolute;
-    top: -160px - 32px !important;
-    height: 350px !important;
-    border-radius: 16px !important;
+  border-radius: 16px !important;
+  box-shadow: @box-shadow;
+
+  @media @md, @lg, @xl {
+    span {
+      width: 250px !important;
+      position: absolute !important;
+      top: -160px - 32px !important;
+      height: 350px !important;
+    }
+  }
+
+  @media @xs, @sm {
+    width: 120px !important;
+    height: 160px !important;
   }
 }
 
@@ -118,13 +127,21 @@
 
 .anime-title-skeleton {
   height: 60px !important;
-  width: 400px !important;
+  width: 40vw !important;
   display: block !important;
+
+  @media @sm, @xs {
+    height: 30px !important;
+  }
 }
 
 .anime-subtitle-skeleton {
-  width: 350px !important;
+  width: 20vw !important;
   display: block !important;
+
+  @media @sm, @xs {
+    height: 15px !important;
+  }
 }
 
 .anime-banner-info-image-detail-container {

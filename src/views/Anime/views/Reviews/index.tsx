@@ -45,12 +45,12 @@ const Reviews = () => {
       </Row>
       {checker.isFetched(reviews)
         ? reviews.data.slice(0, 2).map(review => (
-          <div className='mb-4 sm-mb-2'>
+          <div key={review.mal_id} className='mb-4 sm-mb-2'>
             <ReviewCard review={review}/>
           </div>
         ))
-        : Array.from(Array(2).keys()).map((i) => (
-          <div className='mb-4 sm-mb-2'>
+        : Array.from(Array(2).keys()).map(i => (
+          <div key={i} className='mb-4 sm-mb-2'>
             <ReviewCard loading={reviews.loading}/>
           </div>
         ))}

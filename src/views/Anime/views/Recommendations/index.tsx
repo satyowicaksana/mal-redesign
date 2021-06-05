@@ -46,12 +46,12 @@ const Recommendations = () => {
         <Row gutter={{xs: 8, sm: 8, md: 32}} className='mb-5'>
           {checker.isFetched(recommendations)
           ? recommendations.data.slice(0, totalShowedCharacters).map(recommendation => (
-            <Col span={width <= windowSizes.sm.max ? 8 : width <= windowSizes.md.max ? 6 : 4} className='mb-2'>
+            <Col key={recommendation.mal_id} span={width <= windowSizes.sm.max ? 8 : width <= windowSizes.md.max ? 6 : 4} className='mb-2'>
               <AnimeCard recommendation={recommendation} />
             </Col>
           ))
-          : Array.from(Array(6).keys()).map((i) => (
-            <Col span={width <= windowSizes.sm.max ? 8 : width <= windowSizes.md.max ? 6 : 4} className='mb-2'>
+          : Array.from(Array(6).keys()).map(i => (
+            <Col key={i} span={width <= windowSizes.sm.max ? 8 : width <= windowSizes.md.max ? 6 : 4} className='mb-2'>
               <AnimeCard loading={recommendations.loading} />
             </Col>
           ))}

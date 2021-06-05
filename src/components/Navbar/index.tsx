@@ -166,7 +166,7 @@ const Navbar = () => {
           {links.map(link => (
             <Panel header={link.text} key={link.text}>
               {link.subLinks.map(subLink => (
-                <Link href={subLink.link} className='typography-block mb-2'>{subLink.text}</Link>
+                <Link key={subLink.text} href={subLink.link} className='typography-block mb-2'>{subLink.text}</Link>
               ))}
             </Panel>
           ))}

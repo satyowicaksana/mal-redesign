@@ -44,7 +44,6 @@ const newsSlice = createSlice({
     })
     builder.addCase(getFeaturedNewsList.rejected, (state, action) => {
       state.featuredNewsList.loading = false
-      alert('error')
       console.log(action)
     })
   },

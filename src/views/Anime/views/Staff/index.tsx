@@ -47,12 +47,12 @@ const Staff = () => {
         <Row gutter={32}>
           {charactersAndStaff.data && charactersAndStaff.data.characters.length > 0 && !charactersAndStaff.loading
           ? staffList?.slice(0, totalShowedCharacters).map(staff => (
-            <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
+            <Col key={staff.mal_id} span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
               <StaffCard staff={staff}/>
             </Col>
           ))
-          : Array.from(Array(4).keys()).map((i) => (
-            <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
+          : Array.from(Array(4).keys()).map(i => (
+            <Col key={i} span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
               <StaffCard loading={charactersAndStaff.loading}/>
             </Col>
           ))}

@@ -74,8 +74,8 @@ const Characters = () => {
       {renderTitle('characters')}
       <Row gutter={32} className='mb-5'>
         {charactersAndStaff.data && charactersAndStaff.data.characters.length > 0 && !charactersAndStaff.loading
-        ? filteredCharacters.slice(0, 4).map((character, i) => (
-          <Col key={i} span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
+        ? filteredCharacters.slice(0, 4).map(character => (
+          <Col key={character.mal_id} span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
             <CharacterCard character={character}/>
           </Col>
         ))
@@ -93,8 +93,8 @@ const Characters = () => {
             <StaffCard staff={staff}/>
           </Col>
         ))
-        : Array.from(Array(4).keys()).map((i) => (
-          <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
+        : Array.from(Array(4).keys()).map(i => (
+          <Col key={i} span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
             <StaffCard loading={charactersAndStaff.loading}/>
           </Col>
         ))}

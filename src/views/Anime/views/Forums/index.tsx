@@ -38,7 +38,7 @@ const Forums = () => {
       >
         {checker.isFetched(topics)
         ? topics.data.slice(0, totalShowedCharacters).map(topic => (
-            <TopicCard topic={topic} className='mb-4 sm-mb-2'/>
+            <TopicCard key={topic.topic_id} topic={topic} className='mb-4 sm-mb-2'/>
         ))
         : Array.from(Array(3).keys()).map((i) => (
             <TopicCard loading={topics.loading} className='mb-4 sm-mb-2'/>

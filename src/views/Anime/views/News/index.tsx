@@ -41,7 +41,7 @@ const News = () => {
         <Row gutter={32}>
           {checker.isFetched(articles)
           ? articles.data.slice(0, 4).map(article => (
-            <Col span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
+            <Col key={article.url} span={width <= windowSizes.md.max ? 24 : 12} className='mb-4 sm-mb-2'>
               <ArticleCard article={article} />
             </Col>
           ))

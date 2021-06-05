@@ -60,7 +60,7 @@ const Anime = () => {
     {
       title: `${key.charAt(0).toUpperCase()}${key.slice(1)}`,
       dataIndex: key,
-      key,
+      key: key,
     }
   ));
 
@@ -75,21 +75,22 @@ const Anime = () => {
 
   const generateReferenceText = (references: Reference[]) => (<>
     {references.map((reference, i) => (
-      <>
-      <Link onClick={() => window.open(reference.url, '_blank')}>
-        {reference.name}
-      </Link>
-      {i < references.length - 1 && ', '}
-      </>
+      <span key={reference.mal_id}>
+        <Link onClick={() => window.open(reference.url, '_blank')}>
+          {reference.name}
+        </Link>
+        {i < references.length - 1 && ', '}
+      </span>
     ))}
   </>)
 
   // convert anime object to table dataSource format
   const getAnimeInfoDataSource = () => {
-    if(!anime?.data) return {}
+    if(!anime?.data) return {id: ''}
     const { aired, producers, licensors, studios, genres } = anime.data
     return {
       ...anime.data,
+      id: anime.data.mal_id,
       aired: aired.string,
       producers: generateReferenceText(producers),
       licensors: generateReferenceText(licensors),
@@ -182,7 +183,9 @@ const Anime = () => {
               <Row justify='space-between' className='mb-2'>
                 <Col>
                   <Title level={4} className='desktop'>Synopsis</Title>
-                  <Tag color='warning' className='mobile'><Title><FaStar/> {anime.data?.score}</Title></Tag>
+                  <div className='anime-banner-info-score-container mobile p-1'>
+                    <Title><FaStar/> {anime.data?.score}</Title>
+                  </div>
                 </Col>
                 {!anime.loading && (
                   <Col>
@@ -202,7 +205,7 @@ const Anime = () => {
               </Row>
               <Title level={4} className='mobile mb-1'>Synopsis</Title>
               {anime.loading
-              ? <Skeleton active paragraph={{rows: 1}}/>
+              ? <Skeleton active paragraph={{rows: 1}}  className='anime-banner-info-synopsis'/>
               : <Paragraph ellipsis={{rows: 4, expandable: true, symbol: 'More'}} className='anime-banner-info-synopsis'>
                   {anime.data?.synopsis}
                 </Paragraph>
@@ -217,7 +220,7 @@ const Anime = () => {
                     <Text strong>SCORE</Text>
                   </Col>
                   <Col>
-                    <FaStar className='mobile'/> <Text strong className='anime-banner-info-score'>{anime.data?.score}</Text>
+                    <FaStar/> <Text strong className='anime-banner-info-score'>{anime.data?.score}</Text>
                   </Col>
                   <Col >
                     <Text>{anime.data?.scored_by.toLocaleString()} <FaUserCheck/></Text>
@@ -226,7 +229,7 @@ const Anime = () => {
               </div>
             </Col>
             <Col flex='auto'>
-              <Table loading={anime.loading} dataSource={[getAnimeInfoDataSource()]} columns={infoColumns} pagination={false} className='anime-banner-info-table overflow-scroll' />
+              <Table loading={anime.loading} rowKey='id' dataSource={[getAnimeInfoDataSource()]} columns={infoColumns} pagination={false} className='anime-banner-info-table overflow-scroll' />
             </Col>
           </Row>
         </div>
