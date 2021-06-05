@@ -6,6 +6,8 @@ import { Anime, Recommendation, SearchedAnime, SeasonAnime, TopAiringAnime } fro
 import { styler } from 'helpers'
 import './style.less';
 import { useHistory } from 'react-router';
+import { useWindowSize } from 'hooks';
+import { windowSizes } from 'consts';
 
 const { Text, Paragraph, Title, Link } = Typography;
 
@@ -26,6 +28,7 @@ const AnimeCard = ({
   ...props
 }: AnimeCardProps) => {
   const history = useHistory()
+  const { width } = useWindowSize()
   const [popoverOpen, setPopoverOpen] = useState(false)
 
   if(!anime && !seasonAnime && !topAiringAnime && !recommendation) return (
@@ -117,20 +120,26 @@ const AnimeCard = ({
     }
   }
 
-  return (
-    <Popover onVisibleChange={visible => setPopoverOpen(visible)} placement='rightTop' content={renderPopoverContent()}>
-      <div {...props} className={`anime-card ${popoverOpen ? 'hovered' : ''}`}>
-        <img src={anime?.image_url || seasonAnime?.image_url || topAiringAnime?.image_url || recommendation?.image_url} alt='' className={`anime-card-image ${anime?.rated === 'Rx' ? 'r-18' : ''}`}/>
-        {anime?.rated === 'Rx' && <div className='anime-card-r-18-logo'>
-          <Title>R18</Title>
-        </div>}
-        <div className='anime-card-title-container-blur'/>
-        <div className='anime-card-title-container p-1'>
-          <Paragraph strong className='anime-card-title' ellipsis >{anime?.title || seasonAnime?.title || topAiringAnime?.title || recommendation?.title}</Paragraph>
-        </div>
+  const renderCard = () => (
+    <div {...props} className={`anime-card ${popoverOpen ? 'hovered' : ''}`}>
+      <img src={anime?.image_url || seasonAnime?.image_url || topAiringAnime?.image_url || recommendation?.image_url} alt='' className={`anime-card-image ${anime?.rated === 'Rx' ? 'r-18' : ''}`}/>
+      {anime?.rated === 'Rx' && <div className='anime-card-r-18-logo'>
+        <Title>R18</Title>
+      </div>}
+      <div className='anime-card-title-container-blur'/>
+      <div className='anime-card-title-container p-1'>
+        <Paragraph strong className='anime-card-title' ellipsis >{anime?.title || seasonAnime?.title || topAiringAnime?.title || recommendation?.title}</Paragraph>
       </div>
+    </div>
+  )
+
+  if(width > windowSizes.md.max) return (
+    <Popover onVisibleChange={visible => setPopoverOpen(visible)} placement='rightTop' content={renderPopoverContent()}>
+      {renderCard()}
     </Popover>
   );
+
+  return renderCard()
 }
 
 export default AnimeCard;

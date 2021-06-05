@@ -266,7 +266,7 @@ const Home = () => {
                   ))
                   : animes.loading
                   ? Array.from(Array(15).keys()).map((i) => (
-                    <Col style={{width: '20%'}} className='mb-5'>
+                    <Col style={{width: width > windowSizes.md.max ? '20%' : width > windowSizes.sm.max ? '25%' : '50%'}} className='mb-5'>
                       <AnimeCard loading={animes.loading} />
                     </Col>
                   ))

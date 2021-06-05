@@ -1,12 +1,10 @@
 import { configureStore, Action, combineReducers } from '@reduxjs/toolkit'
 import { ThunkAction } from 'redux-thunk'
 
-import counter from 'store/counter'
 import anime from 'store/anime'
 import news from 'store/news'
 
 const reducer = combineReducers({
-  counter,
   anime,
   news
 })

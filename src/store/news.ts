@@ -8,22 +8,20 @@ type NewsState = {
   featuredNewsList: {
     data: News[]
     loading: boolean
-    error: Error | undefined
+    error?: string
   }
 }
 
 let initialState: NewsState = {
   featuredNewsList: {
     data: [],
-    loading: false,
-    error: undefined
+    loading: false
   }
 }
 
 export const getFeaturedNewsList = createAsyncThunk(
   'news/getFeaturedNewsList',
   async () => {
-    console.log(serverAPI.getFeaturedNewsList)
     const response = await fetch(serverAPI.getFeaturedNewsList)
     const data: News[] = await response.json()
     return data || []
@@ -37,6 +35,7 @@ const newsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getFeaturedNewsList.pending, state => {
       state.featuredNewsList.loading = true
+      delete state.featuredNewsList.error
     })
     builder.addCase(getFeaturedNewsList.fulfilled, (state, { payload }) => {
       state.featuredNewsList.data = payload
@@ -44,7 +43,7 @@ const newsSlice = createSlice({
     })
     builder.addCase(getFeaturedNewsList.rejected, (state, action) => {
       state.featuredNewsList.loading = false
-      console.log(action)
+      state.featuredNewsList.error = action.error.message
     })
   },
 })

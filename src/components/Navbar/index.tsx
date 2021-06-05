@@ -91,7 +91,7 @@ const Navbar = () => {
 
   const handleFinishSearch = (values: any) => {
     if(values.search.length >= 3) {
-      history.push(`animes?search=${values.search}&sort=title`)
+      history.push(`/animes?search=${values.search}&sort=title`)
     }
   }
   return (

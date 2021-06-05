@@ -220,7 +220,7 @@ const Anime = () => {
                     <Text strong>SCORE</Text>
                   </Col>
                   <Col>
-                    <FaStar/> <Text strong className='anime-banner-info-score'>{anime.data?.score}</Text>
+                    <Text strong className='anime-banner-info-score'>{anime.data?.score}</Text>
                   </Col>
                   <Col >
                     <Text>{anime.data?.scored_by.toLocaleString()} <FaUserCheck/></Text>

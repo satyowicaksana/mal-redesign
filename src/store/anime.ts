@@ -10,12 +10,12 @@ type AnimeState = {
   currentSeason: {
     data?: Season
     loading: boolean
-    error?: Error
+    error?: string
   }
   topAiringAnimes: {
     data: TopAiringAnime[]
     loading: boolean
-    error?: Error
+    error?: string
   }
   animes: {
     data: SearchedAnime[]
@@ -24,37 +24,37 @@ type AnimeState = {
       total: number
     }
     loading: boolean
-    error?: Error
+    error?: string
   }
   anime: {
     data?: Anime
     loading: boolean
-    error?: Error
+    error?: string
   }
   charactersAndStaff: {
     data?: CharactersAndStaff
     loading: boolean
-    error?: Error
+    error?: string
   }
   reviews: {
     data: Review[]
     loading: boolean
-    error?: Error
+    error?: string
   }
   articles: {
     data: Article[]
     loading: boolean
-    error?: Error
+    error?: string
   }
   topics: {
     data: Topic[]
     loading: boolean
-    error?: Error
+    error?: string
   }
   recommendations: {
     data: Recommendation[]
     loading: boolean
-    error?: Error
+    error?: string
   }
 }
 
@@ -220,6 +220,7 @@ const animeSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getCurrentSeason.pending, state => {
       state.currentSeason.loading = true
+      delete state.currentSeason.error
     })
     builder.addCase(getCurrentSeason.fulfilled, (state, { payload }) => {
       state.currentSeason.data = payload
@@ -227,10 +228,11 @@ const animeSlice = createSlice({
     })
     builder.addCase(getCurrentSeason.rejected, (state, action) => {
       state.currentSeason.loading = false
-      console.log(action)
+      state.currentSeason.error = action.error.message
     })
     builder.addCase(getTopAiringAnimes.pending, state => {
       state.topAiringAnimes.loading = true
+      delete state.topAiringAnimes.error
     })
     builder.addCase(getTopAiringAnimes.fulfilled, (state, { payload }) => {
       state.topAiringAnimes.data = payload
@@ -238,10 +240,11 @@ const animeSlice = createSlice({
     })
     builder.addCase(getTopAiringAnimes.rejected, (state, action) => {
       state.topAiringAnimes.loading = false
-      console.log(action)
+      state.topAiringAnimes.error = action.error.message
     })
     builder.addCase(getAnimes.pending, state => {
       state.animes.loading = true
+      delete state.animes.error
     })
     builder.addCase(getAnimes.fulfilled, (state, { payload }) => {
       state.animes.data = payload.data
@@ -250,10 +253,11 @@ const animeSlice = createSlice({
     })
     builder.addCase(getAnimes.rejected, (state, action) => {
       state.animes.loading = false
-      console.log(action)
+      state.animes.error = action.error.message
     })
     builder.addCase(getAnime.pending, state => {
       state.anime.loading = true
+      delete state.anime.error
     })
     builder.addCase(getAnime.fulfilled, (state, { payload }) => {
       state.anime.data = payload
@@ -261,10 +265,11 @@ const animeSlice = createSlice({
     })
     builder.addCase(getAnime.rejected, (state, action) => {
       state.anime.loading = false
-      console.log(action)
+      state.anime.error = action.error.message
     })
     builder.addCase(getCharactersAndStaff.pending, state => {
       state.charactersAndStaff.loading = true
+      delete state.charactersAndStaff.error
     })
     builder.addCase(getCharactersAndStaff.fulfilled, (state, { payload }) => {
       state.charactersAndStaff.data = payload
@@ -272,10 +277,11 @@ const animeSlice = createSlice({
     })
     builder.addCase(getCharactersAndStaff.rejected, (state, action) => {
       state.charactersAndStaff.loading = false
-      console.log(action)
+      state.charactersAndStaff.error = action.error.message
     })
     builder.addCase(getReviews.pending, state => {
       state.reviews.loading = true
+      delete state.topAiringAnimes.error
     })
     builder.addCase(getReviews.fulfilled, (state, { payload }) => {
       state.reviews.data = payload
@@ -283,10 +289,11 @@ const animeSlice = createSlice({
     })
     builder.addCase(getReviews.rejected, (state, action) => {
       state.reviews.loading = false
-      console.log(action)
+      state.reviews.error = action.error.message
     })
     builder.addCase(getArticles.pending, state => {
       state.articles.loading = true
+      delete state.articles.error
     })
     builder.addCase(getArticles.fulfilled, (state, { payload }) => {
       state.articles.data = payload
@@ -294,10 +301,11 @@ const animeSlice = createSlice({
     })
     builder.addCase(getArticles.rejected, (state, action) => {
       state.articles.loading = false
-      console.log(action)
+      state.articles.error = action.error.message
     })
     builder.addCase(getTopics.pending, state => {
       state.topics.loading = true
+      delete state.topics.error
     })
     builder.addCase(getTopics.fulfilled, (state, { payload }) => {
       state.topics.data = payload
@@ -305,10 +313,11 @@ const animeSlice = createSlice({
     })
     builder.addCase(getTopics.rejected, (state, action) => {
       state.topics.loading = false
-      console.log(action)
+      state.topics.error = action.error.message
     })
     builder.addCase(getRecommendations.pending, state => {
       state.recommendations.loading = true
+      delete state.recommendations.error
     })
     builder.addCase(getRecommendations.fulfilled, (state, { payload }) => {
       state.recommendations.data = payload
@@ -316,7 +325,7 @@ const animeSlice = createSlice({
     })
     builder.addCase(getRecommendations.rejected, (state, action) => {
       state.recommendations.loading = false
-      console.log(action)
+      state.recommendations.error = action.error.message
     })
   },
 })

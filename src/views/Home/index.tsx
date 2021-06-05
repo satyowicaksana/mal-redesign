@@ -21,7 +21,7 @@ import {
   getCurrentSeason,
   getTopAiringAnimes
 } from 'store/anime'
-import { Col, Divider, Row, Skeleton, Typography } from 'antd';
+import { Col, Divider, notification, Row, Skeleton, Typography } from 'antd';
 import { useWindowSize } from 'hooks';
 import { windowSizes } from 'consts';
 import { checker } from 'helpers';
@@ -44,6 +44,15 @@ const Home = () => {
     dispatch(getCurrentSeason())
     dispatch(getTopAiringAnimes())
   }, [dispatch])
+
+  // show notification if news fetch error
+  useEffect(() => {
+    if(featuredNewsList.error) {
+      notification.error({
+        message: 'Failed to fetch news. Please try again.'
+      })
+    }
+  }, [featuredNewsList.error])
 
   useEffect(() => {
     if(width <= windowSizes.lg.max) {
@@ -84,6 +93,7 @@ const Home = () => {
                 : currentSeason.data?.anime.map((anime, i) => 
                     <div key={i} className='anime-cards-section-swiper-card-container mr-2'>
                       <AnimeCard
+                        onClick={() => history.push(`/anime/${anime.mal_id}`)}
                         seasonAnime={anime}
                       />
                     </div>
@@ -143,6 +153,7 @@ const Home = () => {
                 : topAiringAnimes.data?.map((anime, i) => 
                     <div key={i} className='anime-cards-section-swiper-card-container mr-2'>
                       <AnimeCard
+                        onClick={() => history.push(`/anime/${anime.mal_id}`)}
                         topAiringAnime={anime}
                       />
                     </div>
