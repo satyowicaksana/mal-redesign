@@ -20,23 +20,6 @@ const Reviews = () => {
 
   return (
     <div>
-      <Row gutter={16} justify='end' className='mb-2'>
-        <Col>
-          <Row gutter={8} align='middle'>
-            <Col>
-              <Text>Sort by:</Text>
-            </Col>
-            <Col>
-              <Select defaultValue="Recent">
-                <Option value="Recent">Recent</Option>
-              </Select>
-            </Col>
-          </Row>
-        </Col>
-        <Col>
-          <Button type='default'>WRITE REVIEW</Button>
-        </Col>
-      </Row>
       {checker.isFetched(reviews)
         ? reviews.data.slice(0, 2).map(review => (
           <div key={review.mal_id} className='mb-4 sm-mb-2'>
