@@ -14,8 +14,7 @@ const LoginModal = ({
 }: LoginModalProps) => {
   const history = useHistory()
 
-  const [loginForm] = Form.useForm()
-  const { getFieldsValue } = loginForm
+  const [form] = Form.useForm()
 
   return (
     <Modal {...props}>
@@ -28,7 +27,7 @@ const LoginModal = ({
             <Divider />
           </Col>
         </Row>
-        <Form form={loginForm} onFinish={values => alert(JSON.stringify(values))}>
+        <Form form={form} onFinish={values => alert(JSON.stringify(values))}>
           <Form.Item
             name="email"
             rules={[{validator: validator.email}]}
@@ -58,8 +57,8 @@ const LoginModal = ({
                     type="primary"
                     htmlType="submit"
                     disabled={
-                      !loginForm.isFieldsTouched(true) ||
-                      loginForm.getFieldsError().filter(({ errors }) => errors.length)
+                      !form.isFieldsTouched(true) ||
+                      form.getFieldsError().filter(({ errors }) => errors.length)
                         .length > 0
                     }
                   >

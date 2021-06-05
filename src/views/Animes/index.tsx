@@ -1,32 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory, useLocation } from 'react-router';
-import { Row, Col, Form, Input,  Skeleton, Typography, Pagination, Button, Select, Slider, Tag, DatePicker } from 'antd';
+import { useHistory } from 'react-router';
+import { Row, Col, Form, Input,  Typography, Pagination, Button, Select, Slider, DatePicker } from 'antd';
+import { FaSearch, FaSortAmountDown, FaSortAmountUp } from 'react-icons/fa';
 import moment from 'moment'
 
 import {
-  BannerCarousel,
-  Carousel,
-  AnimeCardsSection,
-  StoryCardsSection,
   AnimeCard
 } from 'components';
 import './style.less';
 import {
-  selectFeaturedNewsList,
-  getFeaturedNewsList
-} from 'store/news'
-import {
   selectAnimes,
-  selectTopAiringAnimes,
-  getCurrentSeason,
-  getTopAiringAnimes,
   getAnimes
 } from 'store/anime'
 import { useWindowSize } from 'hooks';
 import { options, windowSizes } from 'consts';
 import { checker, formatter } from 'helpers';
-import { FaSearch, FaSortAmountDown, FaSortAmountUp, FaStar, FaStarAndCrescent } from 'react-icons/fa';
 import { noResultIllustration } from 'assets/images';
 
 const { Title, Text } = Typography
@@ -34,7 +23,6 @@ const { Option } = Select
 
 const Home = () => {
   const history = useHistory()
-  const location = useLocation()
   const dispatch = useDispatch()
   const { width } = useWindowSize()
   const [form] = Form.useForm()
@@ -87,6 +75,7 @@ const Home = () => {
     return history.listen(() => {
       dispatch(getAnimes(getApiQuery()))
     })
+    /* eslint-disable */
   }, [history, dispatch, form])
 
 

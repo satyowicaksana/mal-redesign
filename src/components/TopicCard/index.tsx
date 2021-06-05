@@ -3,9 +3,6 @@ import { Row, Col, Typography, Skeleton } from 'antd';
 import { FaComment } from 'react-icons/fa'
 import moment from 'moment'
 
-import { windowSizes } from 'consts'
-import { useWindowSize } from 'hooks'
-import { News } from 'interfaces/news'
 import './style.less';
 import { Topic } from 'interfaces/anime';
 
@@ -21,7 +18,6 @@ const TopicCard = ({
   loading,
   ...props
 }: TopicCardProps) => {
-  const { width } = useWindowSize();
 
   if(!topic) return (
     <div {...props}>

@@ -1,8 +1,8 @@
 import { HTMLAttributes, useState } from 'react'
 import { Skeleton, Typography, Popover, Row, Col, Tag } from 'antd';
-import { FaHeart, FaStar, FaTrophy, FaUser, FaUserCheck } from 'react-icons/fa'
+import { FaStar, FaUserCheck } from 'react-icons/fa'
 
-import { Anime, Recommendation, SearchedAnime, SeasonAnime, TopAiringAnime } from 'interfaces/anime'
+import { Recommendation, SearchedAnime, SeasonAnime, TopAiringAnime } from 'interfaces/anime'
 import { styler } from 'helpers'
 import './style.less';
 import { useHistory } from 'react-router';

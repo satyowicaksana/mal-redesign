@@ -1,7 +1,6 @@
 import { HTMLAttributes } from 'react'
 import { useSelector } from 'react-redux'
 import { Row, Col, Typography, Avatar, Tag, Skeleton, Tooltip,  } from 'antd'
-import { ImArrowDown, ImArrowUp } from 'react-icons/im'
 import { AiFillStar } from 'react-icons/ai'
 import moment from 'moment'
 

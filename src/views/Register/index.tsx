@@ -1,7 +1,6 @@
 import { useHistory } from 'react-router-dom'
 import { Form, Input, Button, Typography, Row, Col, Divider, DatePicker, Checkbox } from 'antd'
-import { AiOutlineUser, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
-import { FaArrowLeft, FaArrowAltCircleDown } from 'react-icons/fa'
+import { FaArrowLeft } from 'react-icons/fa'
 
 import { registerIllustration } from 'assets/images'
 import { validator } from 'helpers'

@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroller'
-import { Row, Col, Typography, Spin, Table, Menu, Select, Avatar, Tag } from 'antd'
-import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
-import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
+import { Row, Col, Spin } from 'antd'
 
 import {
   CharacterCard
@@ -13,8 +11,7 @@ import {
   getCharactersAndStaff
 } from 'store/anime'
 import {
-  Character,
-  Reference
+  Character
 } from 'interfaces/anime'
 import './style.less'
 import { useWindowSize } from 'hooks'

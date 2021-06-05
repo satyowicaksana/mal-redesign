@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import InfiniteScroll from 'react-infinite-scroller'
-import { Row, Col, Typography, Spin, Table, Menu, Select, Avatar, Tag, Divider } from 'antd'
+import { Row, Col, Typography, Divider } from 'antd'
 
 import {
   CharacterCard,
@@ -27,8 +26,7 @@ import './style.less'
 import { useWindowSize } from 'hooks'
 import { windowSizes } from 'consts'
 
-const { Title, Text, Paragraph, Link } = Typography
-const { Option } = Select
+const { Title, Link } = Typography
 
 const Characters = () => {
   const history = useHistory()

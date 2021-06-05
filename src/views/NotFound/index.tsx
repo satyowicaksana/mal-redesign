@@ -1,28 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router';
+import { Button, Typography } from 'antd';
 
-import {
-  BannerCarousel,
-  Carousel,
-  AnimeCardsSection,
-  StoryCardsSection,
-  AnimeCard
-} from 'components';
 import './style.less';
-import {
-  selectFeaturedNewsList,
-  getFeaturedNewsList
-} from 'store/news'
-import {
-  selectCurrentSeason,
-  selectTopAiringAnimes,
-  getCurrentSeason,
-  getTopAiringAnimes
-} from 'store/anime'
-import { Button, Col, Divider, Row, Skeleton, Typography } from 'antd';
-import { useWindowSize } from 'hooks';
-import { options, windowSizes } from 'consts';
 import { noResultIllustration } from 'assets/images';
 
 const { Title, Text } = Typography

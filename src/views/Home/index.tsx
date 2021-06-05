@@ -5,8 +5,6 @@ import { useHistory } from 'react-router';
 import {
   BannerCarousel,
   Carousel,
-  AnimeCardsSection,
-  StoryCardsSection,
   AnimeCard,
   ArticleCard
 } from 'components';

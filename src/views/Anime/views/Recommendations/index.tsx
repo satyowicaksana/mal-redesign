@@ -1,30 +1,20 @@
-import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroller'
-import { Row, Col, Typography, Spin, Table, Menu, Select, Avatar, Tag } from 'antd'
-import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
-import { FaArrowAltCircleUp, FaArrowAltCircleDown } from 'react-icons/fa'
+import { Row, Col, Spin } from 'antd'
 
 import {
-  AnimeCard,
-  TopicCard
+  AnimeCard
 } from 'components'
 import {
-  selectRecommendations,
-  getRecommendations
+  selectRecommendations
 } from 'store/anime'
-import {
-  Anime,
-  Recommendation,
-  Reference
-} from 'interfaces/anime'
 import './style.less'
 import { useWindowSize } from 'hooks'
 import { checker } from 'helpers'
 import { windowSizes } from 'consts'
 
 const Recommendations = () => {
-  const dispatch = useDispatch()
   const { width } = useWindowSize()
 
   const recommendations = useSelector(selectRecommendations)

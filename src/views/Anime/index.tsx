@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Switch, Route, useHistory, useParams } from 'react-router-dom'
-import { Row, Col, Typography, Button, Table, Menu, Select, Avatar, Tag, Skeleton } from 'antd'
-import { AiOutlinePlus, AiOutlineHeart, AiFillStar } from 'react-icons/ai'
-import { FaArrowAltCircleUp, FaArrowAltCircleDown, FaUser, FaUserCheck, FaTrophy, FaHeart, FaStar } from 'react-icons/fa'
+import { Row, Col, Typography, Button, Table, Menu, Skeleton } from 'antd'
+import { AiOutlinePlus, AiOutlineHeart } from 'react-icons/ai'
+import { FaUser, FaUserCheck, FaTrophy, FaHeart, FaStar } from 'react-icons/fa'
 
-import anime, {
+import {
   selectAnime,
   getAnime,
   getCharactersAndStaff,
@@ -27,11 +27,8 @@ import {
   Recommendations
 } from './views'
 import './style.less'
-import { useWindowSize } from 'hooks'
-import { formatter } from 'helpers'
 
 const { Title, Text, Paragraph, Link } = Typography
-const { Option } = Select
 
 const infoColumnKeys = [
   'type',

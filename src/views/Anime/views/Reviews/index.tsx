@@ -1,24 +1,18 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { Row, Col, Typography, Button, Select, Avatar, Tag } from 'antd'
-import { AiFillStar } from 'react-icons/ai'
-import { ImArrowUp, ImArrowDown } from 'react-icons/im'
-import moment from 'moment'
+import { useSelector } from 'react-redux'
+import { Row, Col, Typography, Button, Select } from 'antd'
 
 import {
-  selectAnime,
   selectReviews
 } from 'store/anime'
 import {
   ReviewCard
 } from 'components'
 import {
-  checker,
-  formatter
+  checker
 } from 'helpers'
 import './style.less'
 
-const { Title, Text, Paragraph, Link } = Typography
+const { Text } = Typography
 const { Option } = Select
 
 const Reviews = () => {
